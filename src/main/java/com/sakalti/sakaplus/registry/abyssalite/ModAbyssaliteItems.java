@@ -2,8 +2,8 @@ package com.sakalti.sakaplus.registry.abyssalite;
 
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.util.registry.Registries;
+import net.minecraft.util.registry.Registry;
 
 public class ModAbyssaliteItems {
     public static final String MODID = "sakaplus";
