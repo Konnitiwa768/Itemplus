@@ -1,12 +1,14 @@
 package com.sakalti.sakaplus.registry.abyssalite;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class ModAbyssaliteArmorBonus {
-    public static void init() {
+    public static void register() {
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
                 if (hasFullAbyssaliteArmor(player)) {
@@ -16,9 +18,11 @@ public class ModAbyssaliteArmorBonus {
         });
     }
 
-    private static boolean hasFullAbyssaliteArmor(PlayerEntity player) {
-        return player.getInventory().armor.stream().allMatch(stack ->
-            stack.getItem() instanceof ArmorItem armor && armor.getMaterial() instanceof AbyssaliteArmorMaterial
-        );
+    private static boolean hasFullAbyssaliteArmor(ServerPlayerEntity player) {
+        for (ItemStack stack : player.getArmorItems()) {
+            if (!(stack.getItem() instanceof ArmorItem armor)) return false;
+            if (!(armor.getMaterial() instanceof AbyssaliteArmorMaterial)) return false;
+        }
+        return true;
     }
 }
