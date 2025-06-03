@@ -2,24 +2,19 @@
   "schemaVersion": 1,
   "id": "sakaplus",
   "version": "1.0.0",
-  "name": "Sakaplus",
-  "description": "追加Mod",
-  "authors": [
-    "Konnitiwa768"
-  ],
-  "contact": {
-    "homepage": "https://github.com/Konnitiwa768/Itemplus"
-  },
-  "license": "MIT",
-  "environment": "*",
+  "name": "SakaPlus",
+  "description": "フライドポテトMOD",
   "entrypoints": {
     "main": [
       "com.sakalti.sakaplus.SakaPlusMod"
+    ],
+    "datagen": [
+      "com.sakalti.sakaplus.SakaPlusDataGenerator"
     ]
   },
   "depends": {
     "fabricloader": ">=0.14.0",
     "fabric": "*",
-    "minecraft": "1.19.2" // 対応バージョンに合わせて変更
+    "minecraft": "1.19.2"
   }
 }
