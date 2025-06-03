@@ -2,23 +2,22 @@ package com.sakalti.sakaplus.registry.abyssalite;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
 public class AbyssaliteArmorMaterial implements ArmorMaterial {
-    private static final int[] BASE_DURABILITY = {13, 15, 16, 11}; // HELMET, CHEST, LEGS, BOOTS
-    private static final int[] PROTECTION = {3, 6, 5, 4}; // HELMET, CHEST, LEGS, BOOTS
+    private static final int[] BASE_DURABILITY = {13, 15, 16, 11}; // 頭・胸・脚・足
+    private static final int[] PROTECTION_VALUES = {3, 6, 5, 4};
 
     @Override
     public int getDurability(EquipmentSlot slot) {
-        return BASE_DURABILITY[slot.getEntitySlotId() - 2] * 44; // slot IDs: HEAD=5, CHEST=6, LEGS=7, FEET=8
+        return BASE_DURABILITY[slot.getEntitySlotId()] * 44; // 1884あたりを分配
     }
 
     @Override
-    public int getProtection(EquipmentSlot slot) {
-        return PROTECTION[slot.getEntitySlotId() - 2];
+    public int getProtectionAmount(EquipmentSlot slot) {
+        return PROTECTION_VALUES[slot.getEntitySlotId()];
     }
 
     @Override
