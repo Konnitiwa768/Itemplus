@@ -3,8 +3,8 @@ name: Generate Leafeau Textures
 on:
   push:
     branches:
-      - Battlity
-
+      - main
+      
 jobs:
   generate_leafeau_textures:
     runs-on: ubuntu-latest
