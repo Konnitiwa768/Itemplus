@@ -18,13 +18,13 @@ jobs:
 
       - name: Download Netherite Item Textures
         run: |
-          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/netherite_helmet.png
-          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/netherite_chestplate.png
-          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/netherite_leggings.png
-          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/netherite_boots.png
-          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/netherite_pickaxe.png
-          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/netherite_sword.png
-          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/netherite_ingot.png
+          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/diamond_helmet.png
+          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/diamond_chestplate.png
+          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/diamond_leggings.png
+          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/diamond_boots.png
+          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/diamond_pickaxe.png
+          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/diamond_sword.png
+          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/items/iron_ingot.png
 
       - name: Prepare Output Directory
         run: mkdir -p src/main/resources/assets/sakaplus/textures/items/
