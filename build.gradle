@@ -33,6 +33,19 @@ configurations.all {
     }
 }
 
+loom {
+    runs {
+        datagen {
+            name "Data Generation"
+            source sourceSets.main
+            runDir "build/datagen"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.modid=sakaplus"
+            vmArg "-Dfabric-api.datagen.output-dir=${project.rootDir}/src/main/generated"
+        }
+    }
+}
+
 jar {
     manifest {
         attributes(
