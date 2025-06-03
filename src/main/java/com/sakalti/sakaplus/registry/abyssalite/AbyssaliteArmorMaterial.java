@@ -1,24 +1,24 @@
 package com.sakalti.sakaplus.registry.abyssalite;
 
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 
 public class AbyssaliteArmorMaterial implements ArmorMaterial {
-    private static final int[] BASE_DURABILITY = {13, 15, 16, 11}; // boots, leggings, chestplate, helmet
-    private static final int[] PROTECTION = {4, 5, 6, 3}; // boots, leggings, chestplate, helmet
+    private static final int[] BASE_DURABILITY = {13, 15, 16, 11}; // HELMET, CHEST, LEGS, BOOTS
+    private static final int[] PROTECTION = {3, 6, 5, 4}; // HELMET, CHEST, LEGS, BOOTS
 
     @Override
-    public int getDurability(ArmorItem.Type type) {
-        return BASE_DURABILITY[type.getEquipmentSlot().getEntitySlotId()] * 44; // ネザライト(37)より少し高い
+    public int getDurability(EquipmentSlot slot) {
+        return BASE_DURABILITY[slot.getEntitySlotId() - 2] * 44; // slot IDs: HEAD=5, CHEST=6, LEGS=7, FEET=8
     }
 
     @Override
-    public int getProtection(ArmorItem.Type type) {
-        return PROTECTION[type.getEquipmentSlot().getEntitySlotId()];
+    public int getProtection(EquipmentSlot slot) {
+        return PROTECTION[slot.getEntitySlotId() - 2];
     }
 
     @Override
