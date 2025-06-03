@@ -1,0 +1,92 @@
+name: Generate Abyssalite Recipes
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate_abyssalite_recipes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Prepare Output Directory
+        run: mkdir -p src/main/resources/data/sakaplus/recipes
+
+      - name: Generate Recipe JSONs without EOF
+        run: |
+          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
+          echo '  "type": "minecraft:crafting_shapeless",' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
+          echo '  "ingredients": [' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
+          echo '    { "item": "minecraft:diamond" },' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
+          echo '    { "item": "minecraft:netherite_ingot" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
+          echo '  ],' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
+          echo '  "result": { "item": "sakaplus:abyssalite_ingot", "count": 4 }' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
+          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
+
+          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_helmet.json
+          echo '  "type": "minecraft:crafting_shaped",' >> src/main/resources/data/sakaplus/recipes/abyssalite_helmet.json
+          echo '  "pattern": ["XXX", "X X"],' >> src/main/resources/data/sakaplus/recipes/abyssalite_helmet.json
+          echo '  "key": { "X": { "item": "sakaplus:abyssalite_ingot" } },' >> src/main/resources/data/sakaplus/recipes/abyssalite_helmet.json
+          echo '  "result": { "item": "sakaplus:abyssalite_helmet" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_helmet.json
+          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_helmet.json
+
+          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_chestplate.json
+          echo '  "type": "minecraft:crafting_shaped",' >> src/main/resources/data/sakaplus/recipes/abyssalite_chestplate.json
+          echo '  "pattern": ["X X", "XXX", "XXX"],' >> src/main/resources/data/sakaplus/recipes/abyssalite_chestplate.json
+          echo '  "key": { "X": { "item": "sakaplus:abyssalite_ingot" } },' >> src/main/resources/data/sakaplus/recipes/abyssalite_chestplate.json
+          echo '  "result": { "item": "sakaplus:abyssalite_chestplate" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_chestplate.json
+          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_chestplate.json
+
+          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_leggings.json
+          echo '  "type": "minecraft:crafting_shaped",' >> src/main/resources/data/sakaplus/recipes/abyssalite_leggings.json
+          echo '  "pattern": ["XXX", "X X", "X X"],' >> src/main/resources/data/sakaplus/recipes/abyssalite_leggings.json
+          echo '  "key": { "X": { "item": "sakaplus:abyssalite_ingot" } },' >> src/main/resources/data/sakaplus/recipes/abyssalite_leggings.json
+          echo '  "result": { "item": "sakaplus:abyssalite_leggings" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_leggings.json
+          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_leggings.json
+
+          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_boots.json
+          echo '  "type": "minecraft:crafting_shaped",' >> src/main/resources/data/sakaplus/recipes/abyssalite_boots.json
+          echo '  "pattern": ["X X", "X X"],' >> src/main/resources/data/sakaplus/recipes/abyssalite_boots.json
+          echo '  "key": { "X": { "item": "sakaplus:abyssalite_ingot" } },' >> src/main/resources/data/sakaplus/recipes/abyssalite_boots.json
+          echo '  "result": { "item": "sakaplus:abyssalite_boots" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_boots.json
+          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_boots.json
+
+          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
+          echo '  "type": "minecraft:crafting_shaped",' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
+          echo '  "pattern": ["XXX", " # ", " # "],' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
+          echo '  "key": {' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
+          echo '    "X": { "item": "sakaplus:abyssalite_ingot" },' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
+          echo '    "#": { "item": "minecraft:stick" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
+          echo '  },' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
+          echo '  "result": { "item": "sakaplus:abyssalite_pickaxe" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
+          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
+
+          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
+          echo '  "type": "minecraft:crafting_shaped",' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
+          echo '  "pattern": ["X", "X", "#"],' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
+          echo '  "key": {' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
+          echo '    "X": { "item": "sakaplus:abyssalite_ingot" },' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
+          echo '    "#": { "item": "minecraft:stick" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
+          echo '  },' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
+          echo '  "result": { "item": "sakaplus:abyssalite_sword" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
+          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
+
+      - name: Commit and Push Changes
+        env:
+          GIT_AUTHOR_NAME: GitHub Actions
+          GIT_COMMITTER_NAME: GitHub Actions
+          GIT_AUTHOR_EMAIL: actions@github.com
+          GIT_COMMITTER_EMAIL: actions@github.com
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.SECRET_TOKEN }}@github.com/${{ github.repository }}
+
+          git add src/main/resources/data/sakaplus/recipes/*.json
+          git commit -m "Generate Abyssalite recipes (no EOF)" || echo "No changes to commit"
+          git pull --rebase origin main || echo "Pull failed (possibly clean state)"
+          git push origin HEAD:main
