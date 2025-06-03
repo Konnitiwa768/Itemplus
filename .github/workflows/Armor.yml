@@ -43,5 +43,5 @@ jobs:
           git add src/main/resources/assets/sakaplus/textures/models/armor/abyssalite_armor_1.png \
                   src/main/resources/assets/sakaplus/textures/models/armor/abyssalite_armor_2.png
           git commit -m "Generate Leafeau textures from crystal base" || echo "No changes to commit"
-          git pull --rebase origin Battlity || echo "Pull failed (likely due to conflicts or clean state)"
-          git push origin HEAD:Battlity
+          git pull --rebase origin main || echo "Pull failed (likely due to conflicts or clean state)"
+          git push origin HEAD:main
