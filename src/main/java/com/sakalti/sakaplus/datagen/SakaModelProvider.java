@@ -12,7 +12,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class SakaModelProvider extends FabricModelProvider {
-
     public SakaModelProvider(FabricDataGenerator generator) {
         super(generator);
     }
@@ -21,7 +20,7 @@ public class SakaModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         for (Identifier id : Registry.ITEM.getIds()) {
             Item item = Registry.ITEM.get(id);
-            if (item instanceof BlockItem) continue;
+            if (item instanceof BlockItem) continue; // BlockItemはBlock側で処理
             itemModelGenerator.register(item, Models.GENERATED);
         }
     }
