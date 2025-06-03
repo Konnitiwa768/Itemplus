@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "sakaplus:raw_fries"
+  },
+  "result": "sakaplus:fries",
+  "experience": 0.35,
+  "cookingtime": 200
+}
