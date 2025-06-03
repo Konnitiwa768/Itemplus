@@ -45,7 +45,7 @@ jobs:
           convert diamond_sword.png -fill "$COLOR" -colorize $COLORIZE src/main/resources/assets/sakaplus/textures/items/abyssalite_sword.png
 
           # インゴット
-          convert diamond_ingot.png -fill "$COLOR" -colorize $COLORIZE src/main/resources/assets/sakaplus/textures/items/abyssalite_ingot.png
+          convert iron_ingot.png -fill "$COLOR" -colorize $COLORIZE src/main/resources/assets/sakaplus/textures/items/abyssalite_ingot.png
 
       - name: Commit and Push Changes
         env:
