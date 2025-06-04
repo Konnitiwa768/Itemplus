@@ -31,7 +31,7 @@ jobs:
 
       - name: Generate Leafeau Item Textures
         run: |
-          COLOR="#44cc99"
+          COLOR="#4449cf"
           COLORIZE="75%"
 
           # 防具
