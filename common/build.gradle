@@ -1,5 +1,6 @@
 plugins {
     id 'architectury-plugin' version '3.4.139'
+    id 'java' // 必要なら追加。通常はarchitectury-pluginが自動適用するが明示的に入れておくと安全
 }
 
 architectury {
