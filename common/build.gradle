@@ -1,21 +1,29 @@
 buildscript {
     repositories {
-        maven { url 'https://maven.architectury.dev/' } // これが必須
+        maven { url 'https://maven.architectury.dev/' }
         mavenCentral()
     }
     dependencies {
-        classpath 'dev.architectury:architectury-plugin:3.4.140' // ←存在するバージョン
+        classpath 'dev.architectury:architectury-plugin:3.4.140'
     }
 }
 
 apply plugin: 'architectury-plugin'
 
 architectury {
-    common(['fabric', 'forge'])
+    common('fabric', 'forge') // 配列ではなく可変引数です
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.architectury.dev/' }
+    maven { url 'https://maven.fabricmc.net/' }
 }
 
 dependencies {
-    compileOnly "dev.architectury:architectury:6.5.85"
+    // Architectury APIはimplementationかcompileOnly
+    // 通常はimplementationを使います
+    implementation "dev.architectury:architectury:6.5.85"
 }
 
 java {
