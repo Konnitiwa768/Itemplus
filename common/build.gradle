@@ -1,23 +1,19 @@
 plugins {
-    id 'architectury-plugin' version '3.4.139'
     id 'java'
+    id 'dev.architectury.loom' version '1.4.139'
+    id 'architectury-plugin'
 }
 
 architectury {
     common(['fabric', 'forge'])
 }
 
-repositories {
-    maven {
-        url = uri("https://maven.architectury.dev/")
-    }
-    mavenCentral()
-}
-
 dependencies {
-    compileOnly "dev.architectury:architectury:6.5.85"
+    compileOnly 'dev.architectury:architectury:6.5.85'
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
