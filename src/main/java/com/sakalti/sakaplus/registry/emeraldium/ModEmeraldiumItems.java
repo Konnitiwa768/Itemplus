@@ -3,6 +3,7 @@ package com.sakalti.sakaplus.registry.emeraldium;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.entity.EquipmentSlot;
 
 public class ModEmeraldiumItems {
     public static final ToolMaterial EMERALDIUM_TOOL_MATERIAL = new EmeraldiumToolMaterial();
