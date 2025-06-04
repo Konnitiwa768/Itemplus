@@ -1,11 +1,10 @@
 package com.sakalti.sakaplus.registry.gemstone;
 
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.EquipmentSlot;
-import net.minecraft.item.Items;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.recipe.Ingredient;
 
 public class GemstoneArmorMaterial implements ArmorMaterial {
     private static final int[] BASE_DURABILITY = {13, 15, 16, 11};
