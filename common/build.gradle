@@ -1,10 +1,17 @@
-plugins {
-    id 'java-library'
-    id 'architectury-plugin' version '3.4-SNAPSHOT'
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabricmc.net/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'dev.architectury:architectury-plugin:3.4-SNAPSHOT'
+    }
 }
 
+apply plugin: 'architectury-plugin'
+
 architectury {
-    common(rootProject.enabledPlatforms.split(","))
+    common(['fabric', 'forge'])
 }
 
 dependencies {
@@ -12,6 +19,5 @@ dependencies {
 }
 
 java {
-    withSourcesJar()
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
