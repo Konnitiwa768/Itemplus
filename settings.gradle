@@ -5,3 +5,7 @@ pluginManagement {
         mavenCentral()
     }
 }
+rootProject.name = 'sakaplus'
+
+include 'common', 'fabric', 'forge'
+
