@@ -42,7 +42,7 @@ jobs:
 
           # ツール
           convert diamond_pickaxe.png -fill "$COLOR" -colorize $COLORIZE src/main/resources/assets/sakaplus/textures/item/emeraldium_pickaxe.png
-          convert diamond_sword.png -fill "$COLOR" -colorize $COLORIZE src/main/resources/assets/sakaplus/textures/item/gemstone_sword.png
+          convert diamond_sword.png -fill "$COLOR" -colorize $COLORIZE src/main/resources/assets/sakaplus/textures/item/emeraldium_sword.png
 
           # インゴット
           convert iron_ingot.png -fill "$COLOR" -colorize $COLORIZE src/main/resources/assets/sakaplus/textures/item/emeraldium_ingot.png
