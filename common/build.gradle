@@ -1,29 +1,22 @@
-buildscript {
-    repositories {
-        maven { url 'https://maven.architectury.dev/' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'dev.architectury:architectury-plugin:3.4.140'
-    }
+plugins {
+    id 'architectury-plugin' version '3.4.139'
 }
-
-apply plugin: 'architectury-plugin'
 
 architectury {
-    common('fabric', 'forge')
-}
-
-repositories {
-    mavenCentral()
-    maven { url 'https://maven.architectury.dev/' }
-    maven { url 'https://maven.fabricmc.net/' }
+    common(['fabric', 'forge'])
 }
 
 dependencies {
-    implementation "dev.architectury:architectury:6.5.85"
+    compileOnly "dev.architectury:architectury:6.5.85"
 }
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
+repositories {
+    maven {
+        url = uri("https://maven.architectury.dev/")
+    }
+    mavenCentral()
 }
