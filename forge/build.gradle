@@ -1,0 +1,22 @@
+plugins {
+    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'architectury-plugin'
+}
+
+architectury {
+    forge()
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:1.19.2-43.2.0"
+    implementation "dev.architectury:architectury-forge:6.5.85"
+    implementation project(':common')
+
+    // Tinkers' Construct依存
+    compileOnly fg.deobf("slimeknights.mantle:Mantle:1.19.2-1.11.2.74")
+    runtimeOnly fg.deobf("slimeknights.tconstruct:TConstruct:1.19.2-3.6.3.111")
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
