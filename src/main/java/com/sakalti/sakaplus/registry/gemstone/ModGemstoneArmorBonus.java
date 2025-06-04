@@ -1,7 +1,6 @@
 package com.sakalti.sakaplus.registry.gemstone;
 
-import net.fabricmc.fabric.api.entity.event.v1.LivingEquipmentTickCallback;
-import net.minecraft.entity.EquipmentSlot;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ArmorItem;
