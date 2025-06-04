@@ -1,0 +1,22 @@
+plugins {
+    id 'fabric-loom' version '1.5-SNAPSHOT'
+    id 'architectury-plugin'
+}
+
+architectury {
+    platformSetupLoomIde()
+    fabric()
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:1.19.2"
+    mappings "net.fabricmc:yarn:1.19.2+build.28:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.14.19"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.77.0+1.19.2"
+    modImplementation "dev.architectury:architectury-fabric:6.5.85"
+    implementation project(':common')
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
