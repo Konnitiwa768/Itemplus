@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'dev.architectury:architectury-plugin:3.3.116'
+        classpath 'dev.architectury:architectury-plugin:3.4.140'
     }
 }
 
