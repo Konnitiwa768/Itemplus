@@ -4,14 +4,14 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'dev.architectury:architectury-plugin:3.4.140'
+        classpath "dev.architectury:architectury-plugin.gradle.plugin:3.4.140"
     }
 }
 
 apply plugin: 'architectury-plugin'
 
 architectury {
-    common('fabric', 'forge') // 配列ではなく可変引数です
+    common('fabric', 'forge')
 }
 
 repositories {
@@ -21,8 +21,6 @@ repositories {
 }
 
 dependencies {
-    // Architectury APIはimplementationかcompileOnly
-    // 通常はimplementationを使います
     implementation "dev.architectury:architectury:6.5.85"
 }
 
