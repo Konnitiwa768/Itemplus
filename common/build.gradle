@@ -1,10 +1,10 @@
 buildscript {
     repositories {
-        maven { url 'https://maven.fabricmc.net/' }
+        maven { url 'https://maven.architectury.dev/' } // これが必須
         mavenCentral()
     }
     dependencies {
-        classpath 'dev.architectury:architectury-plugin:3.4.140'
+        classpath 'dev.architectury:architectury-plugin:3.4.140' // ←存在するバージョン
     }
 }
 
