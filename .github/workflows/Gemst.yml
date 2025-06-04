@@ -18,16 +18,17 @@ jobs:
 
       - name: Download Zephyr Texture
         run: |
-          curl -O https://raw.githubusercontent.com/sakaltcommunity/Morearmors/499a7636dd3cea3e51a4827efba065e02df5919b/src/main/resources/assets/morearmors/textures/models/armor/crystal_armor_1.png
-          curl -O https://raw.githubusercontent.com/sakaltcommunity/Morearmors/499a7636dd3cea3e51a4827efba065e02df5919b/src/main/resources/assets/morearmors/textures/models/armor/crystal_armor_2.png
+          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/models/armor/diamond_1.png
+          curl -O https://raw.githubusercontent.com/Mojang/bedrock-samples/main/resource_pack/textures/models/armor/diamond_2.png
+    
 
       - name: Prepare Output Directory
         run: mkdir -p src/main/resources/assets/sakaplus/textures/models/armor/
 
       - name: Generate Leafeau Textures
         run: |
-          convert crystal_armor_1.png -fill "#4449cf" -colorize 75% src/main/resources/assets/sakaplus/textures/models/armor/gemstone_armor_2.png
-          convert crystal_armor_2.png -fill "#4449cf" -colorize 75% src/main/resources/assets/sakaplus/textures/models/armor/gemstone_armor_1.png
+          convert diamond_1.png -fill "#4449cf" -colorize 75% src/main/resources/assets/sakaplus/textures/models/armor/gemstone_armor_2.png
+          convert diamond_2.png -fill "#4449cf" -colorize 75% src/main/resources/assets/sakaplus/textures/models/armor/gemstone_armor_1.png
 
       - name: Commit and Push Changes
         env:
