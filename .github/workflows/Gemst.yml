@@ -27,8 +27,8 @@ jobs:
 
       - name: Generate Leafeau Textures
         run: |
-          convert diamond_1.png -fill "#4499cc" -colorize 75% src/main/resources/assets/sakaplus/textures/models/armor/emeraldium_layer_2.png
-          convert diamond_2.png -fill "#4499cc" -colorize 75% src/main/resources/assets/sakaplus/textures/models/armor/emeraldium_layer_1.png
+          convert diamond_1.png -fill "#44cc99" -colorize 75% src/main/resources/assets/sakaplus/textures/models/armor/emeraldium_layer_2.png
+          convert diamond_2.png -fill "#44cc99" -colorize 75% src/main/resources/assets/sakaplus/textures/models/armor/emeraldium_layer_1.png
 
       - name: Commit and Push Changes
         env:
