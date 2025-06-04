@@ -5,7 +5,7 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.item.EquipmentSlot;
+import net.minecraft.entity.EquipmentSlot;
 
 public class GemstoneArmorMaterial implements ArmorMaterial {
     private static final int[] BASE_DURABILITY = {13, 15, 16, 11};
