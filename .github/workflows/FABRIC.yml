@@ -1,0 +1,46 @@
+name: Move Fabric Code & Resources to 'fabric/' Directory
+
+on:
+  workflow_dispatch: # 手動実行
+
+jobs:
+  move-fabric:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create destination directories
+        run: |
+          mkdir -p fabric/src/main/java/com/sakalti/sakaplus
+          mkdir -p fabric/src/main/resources
+
+      - name: Move Java sources
+        run: |
+          if [ -d src/main/java/com/sakalti/sakaplus ]; then
+            mv src/main/java/com/sakalti/sakaplus fabric/src/main/java/com/sakalti/
+          fi
+
+      - name: Move resources
+        run: |
+          if [ -d src/main/resources ]; then
+            mv src/main/resources/* fabric/src/main/resources/
+          fi
+
+      - name: Move build files (if present)
+        run: |
+          FILES="build.gradle settings.gradle gradle.properties gradlew gradlew.bat gradle"
+          for FILE in $FILES; do
+            if [ -e "$FILE" ]; then
+              mv "$FILE" fabric/
+            fi
+          done
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Move Fabric code and resources to 'fabric/' directory" || echo "No changes to commit"
+          git push
