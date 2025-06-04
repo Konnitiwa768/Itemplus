@@ -20,6 +20,5 @@ jobs:
       - name: Create main2 branch at target commit
         run: |
           git fetch origin
-          git checkout -b main2 4e8ddcfa371449c43ca731b63fc4aced32b0b448
-          git pull --rebase
-          git push origin main2
+          git checkout -b main3 4e8ddcfa371449c43ca731b63fc4aced32b0b448
+          git push origin main3
