@@ -1,13 +1,9 @@
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        maven {
-            url = uri("https://maven.architectury.dev/")
-        }
         mavenCentral()
+        maven { url 'https://maven.architectury.dev' }
     }
 }
-rootProject.name = 'sakaplus'
-
+rootProject.name = "sakaplus"
 include 'common', 'fabric', 'forge'
-
