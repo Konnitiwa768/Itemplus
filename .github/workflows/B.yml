@@ -13,11 +13,11 @@ jobs:
 
       - name: Move files from generated/resources to src/main/resources
         run: |
-          mkdir -p src/main/resources
-          if [ -d src/generated/resources ]; then
-            mv src/generated/resources/* src/main/resources/ || true
-            rmdir src/generated/resources || true
-            git add src/main/resources
+          mkdir -p src/main/resources/data/sakaplus/recipe
+          if [ -d src/main/resources/data/sakaplus/recipes ]; then
+            mv src/main/resources/data/sakaplus/recipes/* src/main/resources/data/sakaplus/recipe/ || true
+            rmdir src/main/resources/data/sakaplus/recipes || true
+            git add src/main/resources/data/sakaplus/recipe
             git rm -r --ignore-unmatch generated/resources || true
           fi
 
