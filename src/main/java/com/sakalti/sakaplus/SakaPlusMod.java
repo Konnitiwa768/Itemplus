@@ -15,10 +15,10 @@ public class SakaPlusMod implements ModInitializer {
         // フレンド（味方）系の登録
         Frieds.register();
 
-        // アビサライト素材のアイテム登録
-        ModAbyssaliteItems.register();
+        // アビサライト素材の一括登録
+        ModAbyssaliteItems.registerAll();
 
-        // 宝石素材のアイテム登録
-        ModGemstoneItems.register();
+        // 宝石素材の一括登録
+        ModGemstoneItems.registerAll();
     }
 }
