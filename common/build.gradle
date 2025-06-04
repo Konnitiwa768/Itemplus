@@ -1,0 +1,17 @@
+plugins {
+    id 'java-library'
+    id 'architectury-plugin' version '3.4-SNAPSHOT'
+}
+
+architectury {
+    common(rootProject.enabledPlatforms.split(","))
+}
+
+dependencies {
+    compileOnly "dev.architectury:architectury:6.5.85"
+}
+
+java {
+    withSourcesJar()
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
