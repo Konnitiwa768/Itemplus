@@ -8,24 +8,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class ModGemstoneArmorBonus {
-    public static void init() {
-        LivingEquipmentTickCallback.EVENT.register((entity) -> {
-            if (!(entity instanceof ServerPlayerEntity player)) return;
-
-            boolean fullSet = true;
-            for (EquipmentSlot slot : EquipmentSlot.values()) {
-                if (slot.getType() == EquipmentSlot.Type.ARMOR) {
-                    ItemStack stack = player.getEquippedStack(slot);
-                    if (!(stack.getItem() instanceof ArmorItem armor) || !(armor.getMaterial() instanceof GemstoneArmorMaterial)) {
-                        fullSet = false;
-                        break;
-                    }
+    public static void register() {
+        ServerTickEvents.END_SERVER_TICK.register(server -> {
+            for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
+                if (hasFullGemstoneArmor(player)) {
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 210, 1, false, false, true));
                 }
             }
-
-            if (fullSet) {
-                player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 210, 1, false, false, true));
-            }
         });
+    }
+
+    private static boolean hasFullGemstoneArmor(ServerPlayerEntity player) {
+        for (ItemStack stack : player.getArmorItems()) {
+            if (!(stack.getItem() instanceof ArmorItem armor)) return false;
+            if (!(armor.getMaterial() instanceof GemstoneArmorMaterial)) return false;
+        }
+        return true;
     }
 }
