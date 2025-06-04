@@ -1,14 +1,15 @@
 package com.sakalti.sakaplus.registry.gemstone;
 
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.item.EquipmentSlot;
 
 public class GemstoneArmorMaterial implements ArmorMaterial {
     private static final int[] BASE_DURABILITY = {13, 15, 16, 11};
-    private static final int[] PROTECTION = {2, 6, 5, 2};
+    private static final int[] PROTECTION_AMOUNTS = {2, 6, 5, 2};
 
     @Override
     public int getDurability(EquipmentSlot slot) {
@@ -17,7 +18,7 @@ public class GemstoneArmorMaterial implements ArmorMaterial {
 
     @Override
     public int getProtectionAmount(EquipmentSlot slot) {
-        return PROTECTION[slot.getEntitySlotId()];
+        return PROTECTION_AMOUNTS[slot.getEntitySlotId()];
     }
 
     @Override
