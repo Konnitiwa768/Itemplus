@@ -1,7 +1,9 @@
 package com.sakalti.sakaplus;
 
-import com.sakalti.sakaplus.registry.Frieds;
 import net.fabricmc.api.ModInitializer;
+
+// レジストリ（sakaplus固有）
+import com.sakalti.sakaplus.registry.Frieds;
 import com.sakalti.sakaplus.registry.abyssalite.ModAbyssaliteItems;
 import com.sakalti.sakaplus.registry.gemstone.ModGemstoneItems;
 
@@ -10,8 +12,13 @@ public class SakaPlusMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        // フレンド（味方）系の登録
         Frieds.register();
+
+        // アビサライト素材のアイテム登録
         ModAbyssaliteItems.register();
+
+        // 宝石素材のアイテム登録
         ModGemstoneItems.register();
     }
 }
