@@ -1,11 +1,25 @@
-plugins {
-    id 'java'
-    id 'dev.architectury.loom' version '1.4.139'
-    id 'architectury-plugin'
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://maven.architectury.dev' }
+        maven { url 'https://maven.fabricmc.net' }
+    }
+    dependencies {
+        classpath 'dev.architectury:architectury-loom:1.4.139'
+    }
 }
+
+apply plugin: 'dev.architectury.loom'
+apply plugin: 'architectury-plugin'
 
 architectury {
     common(['fabric', 'forge'])
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.architectury.dev' }
+    maven { url 'https://maven.fabricmc.net' }
 }
 
 dependencies {
