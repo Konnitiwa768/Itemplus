@@ -6,6 +6,7 @@ import net.fabricmc.api.ModInitializer;
 import com.sakalti.sakaplus.registry.Frieds;
 import com.sakalti.sakaplus.registry.abyssalite.ModAbyssaliteItems;
 import com.sakalti.sakaplus.registry.gemstone.ModGemstoneItems;
+import com.sakalti.sakaplus.registry.gemstone.ModEmeraldiumItems;
 
 public class SakaPlusMod implements ModInitializer {
     public static final String MOD_ID = "sakaplus";
@@ -20,5 +21,7 @@ public class SakaPlusMod implements ModInitializer {
 
         // 宝石素材の一括登録
         ModGemstoneItems.registerAll();
+
+        ModEmeraldiumItems.registerAll();
     }
 }
