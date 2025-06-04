@@ -21,4 +21,5 @@ jobs:
         run: |
           git fetch origin
           git checkout -b main2 4e8ddcfa371449c43ca731b63fc4aced32b0b448
+          git pull
           git push origin main2
