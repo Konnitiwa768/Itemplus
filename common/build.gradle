@@ -6,17 +6,17 @@ architectury {
     common(['fabric', 'forge'])
 }
 
+repositories {
+    maven {
+        url = uri("https://maven.architectury.dev/")
+    }
+    mavenCentral()
+}
+
 dependencies {
     compileOnly "dev.architectury:architectury:6.5.85"
 }
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
-}
-
-repositories {
-    maven {
-        url = uri("https://maven.architectury.dev/")
-    }
-    mavenCentral()
 }
