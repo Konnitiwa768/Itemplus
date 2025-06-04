@@ -1,8 +1,9 @@
 package com.sakalti.sakaplus.registry.gemstone;
 
-import net.minecraft.util.Registry.registry;
-import net.minecraft.util.Identifer;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class ModGemstoneItems {
     public static final ArmorMaterial GEMSTONE_ARMOR_MATERIAL = new GemstoneArmorMaterial();
