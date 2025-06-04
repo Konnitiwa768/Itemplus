@@ -2,11 +2,13 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url 'https://maven.architectury.dev' }
-        // Fabricのリポジトリが必要ならこちらも追加
         maven { url 'https://maven.fabricmc.net' }
+        flatDir {
+            dirs 'libs'  // ローカルlibsフォルダからjarを読み込み
+        }
     }
     dependencies {
-        classpath 'dev.architectury:loom:1.9-SNAPSHOT'
+        classpath name: 'loom-1.9.428'  // libs/loom-1.9.428.jar を指定
     }
 }
 
