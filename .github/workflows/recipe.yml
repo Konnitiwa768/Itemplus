@@ -1,4 +1,4 @@
-name: Generate Abyssalite Recipes
+name: Generate Gemstone Recipes
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  generate_abyssalite_recipes:
+  generate_gemstone_recipes:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,62 +18,44 @@ jobs:
 
       - name: Generate Recipe JSONs without EOF
         run: |
-          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
-          echo '  "type": "minecraft:crafting_shapeless",' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
-          echo '  "ingredients": [' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
-          echo '    { "item": "minecraft:diamond" },' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
-          echo '    { "item": "minecraft:netherite_ingot" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
-          echo '  ],' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
-          echo '  "result": { "item": "sakaplus:abyssalite_ingot", "count": 4 }' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
-          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_ingot.json
+          echo '{' > src/main/resources/data/sakaplus/recipes/gemstone.json
+          echo '  "type": "minecraft:crafting_shapeless",' >> src/main/resources/data/sakaplus/recipes/gemstone.json
+          echo '  "ingredients": [' >> src/main/resources/data/sakaplus/recipes/gemstone.json
+          echo '    { "item": "minecraft:lapis_lazuli" },' >> src/main/resources/data/sakaplus/recipes/gemstone.json
+          echo '    { "item": "minecraft:diamond" }' >> src/main/resources/data/sakaplus/recipes/gemstone.json
+          echo '  ],' >> src/main/resources/data/sakaplus/recipes/gemstone.json
+          echo '  "result": { "item": "sakaplus:gemstone", "count": 4 }' >> src/main/resources/data/sakaplus/recipes/gemstone.json
+          echo '}' >> src/main/resources/data/sakaplus/recipes/gemstone.json
 
-          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_helmet.json
-          echo '  "type": "minecraft:crafting_shaped",' >> src/main/resources/data/sakaplus/recipes/abyssalite_helmet.json
-          echo '  "pattern": ["XXX", "X X"],' >> src/main/resources/data/sakaplus/recipes/abyssalite_helmet.json
-          echo '  "key": { "X": { "item": "sakaplus:abyssalite_ingot" } },' >> src/main/resources/data/sakaplus/recipes/abyssalite_helmet.json
-          echo '  "result": { "item": "sakaplus:abyssalite_helmet" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_helmet.json
-          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_helmet.json
+          for item in helmet chestplate leggings boots pickaxe sword; do
+            echo '{' > src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
+            echo '  "type": "minecraft:crafting_shaped",' >> src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
 
-          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_chestplate.json
-          echo '  "type": "minecraft:crafting_shaped",' >> src/main/resources/data/sakaplus/recipes/abyssalite_chestplate.json
-          echo '  "pattern": ["X X", "XXX", "XXX"],' >> src/main/resources/data/sakaplus/recipes/abyssalite_chestplate.json
-          echo '  "key": { "X": { "item": "sakaplus:abyssalite_ingot" } },' >> src/main/resources/data/sakaplus/recipes/abyssalite_chestplate.json
-          echo '  "result": { "item": "sakaplus:abyssalite_chestplate" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_chestplate.json
-          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_chestplate.json
+            if [ "$item" = "helmet" ]; then
+              echo '  "pattern": ["XXX", "X X"],' >> src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
+            elif [ "$item" = "chestplate" ]; then
+              echo '  "pattern": ["X X", "XXX", "XXX"],' >> src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
+            elif [ "$item" = "leggings" ]; then
+              echo '  "pattern": ["XXX", "X X", "X X"],' >> src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
+            elif [ "$item" = "boots" ]; then
+              echo '  "pattern": ["X X", "X X"],' >> src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
+            elif [ "$item" = "pickaxe" ]; then
+              echo '  "pattern": ["XXX", " # ", " # "],' >> src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
+            elif [ "$item" = "sword" ]; then
+              echo '  "pattern": ["X", "X", "#"],' >> src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
+            fi
 
-          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_leggings.json
-          echo '  "type": "minecraft:crafting_shaped",' >> src/main/resources/data/sakaplus/recipes/abyssalite_leggings.json
-          echo '  "pattern": ["XXX", "X X", "X X"],' >> src/main/resources/data/sakaplus/recipes/abyssalite_leggings.json
-          echo '  "key": { "X": { "item": "sakaplus:abyssalite_ingot" } },' >> src/main/resources/data/sakaplus/recipes/abyssalite_leggings.json
-          echo '  "result": { "item": "sakaplus:abyssalite_leggings" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_leggings.json
-          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_leggings.json
+            echo '  "key": {' >> src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
+            echo '    "X": { "item": "sakaplus:gemstone" },' >> src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
 
-          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_boots.json
-          echo '  "type": "minecraft:crafting_shaped",' >> src/main/resources/data/sakaplus/recipes/abyssalite_boots.json
-          echo '  "pattern": ["X X", "X X"],' >> src/main/resources/data/sakaplus/recipes/abyssalite_boots.json
-          echo '  "key": { "X": { "item": "sakaplus:abyssalite_ingot" } },' >> src/main/resources/data/sakaplus/recipes/abyssalite_boots.json
-          echo '  "result": { "item": "sakaplus:abyssalite_boots" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_boots.json
-          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_boots.json
+            if [ "$item" = "pickaxe" ] || [ "$item" = "sword" ]; then
+              echo '    "#": { "item": "minecraft:stick" }' >> src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
+            fi
 
-          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
-          echo '  "type": "minecraft:crafting_shaped",' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
-          echo '  "pattern": ["XXX", " # ", " # "],' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
-          echo '  "key": {' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
-          echo '    "X": { "item": "sakaplus:abyssalite_ingot" },' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
-          echo '    "#": { "item": "minecraft:stick" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
-          echo '  },' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
-          echo '  "result": { "item": "sakaplus:abyssalite_pickaxe" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
-          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_pickaxe.json
-
-          echo '{' > src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
-          echo '  "type": "minecraft:crafting_shaped",' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
-          echo '  "pattern": ["X", "X", "#"],' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
-          echo '  "key": {' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
-          echo '    "X": { "item": "sakaplus:abyssalite_ingot" },' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
-          echo '    "#": { "item": "minecraft:stick" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
-          echo '  },' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
-          echo '  "result": { "item": "sakaplus:abyssalite_sword" }' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
-          echo '}' >> src/main/resources/data/sakaplus/recipes/abyssalite_sword.json
+            echo '  },' >> src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
+            echo '  "result": { "item": "sakaplus:gemstone_'${item}'" }' >> src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
+            echo '}' >> src/main/resources/data/sakaplus/recipes/gemstone_${item}.json
+          done
 
       - name: Commit and Push Changes
         env:
@@ -87,6 +69,6 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.SECRET_TOKEN }}@github.com/${{ github.repository }}
 
           git add src/main/resources/data/sakaplus/recipes/*.json
-          git commit -m "Generate Abyssalite recipes (no EOF)" || echo "No changes to commit"
+          git commit -m "Generate Gemstone recipes (no EOF)" || echo "No changes to commit"
           git pull --rebase origin main || echo "Pull failed (possibly clean state)"
           git push origin HEAD:main
