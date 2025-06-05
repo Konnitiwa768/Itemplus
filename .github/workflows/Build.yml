@@ -6,7 +6,7 @@ on:
     branches:
       - main
     tags:
-      - '*'
+      - 'v1.0'  # タグが push されたときにも実行
 
 jobs:
   build:
@@ -60,3 +60,13 @@ jobs:
             -F "gameVersions=${CF_GAME_VERSION}" \
             -F "releaseType=release" \
             -F "displayName=Automated Upload - $(basename "$JAR_PATH")"
+
+      - name: Upload to GitHub Releases
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          files: build/libs/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
