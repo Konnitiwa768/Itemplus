@@ -1,6 +1,9 @@
 name: Extract all from v1.1.4 jar
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
