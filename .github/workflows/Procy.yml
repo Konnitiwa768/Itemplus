@@ -23,7 +23,6 @@ jobs:
       - name: Download Procyon Decompiler
         run: |
           curl -L -o procyon-decompiler.jar https://github.com/mstrobel/procyon/releases/download/v0.6.0/procyon-decompiler-0.6.0.jar
-          file procyon-decompiler.jar
 
       - name: Decompile all .class files to src/main/java (in place)
         run: |
