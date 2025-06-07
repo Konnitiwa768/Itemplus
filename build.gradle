@@ -34,9 +34,9 @@ configurations.all {
 }
 
 jar {
-    manifest {
+   8 manifest {
         attributes(
-            'Fabric-Loom-Version': '1.5-SNAPSHOT',
+            'Fabric-Loom-Version': '1.3.8',
             'Main-Class': 'com.sakalti.sakaplus.SakaplusMod'
         )
     }
