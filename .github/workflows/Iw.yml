@@ -1,84 +1,51 @@
-name: Undo main merge & Generate Item Models
+name: Extract from v1.1.4 jar and arrange files
 
 on:
-  push:
-    branches:
-      - main3
   workflow_dispatch:
-    inputs:
-      reset_to_commit:
-        description: 'main3の巻き戻し先コミットID (main取り込み前)'
-        required: false
-        default: ''
 
 jobs:
-  undo-and-generate:
+  extract-and-arrange:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout main3 branch
         uses: actions/checkout@v4
         with:
           ref: main3
 
-      # <<<<<< 1時間前に巻き戻すステップ >>>>>>
-      - name: Reset main3 to 1 hour ago (from now)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download v1.1.4 jar
         run: |
-          git fetch origin main3
-          git checkout main3
-          # 1時間前のコミットハッシュを取得（UTC基準）
-          commit=$(git rev-list -1 --before="1 hour ago" main3)
-          echo "1時間前のコミット: $commit"
-          if [ -n "$commit" ]; then
-            git reset --hard "$commit"
-            git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" main3
-          else
-            echo "1時間前のコミットが見つかりませんでした"
-            exit 1
+          curl -L -o Itemplus-1.0.0.jar "https://github.com/Konnitiwa768/Itemplus/releases/download/v1.1.4/Itemplus-1.0.0.jar"
+
+      - name: Extract needed folders from jar (META-INF, com, assets)
+        run: |
+          # jarコマンドで全展開
+          jar xf Itemplus-1.0.0.jar
+
+      - name: Move extracted folders to proper places
+        run: |
+          # META-INFはそのままルートに（ここで追加処理不要ならこのまま）
+          # com/sakalti/sakaplus → src/main/java/com/sakalti/sakaplus
+          mkdir -p src/main/java/com/sakalti
+          # cp -r だと親ディレクトリごとになるので、中身だけ移動
+          if [ -d "com/sakalti/sakaplus" ]; then
+            rm -rf src/main/java/com/sakalti/sakaplus
+            mv com/sakalti/sakaplus src/main/java/com/sakalti/
           fi
 
-      # ↓↓ 以降は元のワークフローと同じ ↓↓
-
-      - name: Set RESET_TO env (push or dispatch)
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "RESET_TO=${{ github.event.inputs.reset_to_commit }}" >> $GITHUB_ENV
-          else
-            echo "RESET_TO=${{ secrets.RESET_TO_COMMIT }}" >> $GITHUB_ENV
+          # assets → src/main/resources/assets
+          mkdir -p src/main/resources
+          if [ -d "assets" ]; then
+            rm -rf src/main/resources/assets
+            mv assets src/main/resources/
           fi
 
-      - name: Undo main merge (reset main3 if RESET_TO is set)
-        if: env.RESET_TO != ''
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git fetch origin main3
-          git checkout main3
-          git reset --hard "$RESET_TO"
-          git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" main3
-
-      - name: Generate item models
-        run: |
-          mkdir -p src/main/resources/assets/sakaplus/models/item
-          find src/main/resources/data/sakaplus/recipe/ -type f -name '*.json' | while read file; do
-            name=$(basename "$file" .json)
-            path="src/main/resources/assets/sakaplus/models/item/${name}.json"
-            echo '{' > "$path"
-            echo '  "parent": "item/generated",' >> "$path"
-            echo '  "textures": {' >> "$path"
-            echo "    \"layer0\": \"moreweapons:item/${name}\"" >> "$path"
-            echo '  }' >> "$path"
-            echo '}' >> "$path"
-          done
-
-      - name: Commit and force push changes
+      - name: Commit and force push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/main/resources/assets/sakaplus/models/item/
-          git diff --cached --quiet || git commit -m "Auto-generate item models from recipes"
+          git add META-INF src/main/java/com/sakalti/sakaplus src/main/resources/assets || true
+          git diff --cached --quiet || git commit -m "Extract META-INF, com/sakalti/sakaplus, assets from v1.1.4 jar"
           git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main3
