@@ -1,6 +1,9 @@
 name: Decompile jar with Procyon and arrange sources
 
 on:
+  push:
+    branches:
+      - main3
   workflow_dispatch:
 
 jobs:
