@@ -1,4 +1,4 @@
-name: Decompile .class files with Procyon (overwrite next to original)
+name: Decompile .class files with Procyon (overwrite in src/main/java)
 
 on:
   push:
@@ -25,16 +25,12 @@ jobs:
           curl -L -o procyon-decompiler.jar https://github.com/mstrobel/procyon/releases/download/v0.6.0/procyon-decompiler-0.6.0.jar
           file procyon-decompiler.jar
 
-      - name: Decompile all .class files (in-place .java next to original)
+      - name: Decompile all .class files to src/main/java (in place)
         run: |
-          find src/main/java -type f -name "*.class" | while read classfile; do
-            # 元のファイルパスから .class を .java に変換
-            javafile="${classfile%.class}.java"
-            # 親ディレクトリが無ければ作成（通常は既にあるはず）
-            mkdir -p "$(dirname "$javafile")"
-            java -jar procyon-decompiler.jar "$classfile" -o "$(dirname "$javafile")"
-            # Procyonはファイル名をそのまま出力するので、念のため .java が生成されたか確認
-          done
+          find src/main/java -type f -name "*.class" > classlist.txt
+          if [ -s classlist.txt ]; then
+            java -jar procyon-decompiler.jar @classlist.txt -o src/main/java
+          fi
 
       - name: Commit and push decompiled files
         run: |
