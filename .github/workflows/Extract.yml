@@ -18,11 +18,11 @@ jobs:
 
       - name: Download v1.1.4 jar
         run: |
-          wget https://github.com/Konnitiwa768/Itemplus/releases/download/v1.1.4/Itemplus-v1.1.4.jar
+          wget https://github.com/Konnitiwa768/Itemplus/releases/download/v1.1.4/Itemplus-v1.0.0.jar
 
       - name: Unzip jar file
         run: |
-          unzip -o Itemplus-v1.1.4.jar -d extracted_v1.1.4
+          unzip -o Itemplus-v1.0.0.jar -d extracted_v1.1.4
 
       - name: (例) assetsやdataをコピー
         run: |
