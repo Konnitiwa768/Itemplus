@@ -1,0 +1,19 @@
+name: Show main3 reflog in logs
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  show-reflog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main3 branch
+        uses: actions/checkout@v4
+        with:
+          ref: main3
+
+      - name: Show reflog in logs
+        run: git reflog
