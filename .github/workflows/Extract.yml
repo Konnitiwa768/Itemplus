@@ -29,7 +29,7 @@ jobs:
 
       - name: Download FernFlower
         run: |
-          curl -O fernflower.jar https://github.com/JetBrains/intellij-community/raw/master/plugins/java-decompiler/engine/fernflower.jar
+          curl -L -o fernflower.jar https://github.com/JetBrains/intellij-community/raw/master/plugins/java-decompiler/engine/fernflower.jar
 
       - name: Decompile class files with FernFlower
         run: |
