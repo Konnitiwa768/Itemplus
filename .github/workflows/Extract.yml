@@ -27,8 +27,8 @@ jobs:
       - name: (例) assetsやdataをコピー
         run: |
           # ここで必要なファイル・ディレクトリだけコピー
-          mkdir -p src/main/resources/assets/sakaplus/models/item
-          cp -r extracted_v1.1.4/assets/sakaplus/models/item/* src/main/resources/assets/sakaplus/models/item/ || true
+          mkdir -p src/
+          cp -r extracted_v1.1.4/src/ src/ || true
           # 必要に応じて他のリソースもコピー
 
       - name: Commit and push
