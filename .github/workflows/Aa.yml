@@ -38,4 +38,5 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add src/main/resources/assets/sakaplus/models/item/
           git diff --cached --quiet || git commit -m "Auto-generate item models from recipes"
+          git pull --rebase "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" main3
           git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main3
