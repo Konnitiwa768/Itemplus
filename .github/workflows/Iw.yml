@@ -21,11 +21,11 @@ jobs:
         with:
           ref: main3
 
-      - name: Undo main merge (reset main3)
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.reset_to_commit != '' }}
+      - name: Undo main merge (reset main3 if reset_to_commit is set)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RESET_TO: ${{ github.event.inputs.reset_to_commit }}
+        if: env.RESET_TO != ''
         run: |
           git fetch origin main3
           git checkout main3
