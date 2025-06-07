@@ -1,43 +1,69 @@
-name: Extract all from v1.1.4 jar
+name: Decompile jar with FernFlower and arrange sources
 
 on:
-  push:
-    branches:
-      - main3
   workflow_dispatch:
 
 jobs:
-  extract-all:
+  decompile-and-arrange:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout main3 branch
         uses: actions/checkout@v4
         with:
           ref: main3
 
-      - name: Download v1.1.4 jar (check for success)
+      - name: Download v1.1.4 jar
         run: |
-          set -e
           curl -L -o Itemplus-1.0.0.jar "https://github.com/Konnitiwa768/Itemplus/releases/download/v1.1.4/Itemplus-1.0.0.jar"
-          file Itemplus-1.0.0.jar
-          # HTMLならエラーとして終了
-          if file Itemplus-1.0.0.jar | grep -q HTML; then
-            echo "Downloaded file is not a jar. Check the URL or release file existence."
-            exit 1
-          fi
 
-      - name: Try unzip, fallback to jar xf
+      - name: Extract all contents from jar
         run: |
-          # まずunzipを試す
-          mkdir -p extracted_v1.1.4
-          if unzip -o Itemplus-1.0.0.jar -d extracted_v1.1.4; then
-            echo "Unzip succeeded."
-          else
-            echo "Unzip failed, trying 'jar xf'..."
-            cd extracted_v1.1.4
-            jar xf ../Itemplus-1.0.0.jar
-            cd ..
+          mkdir extracted
+          cd extracted
+          jar xf ../Itemplus-1.0.0.jar
+          cd ..
+
+      - name: Download FernFlower
+        run: |
+          wget -O fernflower.jar https://github.com/JetBrains/intellij-community/raw/master/plugins/java-decompiler/engine/fernflower.jar
+
+      - name: Decompile class files with FernFlower
+        run: |
+          mkdir -p decompiled
+          # FernFlowerはjarに対して直接実行できるが、classファイルディレクトリでもOK
+          java -jar fernflower.jar -rbr=0 -dgs=1 extracted/ decompiled/
+
+      - name: Move decompiled .java sources to src/main/java
+        run: |
+          # fernflowerは元のパッケージ構造で.javaを吐くので、そのままsrc/main/javaに移動
+          find decompiled -name "*.java" | while read file; do
+            relpath=$(echo "$file" | sed 's@^decompiled/@@')
+            mkdir -p "src/main/java/$(dirname "$relpath")"
+            mv "$file" "src/main/java/$relpath"
+          done
+
+      - name: Move resources to proper places
+        run: |
+          # META-INF → ルート直下
+          if [ -d extracted/META-INF ]; then
+            rm -rf META-INF
+            mv extracted/META-INF .
+          fi
+          # assets → src/main/resources/assets
+          if [ -d extracted/assets ]; then
+            rm -rf src/main/resources/assets
+            mkdir -p src/main/resources
+            mv extracted/assets src/main/resources/
+          fi
+          # fabric.mod.json → src/main/resources/
+          if [ -f extracted/fabric.mod.json ]; then
+            mv extracted/fabric.mod.json src/main/resources/
+          fi
+          # fabric → src/main/resources/
+          if [ -d extracted/fabric ]; then
+            rm -rf src/main/resources/fabric
+            mv extracted/fabric src/main/resources/
           fi
 
       - name: Commit and force push
@@ -46,6 +72,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add extracted_v1.1.4
-          git diff --cached --quiet || git commit -m "Extract all files from v1.1.4 jar"
+          git add META-INF src/main/java src/main/resources/assets src/main/resources/fabric src/main/resources/fabric.mod.json || true
+          git diff --cached --quiet || git commit -m "Decompiled .java sources and restored resources from v1.1.4 jar"
           git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main3
