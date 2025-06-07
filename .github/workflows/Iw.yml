@@ -8,7 +8,7 @@ on:
     inputs:
       reset_to_commit:
         description: 'main3の巻き戻し先コミットID (main取り込み前)'
-        required: true
+        required: false
         default: ''
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
           ref: main3
 
       - name: Undo main merge (reset main3)
-        if: ${{ github.event.inputs.reset_to_commit != '' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.reset_to_commit != '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RESET_TO: ${{ github.event.inputs.reset_to_commit }}
