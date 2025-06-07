@@ -2,6 +2,8 @@ name: Generate Item Models
 
 on:
   push:
+    branches:
+      - main3
     paths:
       - 'src/main/resources/data/sakaplus/recipe/*.json'
   workflow_dispatch:
@@ -17,21 +19,23 @@ jobs:
       - name: Generate item models
         run: |
           mkdir -p src/main/resources/assets/sakaplus/models/item
-          for file in src/main/resources/data/sakaplus/recipe/*.json; do
+          find src/main/resources/data/sakaplus/recipe/ -type f -name '*.json' | while read file; do
             name=$(basename "$file" .json)
             path="src/main/resources/assets/sakaplus/models/item/${name}.json"
             echo '{' > "$path"
             echo '  "parent": "item/generated",' >> "$path"
             echo '  "textures": {' >> "$path"
-            echo "    \"layer0\": \"sakaplus:item/${name}\"" >> "$path"
+            echo "    \"layer0\": \"moreweapons:item/${name}\"" >> "$path"
             echo '  }' >> "$path"
             echo '}' >> "$path"
           done
 
       - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add src/main/resources/assets/sakaplus/models/item/
           git diff --cached --quiet || git commit -m "Auto-generate item models from recipes"
-          git push
+          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main3
