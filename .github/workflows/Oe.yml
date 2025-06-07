@@ -3,7 +3,7 @@ name: Show main3 reflog in logs
 on:
   push:
     branches:
-      - main
+      - main3
   workflow_dispatch:
 
 jobs:
