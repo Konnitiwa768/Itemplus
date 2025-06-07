@@ -1,4 +1,4 @@
-name: Decompile .class files with Procyon (keep directory structure)
+name: Decompile .class files with Procyon (overwrite next to original)
 
 on:
   push:
@@ -25,20 +25,21 @@ jobs:
           curl -L -o procyon-decompiler.jar https://github.com/mstrobel/procyon/releases/download/v0.6.0/procyon-decompiler-0.6.0.jar
           file procyon-decompiler.jar
 
-      - name: Decompile all .class files (keep directory structure)
+      - name: Decompile all .class files (in-place .java next to original)
         run: |
-          mkdir -p decompiled/src/main/java
           find src/main/java -type f -name "*.class" | while read classfile; do
-            relative_path="${classfile#src/main/java/}"
-            output_dir="decompiled/src/main/java/$(dirname "$relative_path")"
-            mkdir -p "$output_dir"
-            java -jar procyon-decompiler.jar "$classfile" -o "$output_dir"
+            # 元のファイルパスから .class を .java に変換
+            javafile="${classfile%.class}.java"
+            # 親ディレクトリが無ければ作成（通常は既にあるはず）
+            mkdir -p "$(dirname "$javafile")"
+            java -jar procyon-decompiler.jar "$classfile" -o "$(dirname "$javafile")"
+            # Procyonはファイル名をそのまま出力するので、念のため .java が生成されたか確認
           done
 
       - name: Commit and push decompiled files
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add decompiled
-          git commit -m "Decompiled .class files with Procyon (directory structure preserved)" || echo "No changes to commit"
+          git add src/main/java
+          git commit -m "Decompiled .class files with Procyon (in-place .java)" || echo "No changes to commit"
           git push
