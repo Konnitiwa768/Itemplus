@@ -1,9 +1,6 @@
-name: Decompile jar with FernFlower and arrange sources
+name: Decompile jar with Procyon and arrange sources
 
 on:
-  push:
-    branches:
-      - main3
   workflow_dispatch:
 
 jobs:
@@ -16,38 +13,35 @@ jobs:
         with:
           ref: main3
 
-      - name: Download v1.1.4 jar
+      - name: Download Itemplus v1.1.4 jar
         run: |
           curl -L -o Itemplus-1.0.0.jar "https://github.com/Konnitiwa768/Itemplus/releases/download/v1.1.4/Itemplus-1.0.0.jar"
 
-      - name: Extract all contents from jar
+      - name: Download Procyon Decompiler
         run: |
+          curl -L -o procyon-decompiler.jar https://github.com/mstrobel/procyon/releases/download/0.6.0/procyon-decompiler-0.6.0.jar
+
+      - name: Decompile all classes in jar with Procyon
+        run: |
+          mkdir decompiled
+          java -jar procyon-decompiler.jar -jar Itemplus-1.0.0.jar -o decompiled
+
+      - name: Move decompiled sources to src/main/java
+        run: |
+          mkdir -p src/main/java
+          # パッケージ構造ごとsrc/main/javaに移動
+          cp -r decompiled/com src/main/java/
+          # 必要に応じて他のパッケージも同様に
+          # 例: cp -r decompiled/net src/main/java/
+
+      - name: Move resources to proper places
+        run: |
+          # jarを展開してリソースやMETA-INFも配置
           mkdir extracted
           cd extracted
           jar xf ../Itemplus-1.0.0.jar
           cd ..
 
-      - name: Download FernFlower
-        run: |
-          curl -L -o fernflower.jar https://github.com/JetBrains/intellij-community/raw/master/plugins/java-decompiler/engine/fernflower.jar
-
-      - name: Decompile class files with FernFlower
-        run: |
-          mkdir -p decompiled
-          # FernFlowerはjarに対して直接実行できるが、classファイルディレクトリでもOK
-          java -jar fernflower.jar -rbr=0 -dgs=1 extracted/ decompiled/
-
-      - name: Move decompiled .java sources to src/main/java
-        run: |
-          # fernflowerは元のパッケージ構造で.javaを吐くので、そのままsrc/main/javaに移動
-          find decompiled -name "*.java" | while read file; do
-            relpath=$(echo "$file" | sed 's@^decompiled/@@')
-            mkdir -p "src/main/java/$(dirname "$relpath")"
-            mv "$file" "src/main/java/$relpath"
-          done
-
-      - name: Move resources to proper places
-        run: |
           # META-INF → ルート直下
           if [ -d extracted/META-INF ]; then
             rm -rf META-INF
@@ -76,5 +70,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add META-INF src/main/java src/main/resources/assets src/main/resources/fabric src/main/resources/fabric.mod.json || true
-          git diff --cached --quiet || git commit -m "Decompiled .java sources and restored resources from v1.1.4 jar"
+          git diff --cached --quiet || git commit -m "Decompile with Procyon and restore resources from v1.1.4 jar"
           git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main3
