@@ -5,6 +5,8 @@
 package com.sakalti.sakaplus.parasitory.registry;
 
 import net.minecraft.class_1832;
+import com.sakalti.sakaplus.parasitory.entity.UgnazhiEntity;
+import com.sakalti.sakaplus.parasitory.entity.ShiberEntity;
 import net.minecraft.class_1829;
 import net.minecraft.class_1834;
 import net.minecraft.class_1299;
@@ -17,6 +19,8 @@ public class ParasitoryItems
 {
     public static final class_1792 UGNAZHI_SPAWN_EGG;
     public static final class_1792 UGNAZHI_SWORD;
+    public static final class_1792 SHIBER_SPAWN_EGG;
+    public static final class_1792 SHIBER_SWORD;
     public static final class_1792 HP_UPPER;
     
     public static void register() {
@@ -27,7 +31,9 @@ public class ParasitoryItems
     
     static {
         UGNAZHI_SPAWN_EGG = (class_1792)new class_1826((class_1299)ParasitoryEntities.UGNAZHI, 3355426, 7842355, new class_1792.class_1793());
-        UGNAZHI_SWORD = (class_1792)new class_1829((class_1832)class_1834.field_22033, 28, -1.3000001f, new class_1792.class_1793());
+        UGNAZHI_SWORD = (class_1792)new class_1829((class_1832)class_1834.field_22033, 28, -3f, new class_1792.class_1793());
         HP_UPPER = new class_1792(new class_1792.class_1793().method_7889(1));
+        SHIBER_SPAWN_EGG = (class_1792)new class_1826((class_1299)ParasitoryEntities.SHIBER, 841066, 83112, new class_1792.class_1793());
+        SHIBER_SWORD = (class_1792)new class_1829((class_1832)class_1834.field_22033, 49, -3.4f, new class_1792.class_1793());
     }
 }
