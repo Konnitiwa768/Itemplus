@@ -1,0 +1,43 @@
+name: Decompile .class files with Procyon (keep directory structure)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  decompile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Download Procyon Decompiler
+        run: |
+          curl -L -o procyon.jar https://repo1.maven.org/maven2/org/bitbucket/mstrobel/procyon-compilertools/0.6.0/procyon-compilertools-0.6.0.jar
+
+      - name: Decompile all .class files keeping directory structure
+        run: |
+          find src/main/java -type f -name "*.class" | while read classfile; do
+            # 相対パス取得
+            relative_path="${classfile#src/main/java/}"
+            # .class 拡張子を .java に変換
+            javafile="decompiled/src/main/java/${relative_path%.class}.java"
+            # ディレクトリ生成
+            mkdir -p "$(dirname "$javafile")"
+            # 逆コンパイル
+            java -jar procyon.jar "$classfile" -o "$(dirname "$javafile")"
+          done
+
+      - name: Commit and push decompiled files
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add decompiled
+          git commit -m "Decompile .class files with Procyon (directory structure preserved)" || echo "No changes to commit"
+          git push
