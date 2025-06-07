@@ -1,6 +1,9 @@
 name: Undo main merge & Generate Item Models
 
 on:
+  push:
+    branches:
+      - main3
   workflow_dispatch:
     inputs:
       reset_to_commit:
