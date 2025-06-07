@@ -1,6 +1,9 @@
 name: Extract from v1.1.4 jar and arrange files
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
