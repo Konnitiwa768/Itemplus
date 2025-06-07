@@ -1,77 +1,42 @@
-name: Decompile jar with Procyon and arrange sources
+name: Decompile .class files with Procyon (keep directory structure)
 
 on:
-  push:
-    branches:
-      - main3
   workflow_dispatch:
 
 jobs:
-  decompile-and-arrange:
+  decompile:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout main3 branch
+      - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: main3
 
-      - name: Download Itemplus v1.1.4 jar
-        run: |
-          curl -L -o Itemplus-1.0.0.jar "https://github.com/Konnitiwa768/Itemplus/releases/download/v1.1.4/Itemplus-1.0.0.jar"
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Download Procyon Decompiler
         run: |
-          curl -L -o procyon-decompiler.jar https://github.com/mstrobel/procyon/releases/download/0.6.0/procyon-decompiler-0.6.0.jar
+          curl -L -o procyon-decompiler.jar https://repo1.maven.org/maven2/org/bitbucket/mstrobel/procyon-decompiler/0.6.0/procyon-decompiler-0.6.0.jar
+          ls -lh procyon-decompiler.jar
+          file procyon-decompiler.jar
 
-      - name: Decompile all classes in jar with Procyon
+      - name: Decompile all .class files (keep directory structure)
         run: |
-          mkdir decompiled
-          java -jar procyon-decompiler.jar -jar Itemplus-1.0.0.jar -o decompiled
+          mkdir -p decompiled/src/main/java
+          find src/main/java -type f -name "*.class" | while read classfile; do
+            relative_path="${classfile#src/main/java/}"
+            output_dir="decompiled/src/main/java/$(dirname "$relative_path")"
+            mkdir -p "$output_dir"
+            java -jar procyon-decompiler.jar "$classfile" -o "$output_dir"
+          done
 
-      - name: Move decompiled sources to src/main/java
+      - name: Commit and push decompiled files
         run: |
-          mkdir -p src/main/java
-          # パッケージ構造ごとsrc/main/javaに移動
-          cp -r decompiled/com src/main/java/
-          # 必要に応じて他のパッケージも同様に
-          # 例: cp -r decompiled/net src/main/java/
-
-      - name: Move resources to proper places
-        run: |
-          # jarを展開してリソースやMETA-INFも配置
-          mkdir extracted
-          cd extracted
-          jar xf ../Itemplus-1.0.0.jar
-          cd ..
-
-          # META-INF → ルート直下
-          if [ -d extracted/META-INF ]; then
-            rm -rf META-INF
-            mv extracted/META-INF .
-          fi
-          # assets → src/main/resources/assets
-          if [ -d extracted/assets ]; then
-            rm -rf src/main/resources/assets
-            mkdir -p src/main/resources
-            mv extracted/assets src/main/resources/
-          fi
-          # fabric.mod.json → src/main/resources/
-          if [ -f extracted/fabric.mod.json ]; then
-            mv extracted/fabric.mod.json src/main/resources/
-          fi
-          # fabric → src/main/resources/
-          if [ -d extracted/fabric ]; then
-            rm -rf src/main/resources/fabric
-            mv extracted/fabric src/main/resources/
-          fi
-
-      - name: Commit and force push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add META-INF src/main/java src/main/resources/assets src/main/resources/fabric src/main/resources/fabric.mod.json || true
-          git diff --cached --quiet || git commit -m "Decompile with Procyon and restore resources from v1.1.4 jar"
-          git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main3
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add decompiled
+          git commit -m "Decompiled .class files with Procyon (directory structure preserved)" || echo "No changes to commit"
+          git push
