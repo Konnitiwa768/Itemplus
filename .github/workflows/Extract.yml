@@ -1,6 +1,9 @@
 name: Extract v1.1.4 resources and generate models
 
 on:
+  push:
+    branches:
+      - main3
   workflow_dispatch:
 
 jobs:
