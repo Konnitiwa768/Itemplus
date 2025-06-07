@@ -1,6 +1,10 @@
 name: Decompile .class files with Procyon (keep directory structure)
 
 on:
+  push:
+    branches:
+      - main
+    
   workflow_dispatch:
 
 jobs:
