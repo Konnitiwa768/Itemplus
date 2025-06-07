@@ -1,4 +1,4 @@
-name: Decompile .class files with Procyon (in-place to src/main/java)
+name: Decompie .class files with Procyon (in-place to src/main/java)
 
 on:
   push:
