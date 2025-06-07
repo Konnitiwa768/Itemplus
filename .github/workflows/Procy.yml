@@ -1,10 +1,6 @@
 name: Decompile .class files with Procyon (keep directory structure)
 
 on:
-  push:
-    branches:
-      - main
-    
   workflow_dispatch:
 
 jobs:
@@ -23,19 +19,18 @@ jobs:
 
       - name: Download Procyon Decompiler
         run: |
-          curl -L -o procyon.jar https://repo1.maven.org/maven2/org/bitbucket/mstrobel/procyon-compilertools/0.6.0/procyon-compilertools-0.6.0.jar
+          curl -L -o procyon-decompiler.jar https://repo1.maven.org/maven2/org/bitbucket/mstrobel/procyon-decompiler/0.6.0/procyon-decompiler-0.6.0.jar
+          ls -lh procyon-decompiler.jar
+          file procyon-decompiler.jar
 
-      - name: Decompile all .class files keeping directory structure
+      - name: Decompile all .class files (keep directory structure)
         run: |
+          mkdir -p decompiled/src/main/java
           find src/main/java -type f -name "*.class" | while read classfile; do
-            # 相対パス取得
             relative_path="${classfile#src/main/java/}"
-            # .class 拡張子を .java に変換
-            javafile="decompiled/src/main/java/${relative_path%.class}.java"
-            # ディレクトリ生成
-            mkdir -p "$(dirname "$javafile")"
-            # 逆コンパイル
-            java -jar procyon.jar "$classfile" -o "$(dirname "$javafile")"
+            output_dir="decompiled/src/main/java/$(dirname "$relative_path")"
+            mkdir -p "$output_dir"
+            java -jar procyon-decompiler.jar "$classfile" -o "$output_dir"
           done
 
       - name: Commit and push decompiled files
@@ -43,5 +38,5 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add decompiled
-          git commit -m "Decompile .class files with Procyon (directory structure preserved)" || echo "No changes to commit"
+          git commit -m "Decompiled .class files with Procyon (directory structure preserved)" || echo "No changes to commit"
           git push
