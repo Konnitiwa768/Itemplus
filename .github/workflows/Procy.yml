@@ -22,8 +22,7 @@ jobs:
 
       - name: Download Procyon Decompiler
         run: |
-          curl -L -o procyon-decompiler.jar https://repo1.maven.org/maven2/org/bitbucket/mstrobel/procyon-decompiler/0.6.0/procyon-decompiler-0.6.0.jar
-          ls -lh procyon-decompiler.jar
+          curl -L -o procyon-decompiler.jar https://github.com/mstrobel/procyon/releases/download/v0.6.0/procyon-decompiler-0.6.0.jar
           file procyon-decompiler.jar
 
       - name: Decompile all .class files (keep directory structure)
