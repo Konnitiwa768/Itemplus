@@ -36,5 +36,6 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add src/main/java
+          git pull --rebase origin main3
           git commit -m "Decompiled .class files with Procyon (in-place .java)" || echo "No changes to commit"
           git push
