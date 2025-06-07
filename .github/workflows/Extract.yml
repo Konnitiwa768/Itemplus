@@ -1,13 +1,10 @@
-name: Extract v1.1.4 resources and generate models
+name: Extract all from v1.1.4 jar
 
 on:
-  push:
-    branches:
-      - main3
   workflow_dispatch:
 
 jobs:
-  extract-and-generate:
+  extract-all:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,27 +13,36 @@ jobs:
         with:
           ref: main3
 
-      - name: Download v1.1.4 jar
+      - name: Download v1.1.4 jar (check for success)
         run: |
-          curl -O https://github.com/Konnitiwa768/Itemplus/releases/download/v1.1.4/Itemplus-v1.0.0.jar
+          set -e
+          curl -L -o Itemplus-1.0.0.jar "https://github.com/Konnitiwa768/Itemplus/releases/download/v1.1.4/Itemplus-1.0.0.jar"
+          file Itemplus-1.0.0.jar
+          # HTMLならエラーとして終了
+          if file Itemplus-1.0.0.jar | grep -q HTML; then
+            echo "Downloaded file is not a jar. Check the URL or release file existence."
+            exit 1
+          fi
 
-      - name: Unzip jar file
+      - name: Try unzip, fallback to jar xf
         run: |
-          unzip -o Itemplus-v1.0.0.jar -d extracted_v1.1.4
+          # まずunzipを試す
+          mkdir -p extracted_v1.1.4
+          if unzip -o Itemplus-1.0.0.jar -d extracted_v1.1.4; then
+            echo "Unzip succeeded."
+          else
+            echo "Unzip failed, trying 'jar xf'..."
+            cd extracted_v1.1.4
+            jar xf ../Itemplus-1.0.0.jar
+            cd ..
+          fi
 
-      - name: (例) assetsやdataをコピー
-        run: |
-          # ここで必要なファイル・ディレクトリだけコピー
-          mkdir -p src/
-          cp -r extracted_v1.1.4/src/ src/ || true
-          # 必要に応じて他のリソースもコピー
-
-      - name: Commit and push
+      - name: Commit and force push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/main/resources/assets/sakaplus/models/item/
-          git diff --cached --quiet || git commit -m "Restore sakaplus item models from v1.1.4 jar"
+          git add extracted_v1.1.4
+          git diff --cached --quiet || git commit -m "Extract all files from v1.1.4 jar"
           git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main3
