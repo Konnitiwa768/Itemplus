@@ -30,7 +30,7 @@ jobs:
             echo '}' >> "$path"
           done
 
-      - name: Commit and push changes
+      - name: Commit and force push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -38,5 +38,4 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add src/main/resources/assets/sakaplus/models/item/
           git diff --cached --quiet || git commit -m "Auto-generate item models from recipes"
-          git pull --rebase "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" main3
-          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main3
+          git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main3
