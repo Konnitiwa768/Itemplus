@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["XXX", " # ", " # "],
+  "key": {
+    "X": { "item": "sakaplus:gemstone" },
+    "#": { "item": "minecraft:stick" }
+  },
+  "result": { "item": "sakaplus:gemstone_pickaxe" }
+}

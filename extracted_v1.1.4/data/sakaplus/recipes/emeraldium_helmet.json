@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["XXX", "X X"],
+  "key": { "X": { "item": "sakaplus:emeraldium_ingot" } },
+  "result": { "item": "sakaplus:emeraldium_helmet" }
+}

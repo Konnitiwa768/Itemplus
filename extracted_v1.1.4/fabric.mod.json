@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "sakaplus",
+  "version": "1.0.0",
+  "name": "SakaPlus",
+  "description": "フライドポテトMOD",
+  "entrypoints": {
+    "main": [
+      "com.sakalti.sakaplus.SakaPlusMod"
+    ],
+    "mixins": [
+      "mixins.sakaplus.json"
+    ],
+    "client": [
+      "com.sakalti.sakaplus.client.SakaplusClient"
+    ],
+    "datagen": [
+      "com.sakalti.sakaplus.SakaPlusDataGenerator"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "fabric": "*",
+    "minecraft": "1.19.2"
+  }
+}

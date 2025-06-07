@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " CO",
+    "AOC",
+    "OA "
+  ],
+  "key": {
+    "O": { "item": "sakaplus:orange_crystal" },
+    "A": { "item": "sakaplus:abyssalite_ingot" },
+    "C": { "item": "sakaplus:cyan_crystal" }
+  },
+  "result": {
+    "item": "sakaplus:the_last_tentacle"
+  }
+}

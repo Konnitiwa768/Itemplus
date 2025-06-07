@@ -1,0 +1,24 @@
+{
+  "mappings": {
+    "com/sakalti/sakaplus/mixin/AttackDamageMixin": {
+      "attack(Lnet/minecraft/entity/Entity;)V": "Lnet/minecraft/class_1657;method_7324(Lnet/minecraft/class_1297;)V"
+    },
+    "com/sakalti/sakaplus/mixin/CreeperEntityAccessor": {
+      "currentFuseTime": "field_7227:I",
+      "explosionRadius": "field_7225:I",
+      "fuseTime": "field_7228:I"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "com/sakalti/sakaplus/mixin/AttackDamageMixin": {
+        "attack(Lnet/minecraft/entity/Entity;)V": "Lnet/minecraft/class_1657;method_7324(Lnet/minecraft/class_1297;)V"
+      },
+      "com/sakalti/sakaplus/mixin/CreeperEntityAccessor": {
+        "currentFuseTime": "field_7227:I",
+        "explosionRadius": "field_7225:I",
+        "fuseTime": "field_7228:I"
+      }
+    }
+  }
+}

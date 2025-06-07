@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " CB",
+    " BC",
+    "BE "
+  ],
+  "key": {
+    "B": { "item": "sakaplus:beige_crystal" },
+    "E": { "item": "sakaplus:emeraldium_ingot" },
+    "C": { "item": "sakaplus:cyan_crystal" }
+  },
+  "result": {
+    "item": "sakaplus:beige_slash"
+  }
+}
