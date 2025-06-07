@@ -3,7 +3,7 @@ name: Generate Emeraldium Recipes
 on:
   push:
     branches:
-      - main
+      - main3
 
 jobs:
   generate_emeraldium_recipes:
