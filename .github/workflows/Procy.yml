@@ -1,4 +1,4 @@
-name: Decompile .class files with Procyon (overwrite in src/main/java)
+name: Decompile .class files with Procyon (in-place to src/main/java)
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
         run: |
           curl -L -o procyon-decompiler.jar https://github.com/mstrobel/procyon/releases/download/v0.6.0/procyon-decompiler-0.6.0.jar
 
-      - name: Decompile all .class files to src/main/java (in place)
+      - name: Decompile all .class files to src/main/java (NO decompiled/, NO path loop)
         run: |
           find src/main/java -type f -name "*.class" > classlist.txt
           if [ -s classlist.txt ]; then
@@ -36,7 +36,6 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add -A
-          git status      # デバッグ用（任意）
-          git commit -m "Decompiled .class files with Procyon (in-place .java)" || echo "No changes to commit"
+          git commit -m "Decompiled .class files with Procyon (in-place .java, cleaned paths)" || echo "No changes to commit"
           git pull --rebase origin main3 || echo "Nothing to rebase"
           git push
