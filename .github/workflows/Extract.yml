@@ -1,0 +1,39 @@
+name: Extract v1.1.4 resources and generate models
+
+on:
+  workflow_dispatch:
+
+jobs:
+  extract-and-generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main3
+
+      - name: Download v1.1.4 jar
+        run: |
+          wget https://github.com/Konnitiwa768/Itemplus/releases/download/v1.1.4/Itemplus-v1.1.4.jar
+
+      - name: Unzip jar file
+        run: |
+          unzip -o Itemplus-v1.1.4.jar -d extracted_v1.1.4
+
+      - name: (例) assetsやdataをコピー
+        run: |
+          # ここで必要なファイル・ディレクトリだけコピー
+          mkdir -p src/main/resources/assets/sakaplus/models/item
+          cp -r extracted_v1.1.4/assets/sakaplus/models/item/* src/main/resources/assets/sakaplus/models/item/ || true
+          # 必要に応じて他のリソースもコピー
+
+      - name: Commit and push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/main/resources/assets/sakaplus/models/item/
+          git diff --cached --quiet || git commit -m "Restore sakaplus item models from v1.1.4 jar"
+          git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main3
