@@ -17,7 +17,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:0.14.19"
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.77.0+1.19.2"
     // ProGuardを追加
-    implementation 'net.sf.proguard:proguard-gradle:7.4.0'
+    //　implementation 'net.sf.proguard:proguard-gradle:7.4.0'
 }
 
 java {
@@ -41,19 +41,19 @@ jar {
 }
 
 // ProGuardのタスク追加例
-task obfuscate(type: JavaExec) {
-    group = "build"
-    description = "Obfuscate jar using ProGuard"
-    classpath = configurations.runtimeClasspath
-    main = 'proguard.gradle.ProGuardTask'
-    def jarTask = tasks.named("jar").get()
-    args = [
-        '@proguard-rules.pro',
-        '-injars', "$buildDir/libs/${jarTask.archiveFile.get().asFile.name}",
-        '-outjars', "$buildDir/libs/${jarTask.archiveBaseName.get()}-obf.jar"
-    ]
-    dependsOn jar
-}
+// task obfuscate(type: JavaExec) {
+//    group = "build"
+//   description = "Obfuscate jar using ProGuard"
+// classpath = configurations.runtimeClasspath
+// main = 'proguard.gradle.ProGuardTask'
+// def jarTask = tasks.named("jar").get()
+//    args = [
+//        '@proguard-rules.pro',
+//        '-injars', "$buildDir/libs/${jarTask.archiveFile.get().asFile.name}",
+//        '-outjars', "$buildDir/libs/${jarTask.archiveBaseName.get()}-obf.jar"
+//    ]
+//    dependsOn jar
+//　}
 
 // ビルド時に難読化も実行したい場合
-build.dependsOn obfuscate
+//　build.dependsOn obfuscate
