@@ -14,7 +14,7 @@ repositories {
 dependencies {
     minecraft "com.mojang:minecraft:1.19.2"
     // mappingsが必須。Yarn(v2)で1.19.2用
-    mappings "net.fabricmc:yarn:1.19.2+build.28:v1"
+    mappings "net.fabricmc:yarn:1.19.2+build.28:v2"
 
     // Fabric Loader
     modImplementation "net.fabricmc:fabric-loader:0.14.19"
