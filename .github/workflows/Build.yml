@@ -22,7 +22,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build with Gradle
-        run: ./gradlew clean build yguardObfuscate --info --refresh-dependencies --warning-mode all
+        run: ./gradlew clean build --info --refresh-dependencies --warning-mode all
 
       - name: Upload to CurseForge
         env:
@@ -50,7 +50,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: Release ${{ github.ref_name }}
-          tag_name: v1.1.5
+          tag_name: vkatapen-1.0.0
           files: build/libs/*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
