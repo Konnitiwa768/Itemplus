@@ -34,6 +34,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto-generate item models from item textures"
-          branch: ${{ github.ref }}
+          branch: ${{ github.ref_name }}
           file_pattern: src/main/resources/assets/sakaplus/models/item/*.json
           pull: true
