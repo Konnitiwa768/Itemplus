@@ -56,4 +56,4 @@ task obfuscate(type: JavaExec) {
 }
 
 // ビルド時に難読化も実行したい場合
-// build.dependsOn obfuscate
+build.dependsOn obfuscate
