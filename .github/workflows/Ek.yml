@@ -13,8 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Find and output class_*** definitions
+      - name: Find and echo class_*** definitions
         run: |
-          find src/main/java -type f -name '*.java' \
-            -exec grep -HE 'class\s+class_[A-Za-z0-9_]+' {} \; \
-            | sort | uniq
+          for file in $(find src/main/java -type f -name '*.java'); do
+            grep -E 'class\s+class_[A-Za-z0-9_]+' "$file" | while read -r line; do
+              echo "$file: $line"
+            done
+          done
