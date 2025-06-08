@@ -1,0 +1,44 @@
+name: Decompile Classes with FernFlower
+
+on:
+  push:
+    branches:
+      - main3
+  workflow_dispatch:
+
+jobs:
+  decompile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Download FernFlower
+        run: |
+          curl -L -o fernflower.jar https://github.com/JetBrains/intellij-community/raw/master/plugins/java-decompiler/engine/fernflower.jar
+
+      - name: Decompile classes from classlist.txt
+        run: |
+          while IFS= read -r classpath; do
+            if [ -f "$classpath" ]; then
+              dir=$(dirname "$classpath")
+              base=$(basename "$classpath" .class)
+              # FernFlowerは出力先ディレクトリ全体を指定する形式
+              java -jar fernflower.jar -dgs=1 "$classpath" "$dir"
+            fi
+          done < classlist.txt
+
+      - name: Commit and push decompiled sources
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          git commit -m "Decompiled classes from classlist.txt with FernFlower"
+          git push
