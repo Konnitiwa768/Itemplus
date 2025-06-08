@@ -1,18 +1,18 @@
-name: Remap and Decompile to Java Source
+name: Remap and Decompile to Java Source (main3→main4)
 
 on:
-  push:
-    branches:
-      - main3
   workflow_dispatch:
+    branches: [main3]
 
 jobs:
   remap_and_decompile:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout main3
         uses: actions/checkout@v4
+        with:
+          ref: main3
 
       - name: Download Yarn mappings (1.19.2)
         run: |
@@ -24,17 +24,25 @@ jobs:
 
       - name: Download Procyon Decompiler
         run: |
-          curl -L -o procyon-decompiler.jar https://github.com/mstrobel/procyon/releases/download/v0.6.0/procyon-decompiler-0.6.0.jar
+          curl -L -o procyon-decompiler.jar "https://github.com/mstrobel/procyon/releases/download/v0.6.0/procyon-decompiler-0.6.0.jar"
 
-      - name: Remap .class files in extracted_v1.1.4 with TinyRemapper
+      - name: Create input.jar from extracted_v1.1.4
         run: |
-          mkdir -p remapped_classes
-          java -jar TinyRemapper.jar \
-            --in extracted_v1.1.4 \
-            --out remapped_classes \
-            --mappings mappings.tiny \
-            --from official \
-            --to named
+          cd extracted_v1.1.4
+          jar cf ../input.jar .
+          cd ..
+
+      - name: Remap input.jar with TinyRemapper to output.jar
+        run: |
+          java -jar TinyRemapper.jar input.jar output.jar mappings.tiny --from official --to named
+
+      - name: Extract remapped .class files
+        run: |
+          rm -rf remapped_classes
+          mkdir remapped_classes
+          cd remapped_classes
+          jar xf ../output.jar
+          cd ..
 
       - name: Decompile remapped .class files to Java (src/main/java)
         run: |
@@ -44,11 +52,21 @@ jobs:
             java -jar procyon-decompiler.jar @classlist.txt -o src/main/java
           fi
 
-      - name: Commit and push decompiled Java sources
+      - name: Checkout main4
+        uses: actions/checkout@v4
+        with:
+          ref: main4
+
+      - name: Copy decompiled java to main4
+        run: |
+          rm -rf src/main/java
+          cp -r $GITHUB_WORKSPACE/src/main/java ./src/main/java
+
+      - name: Commit and push to main4
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add src/main/java
-          git commit -m "Decompiled remapped classes from extracted_v1.1.4 to Java using TinyRemapper and Procyon" || echo "No changes to commit"
+          git commit -m "Decompiled and remapped from main3 extracted_v1.1.4 (TinyRemapper+Procyon)" || echo "No changes to commit"
           git pull --rebase origin main4 || echo "Nothing to rebase"
           git push
