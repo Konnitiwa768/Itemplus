@@ -2,7 +2,9 @@ name: Remap and Decompile to Java Source (main3→main4)
 
 on:
   workflow_dispatch:
-    branches: [main3]
+  push:
+    branches:
+      - main3
 
 jobs:
   remap_and_decompile:
