@@ -39,7 +39,7 @@ jar {
     manifest {
         attributes(
             // Fabric modはMain-Class不要だが、どうしても必要なら残す
-            //'Main-Class': 'com.sakalti.sakaplus.SakaplusMod'
+            'Main-Class': 'com.sakalti.sakaplus.SakaplusMod'
         )
     }
 }
