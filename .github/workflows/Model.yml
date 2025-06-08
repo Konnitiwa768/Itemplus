@@ -2,6 +2,8 @@ name: Generate Minecraft Item Models
 
 on:
   push:
+    branches:
+      - main3
     paths:
       - 'src/main/resources/assets/sakaplus/textures/item/*.png'
   workflow_dispatch:
