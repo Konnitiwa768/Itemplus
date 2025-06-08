@@ -46,10 +46,11 @@ task obfuscate(type: JavaExec) {
     description = "Obfuscate jar using ProGuard"
     classpath = configurations.runtimeClasspath
     main = 'proguard.gradle.ProGuardTask'
+    def jarTask = tasks.named("jar").get()
     args = [
         '@proguard-rules.pro',
-        '-injars', "$buildDir/libs/${jar.archiveFileName.get()}",
-        '-outjars', "$buildDir/libs/${baseName}-obf.jar"
+        '-injars', "$buildDir/libs/${jarTask.archiveFile.get().asFile.name}",
+        '-outjars', "$buildDir/libs/${jarTask.archiveBaseName.get()}-obf.jar"
     ]
     dependsOn jar
 }
