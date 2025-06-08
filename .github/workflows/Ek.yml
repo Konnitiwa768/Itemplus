@@ -1,4 +1,4 @@
-name: Find class_*** Classes
+name: Find unique class_*** Classes (header only)
 
 on:
   workflow_dispatch:
@@ -7,18 +7,23 @@ on:
       - main3
 
 jobs:
-  find-classes:
+  find-unique-classes:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Show all Java files and extract class_*** definitions
+      - name: Extract unique class_*** definitions before import
         run: |
+          class_list=""
           for file in $(find src/main/java -type f -name '*.java'); do
-            echo "==== $file ===="
-            cat "$file"
-            grep -E 'class\s+class_[A-Za-z0-9_]+' "$file" | while read -r line; do
-              echo "[class_*** found] $line"
-            done
+            # 最初のimportで始まる行までを抽出
+            header=$(awk '/^import /{exit} {print}' "$file")
+            # その中からclass_****を抽出
+            class=$(echo "$header" | grep -oE 'class_[A-Za-z0-9_]+')
+            if [ -n "$class" ]; then
+              class_list="$class_list"$'\n'"$class"
+            fi
           done
+          # 重複を削除してecho
+          echo "$class_list" | sort | uniq | grep .
