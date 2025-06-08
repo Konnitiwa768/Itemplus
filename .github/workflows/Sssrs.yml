@@ -27,7 +27,7 @@ jobs:
       # 2. Enigma CLIダウンロード
       - name: Download Enigma CLI
         run: |
-          wget -O enigma-cli.jar "https://github.com/FabricMC/Enigma/releases/latest/download/enigma-cli.jar"
+          crul -L -o enigma-cli.jar "https://github.com/FabricMC/Enigma/releases/latest/download/enigma-cli.jar"
 
       # 3. Yarnマッピングダウンロード（1.19.2+build.28例）
       - name: Download Yarn mappings
