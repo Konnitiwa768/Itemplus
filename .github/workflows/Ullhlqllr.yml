@@ -1,0 +1,51 @@
+name: Remap and Decompile to Java Source
+
+on:
+  workflow_dispatch:
+
+jobs:
+  remap_and_decompile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Yarn mappings (1.19.2)
+        run: |
+          curl -L -o mappings.tiny "https://maven.fabricmc.net/net/fabricmc/yarn/1.19.2+build.28/yarn-1.19.2+build.28.tiny"
+
+      - name: Download TinyRemapper
+        run: |
+          curl -L -o TinyRemapper.jar "https://maven.fabricmc.net/net/fabricmc/tiny-remapper/0.8.6/tiny-remapper-0.8.6-fat.jar"
+
+      - name: Download Procyon Decompiler
+        run: |
+          curl -L -o procyon-decompiler.jar https://github.com/mstrobel/procyon/releases/download/v0.6.0/procyon-decompiler-0.6.0.jar
+
+      - name: Remap .class files in extracted_v1.1.4 with TinyRemapper
+        run: |
+          mkdir -p remapped_classes
+          java -jar TinyRemapper.jar \
+            --in extracted_v1.1.4 \
+            --out remapped_classes \
+            --mappings mappings.tiny \
+            --from official \
+            --to named
+
+      - name: Decompile remapped .class files to Java (src/main/java)
+        run: |
+          mkdir -p src/main/java
+          find remapped_classes -type f -name "*.class" > classlist.txt
+          if [ -s classlist.txt ]; then
+            java -jar procyon-decompiler.jar @classlist.txt -o src/main/java
+          fi
+
+      - name: Commit and push decompiled Java sources
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add src/main/java
+          git commit -m "Decompiled remapped classes from extracted_v1.1.4 to Java using TinyRemapper and Procyon" || echo "No changes to commit"
+          git pull --rebase origin main4 || echo "Nothing to rebase"
+          git push
