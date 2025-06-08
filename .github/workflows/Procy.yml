@@ -28,7 +28,7 @@ jobs:
         run: |
           find src/main/java -type f -name "*.class" > classlist.txt
           if [ -s classlist.txt ]; then
-            java -jar procyon-decompiler.jar @classlist.txt -o src/main/java
+            java -jar procyon-decompiler.jar @classlist.txt -o  -g src/main/java
           fi
 
       - name: Commit and push decompiled files
