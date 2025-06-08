@@ -1,0 +1,25 @@
+name: Reset main to specific commit
+
+on:
+  push:
+    branches:
+      - main3
+  workflow_dispatch:
+
+jobs:
+  reset-to-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target commit
+        uses: actions/checkout@v4
+        with:
+          ref: cba50b507cb72d16e398bdfefb59fd11605bcff3
+
+      - name: Force push commit to main
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git checkout -B main3
+          git push origin main3 --force
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
