@@ -22,7 +22,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build with Gradle
-        run: ./gradlew clean build YguardObfuscate --info --refresh-dependencies --warning-mode all
+        run: ./gradlew clean build yguardObfuscate --info --refresh-dependencies --warning-mode all
 
       - name: Upload to CurseForge
         env:
