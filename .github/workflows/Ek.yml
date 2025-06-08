@@ -13,10 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Echo class_*** definitions from all Java files
+      - name: Show all Java files and extract class_*** definitions
         run: |
           for file in $(find src/main/java -type f -name '*.java'); do
+            echo "==== $file ===="
+            cat "$file"
             grep -E 'class\s+class_[A-Za-z0-9_]+' "$file" | while read -r line; do
-              echo "$file: $line"
+              echo "[class_*** found] $line"
             done
           done
