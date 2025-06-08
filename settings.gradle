@@ -2,7 +2,7 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         mavenCentral()
-        maven { url 'https://maven.architectury.dev' }
+        maven { url 'https://maven.fabricmc.net' }
     }
 }
 rootProject.name = "sakaplus"
