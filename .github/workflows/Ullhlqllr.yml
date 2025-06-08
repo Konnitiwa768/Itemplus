@@ -1,6 +1,9 @@
 name: Remap and Decompile to Java Source
 
 on:
+  push:
+    branches:
+      - main3
   workflow_dispatch:
 
 jobs:
