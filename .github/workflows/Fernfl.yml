@@ -3,7 +3,7 @@ name: Decompile Classes with FernFlower
 on:
   push:
     branches:
-      - main
+      - main3
   workflow_dispatch:
 
 jobs:
