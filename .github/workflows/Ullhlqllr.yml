@@ -16,9 +16,12 @@ jobs:
         with:
           ref: main3
 
-      - name: Download Yarn mappings (1.19.2)
+      # Yarn v1 mappingをダウンロード（例: 1.17.1+build.65はv1形式）
+      # 必要に応じて、あなたの対象バージョンでv1があるか https://maven.fabricmc.net/net/fabricmc/yarn/ を参照
+      - name: Download Yarn mappings (1.17.1 v1 example)
         run: |
-          curl -L -o mappings.tiny "https://maven.fabricmc.net/net/fabricmc/yarn/1.19.2+build.28/yarn-1.19.2+build.28.tiny"
+          curl -L -o mappings.tiny "https://maven.fabricmc.net/net/fabricmc/yarn/1.17.1+build.65/yarn-1.17.1+build.65.tiny"
+          head -n 1 mappings.tiny  # tiny	1	0 などv1になっていることを確認
 
       - name: Download TinyRemapper
         run: |
