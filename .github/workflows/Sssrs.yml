@@ -1,9 +1,6 @@
 name: Deobfuscate and Upload to Release
 
 on:
-  push:
-    branches:
-      - main3
   workflow_dispatch:
 
 jobs:
@@ -14,33 +11,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 1. JARダウンロード
-      - name: Download Obfuscated JAR by sha256
+      # 1. JARダウンロード（curl使用）
+      - name: Download Obfuscated JAR (curl)
         run: |
-          # ここでは例としてGitHubリリースから取得する形です
-          # 必要なら適切なダウンロードURLに修正してください
-          JAR_URL="https://github.com/Konnitiwa768/Itemplus/releases/download/v1.1.4/Itemplus-1.0.0.jar"
-          wget -O obfuscated.jar "$JAR_URL"
-          # sha256チェック
-          echo "881c68c3bfc3487e3a445cf5ec252b4d3e887cf99f73a1fa27258373541084e4  obfuscated.jar" | sha256sum -c -
+          curl -L -o itemplus-1.0.0.jar "https://github.com/Konnitiwa768/Itemplus/releases/download/v1.1.4/Itemplus-1.0.0.jar"
 
-      # 2. Enigma CLIダウンロード
-      - name: Download Enigma CLI
+      # 2. Enigma CLIダウンロード（curl使用）
+      - name: Download Enigma CLI (curl)
         run: |
-          crul -L -o enigma-cli.jar "https://github.com/FabricMC/Enigma/releases/latest/download/enigma-cli.jar"
+          curl -L -o enigma-cli.jar "https://github.com/FabricMC/Enigma/releases/latest/download/enigma-cli.jar"
 
-      # 3. Yarnマッピングダウンロード（1.19.2+build.28例）
-      - name: Download Yarn mappings
+      # 3. Yarnマッピングダウンロード（curl使用、1.19.2+build.28）
+      - name: Download Yarn mappings (curl)
         run: |
-          wget -O mappings.tiny "https://github.com/FabricMC/yarn/releases/download/1.19.2+build.28/mappings.tiny"
+          curl -L -o mappings.tiny "https://github.com/FabricMC/yarn/releases/download/1.19.2+build.28/mappings.tiny"
 
       # 4. Enigmaでデオブフスケート
       - name: Deobfuscate JAR using Enigma
         run: |
           java -jar enigma-cli.jar \
             --mappings mappings.tiny \
-            --input obfuscated.jar \
-            --output deobf.jar \
+            --input itemplus-1.0.0.jar \
+            --output itemplus-1.0.0-deobf.jar \
             --from obf \
             --to named
 
@@ -49,6 +41,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.1.5
-          files: deobf.jar
+          files: itemplus-1.0.0-deobf.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
