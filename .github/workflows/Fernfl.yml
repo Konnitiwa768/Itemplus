@@ -1,9 +1,8 @@
-name: Decompile Classes with Krakatau (Rust)
+name: Decompile Classes with Bytecode Viewer (Krakatau only)
 
 on:
   push:
-    branches:
-      - main3
+    branches: [main3]
   workflow_dispatch:
 
 jobs:
@@ -16,25 +15,23 @@ jobs:
         with:
           ref: main3
 
-      - name: Set up Rust
-        uses: shogo82148/actions-setup-rust@v1
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
-          rust-version: stable
+          distribution: 'temurin'
+          java-version: 17
 
-      - name: Clone Krakatau (Rust)
-        run: git clone https://github.com/Storyyeller/Krakatau.git
-
-      - name: Build Krakatau
+      - name: Download Bytecode Viewer (with decompilers)
         run: |
-          cd Krakatau
-          cargo build --release
+          curl -L -o Bytecode-Viewer.jar https://github.com/Konloch/bytecode-viewer/releases/latest/download/Bytecode-Viewer.jar
 
-      - name: Decompile classes from classlist.txt
+      - name: Decompile classes from classlist.txt with Krakatau only
         run: |
           while IFS= read -r classpath; do
             if [ -f "$classpath" ]; then
               dir=$(dirname "$classpath")
-              ./Krakatau/target/release/krakatau decompile "$classpath" --output "$dir"
+              base=$(basename "$classpath" .class)
+              java -jar Bytecode-Viewer.jar -import "$classpath" -decompile Krakatau -output "$dir/${base}.java" || true
             fi
           done < classlist.txt
 
@@ -43,5 +40,5 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
-          git commit -m "Decompiled classes from classlist.txt with Krakatau Rust"
+          git commit -m "Decompiled classes from classlist.txt with Bytecode Viewer (Krakatau)"
           git push
