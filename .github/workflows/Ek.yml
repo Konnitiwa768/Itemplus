@@ -19,3 +19,4 @@ jobs:
             | xargs -0 grep -E 'class\s+class_[A-Za-z0-9_]+' \
             | sed -n 's/.*class\s\+\(class_[A-Za-z0-9_]\+\).*/\1/p' \
             | sort | uniq
+            echo "$class"
