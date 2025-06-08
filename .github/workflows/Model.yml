@@ -1,0 +1,37 @@
+name: Generate Minecraft Item Models
+
+on:
+  push:
+    paths:
+      - 'src/main/resources/assets/sakaplus/textures/item/*.png'
+  workflow_dispatch:
+
+jobs:
+  generate-models:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate item models (with echo)
+        run: |
+          mkdir -p src/main/resources/assets/sakaplus/models/item
+          for file in src/main/resources/assets/sakaplus/textures/item/*.png; do
+            bname=$(basename "$file" .png)
+            json_path=src/main/resources/assets/sakaplus/models/item/${bname}.json
+            echo '{' > $json_path
+            echo '  "parent": "item/generated",' >> $json_path
+            echo '  "textures": {' >> $json_path
+            echo '    "layer0": "sakaplus:item/'${bname}'"' >> $json_path
+            echo '  }' >> $json_path
+            echo '}' >> $json_path
+          done
+
+      - name: Commit and push generated models
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-generate item models from item textures"
+          branch: ${{ github.ref }}
+          file_pattern: src/main/resources/assets/sakaplus/models/item/*.json
+          pull: true
