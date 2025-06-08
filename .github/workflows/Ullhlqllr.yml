@@ -36,7 +36,7 @@ jobs:
 
       - name: Remap input.jar with TinyRemapper to output.jar
         run: |
-          java -jar TinyRemapper.jar input.jar output.jar mappings.tiny --from official --to named
+          java -jar TinyRemapper.jar input.jar output.jar mappings.tiny official named
 
       - name: Extract remapped .class files
         run: |
