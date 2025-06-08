@@ -1,9 +1,6 @@
 name: Decompile Classes with FernFlower
 
 on:
-  push:
-    branches:
-      - main3
   workflow_dispatch:
 
 jobs:
@@ -22,16 +19,15 @@ jobs:
 
       - name: Download FernFlower
         run: |
-          curl -L -o fernflower.jar https://github.com/JetBrains/intellij-community/raw/master/plugins/java-decompiler/engine/fernflower.jar
+          curl -L -o fernflower.jar https://repo1.maven.org/maven2/org/jetbrains/java-decompiler/fernflower/1.9.3/fernflower-1.9.3.jar
+          file fernflower.jar
 
       - name: Decompile classes from classlist.txt
         run: |
           while IFS= read -r classpath; do
             if [ -f "$classpath" ]; then
               dir=$(dirname "$classpath")
-              base=$(basename "$classpath" .class)
-              # FernFlowerは出力先ディレクトリ全体を指定する形式
-              java -jar fernflower.jar -dgs=1 "$classpath" "$dir"
+              java -jar fernflower.jar "$classpath" "$dir"
             fi
           done < classlist.txt
 
