@@ -1,6 +1,9 @@
 name: Decompile Classes with Krakatau
 
 on:
+  push:
+    branches:
+      - main3
   workflow_dispatch:
 
 jobs:
