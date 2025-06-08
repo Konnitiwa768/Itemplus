@@ -1,9 +1,6 @@
-name: Decompile Classes with FernFlower
+name: Decompile Classes with Krakatau
 
 on:
-  push:
-    branches:
-      - main3
   workflow_dispatch:
 
 jobs:
@@ -11,26 +8,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repository (main3)
         uses: actions/checkout@v3
-
-      - name: Set up Java
-        uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: 17
+          ref: main3
 
-      - name: Download FernFlower
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Download Krakatau
         run: |
-          curl -L -o fernflower.jar https://repo1.maven.org/maven2/org/jetbrains/java-decompiler/fernflower/1.9.3/fernflower-1.9.3.jar
-          file fernflower.jar
+          git clone https://github.com/Storyyeller/Krakatau.git
+          ls Krakatau
 
       - name: Decompile classes from classlist.txt
         run: |
           while IFS= read -r classpath; do
             if [ -f "$classpath" ]; then
               dir=$(dirname "$classpath")
-              java -jar fernflower.jar "$classpath" "$dir"
+              base=$(basename "$classpath" .class)
+              # Krakatauのdecompile.pyでデコンパイル（出力は同じディレクトリ）
+              python3 Krakatau/decompile.py "$classpath" -out "$dir"
             fi
           done < classlist.txt
 
@@ -39,5 +39,5 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
-          git commit -m "Decompiled classes from classlist.txt with FernFlower"
+          git commit -m "Decompiled classes from classlist.txt with Krakatau"
           git push
