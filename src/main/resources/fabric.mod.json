@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "sakaplus",
+  "version": "1.0.0",
+  "name": "Sakaplus",
+  "description": "Adds an iron scaffold block.",
+  "authors": [
+    "Konnitiwa768"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Konnitiwa768/Itemplus",
+    "sources": "https://github.com/Konnitiwa768/Itemplus"
+  },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.sakalti.sakaplus.SakaplusMod2"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "fabric": "*",
+    "minecraft": "1.19.2"
+  },
+  "icon": "assets/sakaplus/icon.png"
+}
