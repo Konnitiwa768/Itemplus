@@ -3,7 +3,7 @@ name: Deobfuscate and Upload to Release
 on:
   push:
     branches:
-      - main
+      - main3
   workflow_dispatch:
 
 jobs:
