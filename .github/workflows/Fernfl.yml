@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main3
-   
   workflow_dispatch:
 
 jobs:
@@ -18,7 +17,7 @@ jobs:
           ref: main3
 
       - name: Set up Rust
-        uses: actions/setup-rust@v1
+        uses: shogo82148/actions-setup-rust@v1
         with:
           rust-version: stable
 
