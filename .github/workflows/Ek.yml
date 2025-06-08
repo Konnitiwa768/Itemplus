@@ -5,8 +5,6 @@ on:
   push:
     branches:
       - main3
-    paths:
-      - 'src/main/java/**'
 
 jobs:
   find-classes:
