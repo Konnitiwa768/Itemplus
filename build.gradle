@@ -13,10 +13,8 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:1.19.2"
-    mappings "net.fabricmc:yarn:1.19.2+build.28"
     modImplementation "net.fabricmc:fabric-loader:0.14.19"
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.77.0+1.19.2"
-    implementation 'com.yworks:yguard:4.0.0'
 }
 
 java {
@@ -34,25 +32,8 @@ configurations.all {
 jar {
     manifest {
         attributes(
-            'Main-Class': 'com.sakalti.sakaplus.SakaplusMod'
+            'Main-Class': 'com.sakalti.sakaplus.SakaplusMod2'
         )
     }
 }
 
-task yguardObfuscate(type: JavaExec) {
-    group = "build"
-    description = "Obfuscate jar using yGuard"
-    mainClass = 'yguard.YGuardTask'
-    classpath = configurations.runtimeClasspath
-    def jarTask = tasks.named("jar").get()
-    args = [
-        '-in', "$buildDir/libs/${jarTask.archiveFile.get().asFile.name}",
-        '-out', "$buildDir/libs/${jarTask.archiveBaseName.get()}-yguard.jar",
-        '-config', "$projectDir/yguard-config.xml"
-    ]
-    dependsOn jar
-}
-
-// buildタスクには依存しません。
-// 通常ビルド: ./gradlew build
-// 難読化ビルド: ./gradlew yguardObfuscate
