@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Find and echo class_*** definitions
+      - name: Echo class_*** definitions from all Java files
         run: |
           for file in $(find src/main/java -type f -name '*.java'); do
             grep -E 'class\s+class_[A-Za-z0-9_]+' "$file" | while read -r line; do
