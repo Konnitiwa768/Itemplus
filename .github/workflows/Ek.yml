@@ -1,0 +1,23 @@
+name: Find class_*** Classes
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main3
+    paths:
+      - 'src/main/java/**'
+
+jobs:
+  find-classes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Search for class_*** definitions
+        run: |
+          find src/main/java -type f -name '*.java' -print0 \
+            | xargs -0 grep -E 'class\s+class_[A-Za-z0-9_]+' \
+            | sed -n 's/.*class\s\+\(class_[A-Za-z0-9_]\+\).*/\1/p' \
+            | sort | uniq
