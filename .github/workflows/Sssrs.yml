@@ -1,7 +1,7 @@
 name: Deobfuscate and Upload to Release
 
 on:
-  workflow_dispatch:  # 手動実行
+  workflow_dispatch:
 
 jobs:
   deobfuscate:
@@ -11,29 +11,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download Obfuscated JAR
-        uses: actions/download-artifact@v4
-        with:
-          name: your-obfuscated-jar  # 必要ならここを適宜修正
-          path: obf/
-
-      - name: Download Enigma
+      # 1. JARダウンロード
+      - name: Download Obfuscated JAR by sha256
         run: |
-          wget -O enigma-cli.jar https://github.com/FabricMC/Enigma/releases/latest/download/enigma-cli.jar
+          # ここでは例としてGitHubリリースから取得する形です
+          # 必要なら適切なダウンロードURLに修正してください
+          JAR_URL="https://github.com/Konnitiwa768/Itemplus/releases/download/v1.1.4/Itemplus-1.0.0.jar"
+          wget -O obfuscated.jar "$JAR_URL"
+          # sha256チェック
+          echo "881c68c3bfc3487e3a445cf5ec252b4d3e887cf99f73a1fa27258373541084e4  obfuscated.jar" | sha256sum -c -
 
+      # 2. Enigma CLIダウンロード
+      - name: Download Enigma CLI
+        run: |
+          wget -O enigma-cli.jar "https://github.com/FabricMC/Enigma/releases/latest/download/enigma-cli.jar"
+
+      # 3. Yarnマッピングダウンロード（1.19.2+build.28例）
       - name: Download Yarn mappings
         run: |
           wget -O mappings.tiny "https://github.com/FabricMC/yarn/releases/download/1.19.2+build.28/mappings.tiny"
 
+      # 4. Enigmaでデオブフスケート
       - name: Deobfuscate JAR using Enigma
         run: |
           java -jar enigma-cli.jar \
             --mappings mappings.tiny \
-            --input obf/your-obfuscated.jar \
+            --input obfuscated.jar \
             --output deobf.jar \
             --from obf \
             --to named
 
+      # 5. リリースへアップロード
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
