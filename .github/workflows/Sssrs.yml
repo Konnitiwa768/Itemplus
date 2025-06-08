@@ -1,0 +1,43 @@
+name: Deobfuscate and Upload to Release
+
+on:
+  workflow_dispatch:  # 手動実行
+
+jobs:
+  deobfuscate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Obfuscated JAR
+        uses: actions/download-artifact@v4
+        with:
+          name: your-obfuscated-jar  # 必要ならここを適宜修正
+          path: obf/
+
+      - name: Download Enigma
+        run: |
+          wget -O enigma-cli.jar https://github.com/FabricMC/Enigma/releases/latest/download/enigma-cli.jar
+
+      - name: Download Yarn mappings
+        run: |
+          wget -O mappings.tiny "https://github.com/FabricMC/yarn/releases/download/1.19.2+build.28/mappings.tiny"
+
+      - name: Deobfuscate JAR using Enigma
+        run: |
+          java -jar enigma-cli.jar \
+            --mappings mappings.tiny \
+            --input obf/your-obfuscated.jar \
+            --output deobf.jar \
+            --from obf \
+            --to named
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.1.5
+          files: deobf.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
