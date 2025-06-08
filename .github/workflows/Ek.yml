@@ -13,10 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Search for class_*** definitions
+      - name: Find all Java files and output class_*** definitions
         run: |
-          find src/main/java -type f -name '*.java' -print0 \
-            | xargs -0 grep -E 'class\s+class_[A-Za-z0-9_]+' \
-            | sed -n 's/.*class\s\+\(class_[A-Za-z0-9_]\+\).*/\1/p' \
-            | sort | uniq
-            echo "$class"
+          find src/main/java -type f -name '*.java' > filelist.txt
+          while IFS= read -r file; do
+            grep -E 'class\s+class_[A-Za-z0-9_]+' "$file" && echo "==== $file ====";
+          done < filelist.txt
