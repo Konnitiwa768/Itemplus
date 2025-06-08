@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.3.8'
+    id 'fabric-loom' version '1.5-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -14,7 +14,10 @@ repositories {
 dependencies {
     minecraft "com.mojang:minecraft:1.19.2"
     mappings "net.fabricmc:yarn:1.19.2+build.28:v2"
-    modImplementation "net.fabricmc:fabric-loader:0.14.19"
+
+    // Fabric Loaderを追加
+    modImplementation "net.fabricmc:fabric-loader:0.14.19" // 例：適切なバージョンに置き換えてください
+
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.77.0+1.19.2"
 }
 
@@ -33,8 +36,8 @@ configurations.all {
 jar {
     manifest {
         attributes(
-            'Fabric-Loom-Version': '1.3.8'
-            // 'Main-Class': 'com.sakalti.sakaplus.SakaplusMod' // Fabric Modなら通常不要
+            'Fabric-Loom-Version': '1.5-SNAPSHOT',
+            'Main-Class': 'com.sakalti.sakaplus.SakaplusMod'
         )
     }
 }
