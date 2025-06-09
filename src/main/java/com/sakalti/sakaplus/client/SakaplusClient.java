@@ -8,7 +8,7 @@ import net.fabricmc.api.ClientModInitializer;
 public class SakaplusClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        EntityRendererRegistry.register(ModEntities.SCORCHER, ScorcherRenderer::new);
+        EntityRendererRegistry.register(ModEntities.ScorcherEntity, ScorcherRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ScorcherRenderer.MODEL_LAYER, ScorcherModel::getTexturedModelData);
     }
 }
