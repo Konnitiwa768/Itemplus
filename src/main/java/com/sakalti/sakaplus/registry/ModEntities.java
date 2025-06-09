@@ -18,7 +18,7 @@ public class ModEntities {
             EntityType.Builder.create(ScorcherEntity::new, SpawnGroup.MONSTER)
                     .setDimensions(0.6F, 1.8F))
                     .fireImmune()
-                    .build()
+                    .build();
     );
 
     public static void register() {
