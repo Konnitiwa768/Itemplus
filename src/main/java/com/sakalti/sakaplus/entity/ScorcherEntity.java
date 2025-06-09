@@ -18,7 +18,9 @@ public class ScorcherEntity extends BlazeEntity {
     // 属性（アトリビュート）定義
     public static DefaultAttributeContainer.Builder createAttributes() {
         return BlazeEntity.createBlazeAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 15.0D);
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 15.0D)
+                .add(EntityAttributes.GENERIC_SPEED, 0.36D)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 40.0D);
     }
 
     @Override
@@ -30,7 +32,10 @@ public class ScorcherEntity extends BlazeEntity {
                     .stream().findFirst().ifPresent(this::setTarget);
         }
     }
-
+    @Override
+    public boolean isFireImmune() {
+      return true;
+    }
     // デバッグ用ドロップ（LootTable推奨）
     @Override
     protected void dropLoot(DamageSource source, boolean causedByPlayer) {
