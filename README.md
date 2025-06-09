@@ -1,6 +1,7 @@
 https://chatgpt.com
 https://google.com
 https://wrtn.jp/character
+https://web.blockbench.net
 
 【重要なお知らせ】
 
