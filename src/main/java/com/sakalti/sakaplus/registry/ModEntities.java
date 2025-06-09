@@ -16,18 +16,11 @@ public class ModEntities {
             Registry.ENTITY_TYPE,
             new Identifier("sakaplus", "scorcher"),
             EntityType.Builder.create(ScorcherEntity::new, SpawnGroup.MONSTER)
-                    .setDimensions(0.6F, 1.8F))
+                    .setDimensions(0.6F, 1.8F)
                     .fireImmune()
-                    .build();
+                    .build()
     );
 
     public static void register() {
-        FabricDefaultAttributeRegistry.register(SCORCHER, ScorcherEntity.createAttributes());
-        BiomeModifications.addSpawn(
-                BiomeSelectors.includeByKey(BiomeKeys.CRIMSON_FOREST),
-                SpawnGroup.MONSTER,
-                SCORCHER,
-                20, 1, 2
-        );
     }
 }
