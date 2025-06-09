@@ -33,14 +33,14 @@ public class ScorcherModel extends SinglePartEntityModel<ScorcherEntity> {
         // Left Leg: 8x8x8, rotated +45° Y, positioned below body
         root.addChild("left_leg",
             ModelPartBuilder.create().uv(0, 16)
-                .cuboid(-4.0F, 0.0F, -4.0F, 8, 8, 8),
+                .cuboid(-4.0F, 0.0F, -4.0F, 2, 8, 2),
             ModelTransform.of(0.0F, 20.0F, 0.0F, 0.0F, MathHelper.PI / 4, 0.0F)
         );
 
         // Right Leg: 8x8x8, rotated -45° Y, positioned below body
         root.addChild("right_leg",
             ModelPartBuilder.create().uv(32, 16)
-                .cuboid(-4.0F, 0.0F, -4.0F, 8, 8, 8),
+                .cuboid(-4.0F, 0.0F, -4.0F, 2, 8, 2),
             ModelTransform.of(0.0F, 20.0F, 0.0F, 0.0F, -MathHelper.PI / 4, 0.0F)
         );
 
