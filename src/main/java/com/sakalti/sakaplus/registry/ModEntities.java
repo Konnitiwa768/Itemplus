@@ -16,7 +16,7 @@ public class ModEntities {
             Registry.ENTITY_TYPE,
             new Identifier("sakaplus", "scorcher"),
             EntityType.Builder.create(ScorcherEntity::new, SpawnGroup.MONSTER)
-                    .setDimensions(EntityDimensions.fixed(0.6F, 1.8F))
+                    .setDimensions(0.6F, 1.8F))
                     .fireImmune()
                     .build()
     );
