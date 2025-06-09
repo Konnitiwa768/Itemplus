@@ -19,7 +19,7 @@ public class ScorcherEntity extends BlazeEntity {
     public static DefaultAttributeContainer.Builder createAttributes() {
         return BlazeEntity.createBlazeAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 15.0D)
-                .add(EntityAttributes.GENERIC_SPEED, 0.36D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.36D)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 40.0D);
     }
 
