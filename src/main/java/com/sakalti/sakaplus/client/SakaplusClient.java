@@ -1,5 +1,5 @@
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import com.sakalti.sakaplus.client.model.ScorcherModel;
 import com.sakalti.sakaplus.registry.ModEntities;
 import com.sakalti.sakaplus.client.renderer.ScorcherRenderer;
