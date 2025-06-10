@@ -2,7 +2,7 @@ package com.sakalti.sakaplus.registry;
 
 import com.sakalti.sakaplus.entity.ScorcherEntity;
 import com.sakalti.sakaplus.entity.OganesonEntity;
-import com.sakalti.sakaplus.entity.NyankoEntity; // ← 追加を忘れずに
+import com.sakalti.sakaplus.entity.NyankoEntity;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -18,27 +18,27 @@ public class ModEntities {
     public static final EntityType<ScorcherEntity> SCORCHER = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier("sakaplus", "scorcher"),
-            EntityType.Builder.create(ScorcherEntity::new, SpawnGroup.MONSTER)
-                    .setDimensions(0.6F, 1.8F)
-                    .build("scorcher")
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ScorcherEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.6F, 1.8F))
+                    .build()
     );
     public static final EntityType<OganesonEntity> OGANESON = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier("sakaplus", "oganeson"),
-            EntityType.Builder.create(OganesonEntity::new, SpawnGroup.MONSTER)
-                    .setDimensions(0.6F, 1.8F)
-                    .build("oganeson")
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, OganesonEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.6F, 1.8F))
+                    .build()
     );
     public static final EntityType<NyankoEntity> NYANKO = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier("sakaplus", "nyanko"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, NyankoEntity::new)
-                .dimensions(EntityDimensions.fixed(0.8f, 0.8f))
-                .build()
+                    .dimensions(EntityDimensions.fixed(0.8F, 0.8F))
+                    .build()
     );
 
     public static void register() {
-        // --- Attribute Registry追加 ---
+        // Attribute Registry
         FabricDefaultAttributeRegistry.register(SCORCHER, ScorcherEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(OGANESON, OganesonEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(NYANKO, NyankoEntity.createAttributes());
@@ -52,6 +52,7 @@ public class ModEntities {
             1,  // 最小スポーン数
             5   // 最大スポーン数
         );
+        // Nyanko: 平原
         BiomeModifications.addSpawn(
             BiomeSelectors.includeByKey(BiomeKeys.PLAINS),
             SpawnGroup.MONSTER,
@@ -60,7 +61,6 @@ public class ModEntities {
             1,  // 最小スポーン数
             5   // 最大スポーン数
         );
-
         // Oganeson: 歪んだ森または深紅の森
         BiomeModifications.addSpawn(
             BiomeSelectors.includeByKey(BiomeKeys.WARPED_FOREST, BiomeKeys.CRIMSON_FOREST),
