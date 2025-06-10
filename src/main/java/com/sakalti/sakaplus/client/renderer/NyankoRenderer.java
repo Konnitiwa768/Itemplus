@@ -1,6 +1,6 @@
 package com.sakalti.sakaplus.client.renderer;
 
-import com.sakalti.sakaplus.entity.ModEntities;
+import com.sakalti.sakaplus.registry.ModEntities;
 import com.sakalti.sakaplus.client.model.NyankoModel;
 import com.sakalti.sakaplus.entity.NyankoEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
