@@ -12,8 +12,9 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.world.World;
 
 public class NyankoEntity extends HostileEntity {
-    public NyankoEntity(EntityType<? extends HostileEntity> entityType, World world) {
+    public NyankoEntity(EntityType6<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
+        this.experiencePoints = 6;
     }
 
     @Override
