@@ -1,12 +1,12 @@
 package com.sakalti.sakaplus.client.model;
 
-import com.sakalti.sakaplus.entity.ScorcherEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 
-public class ScorcherModel extends SinglePartEntityModel<ScorcherEntity> {
+// TはSinglePartEntityModelの型引数。ScorcherEntityやOganesonEntityなどを指定可能にする
+public class ScorcherModel<T extends net.minecraft.entity.mob.MobEntity> extends SinglePartEntityModel<T> {
     private final ModelPart root;
     private final ModelPart body;
     private final ModelPart leftLeg;
@@ -53,8 +53,7 @@ public class ScorcherModel extends SinglePartEntityModel<ScorcherEntity> {
     }
 
     @Override
-    public void setAngles(ScorcherEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        // 脚を歩行アニメーションで上下に振る
+    public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         this.leftLeg.pitch = MathHelper.cos(limbAngle) * limbDistance * 0.5F;
         this.rightLeg.pitch = MathHelper.cos(limbAngle + (float)Math.PI) * limbDistance * 0.5F;
     }
