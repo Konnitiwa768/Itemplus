@@ -2,11 +2,10 @@ package com.sakalti.sakaplus.client.model;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.entity.mob.MobEntity;
 
-// TはSinglePartEntityModelの型引数。ScorcherEntityやOganesonEntityなどを指定可能にする
-public class ScorcherModel<T extends net.minecraft.entity.mob.MobEntity> extends SinglePartEntityModel<T> {
+public class ScorcherModel<T extends MobEntity> extends SinglePartEntityModel<T> {
     private final ModelPart root;
     private final ModelPart body;
     private final ModelPart leftLeg;
@@ -30,14 +29,14 @@ public class ScorcherModel<T extends net.minecraft.entity.mob.MobEntity> extends
             ModelTransform.pivot(0.0F, 12.0F, 0.0F)
         );
 
-        // Left Leg: 8x8x8, rotated +45° Y, positioned below body
+        // Left Leg
         root.addChild("left_leg",
             ModelPartBuilder.create().uv(0, 16)
                 .cuboid(-4.0F, 0.0F, -4.0F, 2, 8, 2),
             ModelTransform.of(0.0F, 20.0F, 0.0F, 0.0F, MathHelper.PI / 4, 0.0F)
         );
 
-        // Right Leg: 8x8x8, rotated -45° Y, positioned below body
+        // Right Leg
         root.addChild("right_leg",
             ModelPartBuilder.create().uv(32, 16)
                 .cuboid(-4.0F, 0.0F, -4.0F, 2, 8, 2),
