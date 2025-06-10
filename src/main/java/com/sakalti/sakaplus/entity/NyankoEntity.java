@@ -36,9 +36,4 @@ public class NyankoEntity extends HostileEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.8); // 1.25秒ごと（=0.8回/秒）
     }
-
-    @Override
-    protected boolean tryAttack(Entity target) {
-        return super.tryAttack(target);
-    }
 }
