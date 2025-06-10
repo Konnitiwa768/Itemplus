@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.ModelIdentifier;
 
-public class OganesonRenderer extends MobEntityRenderer<OganesonEntity, OganesonModel> {
+public class OganesonRenderer extends MobEntityRenderer<OganesonEntity, ScorcherModel> {
     private static final Identifier TEXTURE = new Identifier("sakaplus", "textures/entity/oganeson.png");
 
     public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(
