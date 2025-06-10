@@ -1,5 +1,6 @@
 package com.sakalti.sakaplus.entity;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
@@ -12,7 +13,7 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.world.World;
 
 public class NyankoEntity extends HostileEntity {
-    public NyankoEntity(EntityType6<? extends HostileEntity> entityType, World world) {
+    public NyankoEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 6;
     }
