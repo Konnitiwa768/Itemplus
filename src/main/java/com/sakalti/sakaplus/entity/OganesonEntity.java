@@ -13,7 +13,9 @@ import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.world.World;
+import net.minecraft.util.hit.EntityHitResult;
 
 public class OganesonEntity extends BlazeEntity {
     private int shootTick = 0;
@@ -68,18 +70,22 @@ public class OganesonEntity extends BlazeEntity {
             double dz = Math.sin(angle);
             double dy = 0.15;
 
-            ArrowEntity arrow = new ArrowEntity(this.world, this.getX(), this.getY() + 1, this.getZ()) {
+            ArrowEntity arrow = new ArrowEntity(this.world, this.getX(), this.getY() + 1, this.getZ(), 1.0F) {
                 @Override
-                protected void onHit(LivingEntity target) {
-                    super.onHit(target);
-                    target.hurtResistantTime = 0; // 無敵時間リセット
+                protected void onEntityHit(EntityHitResult entityHitResult) {
+                    super.onEntityHit(entityHitResult);
+                    if (entityHitResult.getEntity() instanceof LivingEntity target) {
+                        target.hurtResistantTime = 0; // 無敵時間リセット
+                    }
                 }
             };
             arrow.setVelocity(dx, dy, dz, (float)arrowSpeed, 0.0F);
             arrow.setOwner(this);
-            arrow.setPickupType(PersistentProjectileEntity.PickupPermission.DISALLOWED);
+            if (arrow instanceof PersistentProjectileEntity ppe) {
+                ppe.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
+            }
             arrow.setInvisible(true); // 完全透明
-            arrow.setDamage(1.0D); // ダメージ1
+            arrow.setDamage(1.0D);    // ダメージ1
 
             this.world.spawnEntity(arrow);
         }
