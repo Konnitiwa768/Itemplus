@@ -1,11 +1,12 @@
 package com.sakalti.sakaplus.client.model;
 
+import com.sakalti.sakaplus.entity.ScorcherEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.entity.mob.MobEntity;
 
-public class ScorcherModel<T extends MobEntity> extends SinglePartEntityModel<T> {
+public class ScorcherModel extends SinglePartEntityModel<ScorcherEntity> {
     private final ModelPart root;
     private final ModelPart body;
     private final ModelPart leftLeg;
@@ -29,14 +30,14 @@ public class ScorcherModel<T extends MobEntity> extends SinglePartEntityModel<T>
             ModelTransform.pivot(0.0F, 12.0F, 0.0F)
         );
 
-        // Left Leg
+        // Left Leg: 8x8x8, rotated +45° Y, positioned below body
         root.addChild("left_leg",
             ModelPartBuilder.create().uv(0, 16)
                 .cuboid(-4.0F, 0.0F, -4.0F, 2, 8, 2),
             ModelTransform.of(0.0F, 20.0F, 0.0F, 0.0F, MathHelper.PI / 4, 0.0F)
         );
 
-        // Right Leg
+        // Right Leg: 8x8x8, rotated -45° Y, positioned below body
         root.addChild("right_leg",
             ModelPartBuilder.create().uv(32, 16)
                 .cuboid(-4.0F, 0.0F, -4.0F, 2, 8, 2),
@@ -52,7 +53,8 @@ public class ScorcherModel<T extends MobEntity> extends SinglePartEntityModel<T>
     }
 
     @Override
-    public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setAngles(ScorcherEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+        // 脚を歩行アニメーションで上下に振る
         this.leftLeg.pitch = MathHelper.cos(limbAngle) * limbDistance * 0.5F;
         this.rightLeg.pitch = MathHelper.cos(limbAngle + (float)Math.PI) * limbDistance * 0.5F;
     }
