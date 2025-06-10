@@ -1,6 +1,5 @@
 package com.sakalti.sakaplus.registry;
 
-import com.sakalti.sakaplus.SakaPlusMod;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
