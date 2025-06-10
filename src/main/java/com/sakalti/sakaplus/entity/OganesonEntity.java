@@ -13,9 +13,8 @@ import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.world.World;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.world.World;
 
 public class OganesonEntity extends BlazeEntity {
     private int shootTick = 0;
@@ -25,7 +24,6 @@ public class OganesonEntity extends BlazeEntity {
         this.experiencePoints = 5;
     }
 
-    // 属性: HP18, 防御2, 攻撃1, 追従距離48
     public static DefaultAttributeContainer.Builder createAttributes() {
         return BlazeEntity.createBlazeAttributes()
             .add(EntityAttributes.GENERIC_MAX_HEALTH, 18.0D)
@@ -54,7 +52,7 @@ public class OganesonEntity extends BlazeEntity {
         }
         if (!this.world.isClient) {
             shootTick++;
-            if (shootTick >= 10) { // 0.5秒ごと
+            if (shootTick >= 10) {
                 shootRadialArrows();
                 shootTick = 0;
             }
@@ -62,7 +60,7 @@ public class OganesonEntity extends BlazeEntity {
     }
 
     private void shootRadialArrows() {
-        int count = 8; // 8方向
+        int count = 8;
         double arrowSpeed = 2.0F;
         for (int i = 0; i < count; i++) {
             double angle = 2 * Math.PI * i / count;
@@ -70,22 +68,23 @@ public class OganesonEntity extends BlazeEntity {
             double dz = Math.sin(angle);
             double dy = 0.15;
 
-            ArrowEntity arrow = new ArrowEntity(this.world, this.getX(), this.getY() + 1, this.getZ(), 1.0F) {
+            ArrowEntity arrow = new ArrowEntity(this.world, this.getX(), this.getY() + 1, this.getZ()) {
                 @Override
                 protected void onEntityHit(EntityHitResult entityHitResult) {
                     super.onEntityHit(entityHitResult);
                     if (entityHitResult.getEntity() instanceof LivingEntity target) {
-                        target.hurtResistantTime = 0; // 無敵時間リセット
+                        // hurtTimeはパブリック/protected
+                        target.hurtTime = 0; // 直後のダメージで無敵時間をリセット
                     }
                 }
             };
             arrow.setVelocity(dx, dy, dz, (float)arrowSpeed, 0.0F);
             arrow.setOwner(this);
-            if (arrow instanceof PersistentProjectileEntity ppe) {
-                ppe.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
+            if (arrow instanceof PersistentProjectileEntity) {
+                ((PersistentProjectileEntity)arrow).pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
             }
-            arrow.setInvisible(true); // 完全透明
-            arrow.setDamage(1.0D);    // ダメージ1
+            arrow.setInvisible(true);
+            arrow.setDamage(1.0D);
 
             this.world.spawnEntity(arrow);
         }
