@@ -27,6 +27,13 @@ public class ModEntities {
                     .setDimensions(0.6F, 1.8F)
                     .build("oganeson")
     );
+    public static final EntityType<NyankoEntity> NYANKO = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("sakaplus", "nyanko"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, NyankoEntity::new)
+                .dimensions(EntityDimensions.fixed(0.8f, 0.8f)) // サイズは自由に調整
+                .build("nyanko")
+    );
 
     public static void register() {
         // Scorcher: 深紅の森のみ
@@ -35,6 +42,14 @@ public class ModEntities {
             SpawnGroup.MONSTER,
             SCORCHER,
             20, // ウェイト
+            1,  // 最小スポーン数
+            5   // 最大スポーン数
+        );
+        BiomeModifications.addSpawn(
+            BiomeSelectors.includeByKey(BiomeKeys.PLAINS),
+            SpawnGroup.MONSTER,
+            NYANKO,
+            11, // ウェイト
             1,  // 最小スポーン数
             5   // 最大スポーン数
         );
