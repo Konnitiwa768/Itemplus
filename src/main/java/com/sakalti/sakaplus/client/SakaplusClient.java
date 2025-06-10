@@ -1,6 +1,7 @@
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import com.sakalti.sakaplus.client.model.ScorcherModel;
+import com.sakalti.sakaplus.client.model.OganesonModel;
 import com.sakalti.sakaplus.registry.ModEntities;
 import com.sakalti.sakaplus.entity.ScorcherEntity;
 import com.sakalti.sakaplus.client.renderer.ScorcherRenderer;
@@ -14,5 +15,6 @@ public class SakaplusClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.SCORCHER, ScorcherRenderer::new);
         EntityRendererRegistry.register(ModEntities.OGANESON, OganesonRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ScorcherRenderer.MODEL_LAYER, ScorcherModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(OganesonRenderer.MODEL_LAYER, OganesonModel::getTexturedModelData);
     }
 }
