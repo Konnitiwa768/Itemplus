@@ -2,9 +2,11 @@ package com.sakalti.sakaplus.registry;
 
 import com.sakalti.sakaplus.entity.ScorcherEntity;
 import com.sakalti.sakaplus.entity.OganesonEntity;
+import com.sakalti.sakaplus.entity.NyankoEntity; // ← 追加を忘れずに
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -31,11 +33,16 @@ public class ModEntities {
             Registry.ENTITY_TYPE,
             new Identifier("sakaplus", "nyanko"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, NyankoEntity::new)
-                .dimensions(EntityDimensions.fixed(0.8f, 0.8f)) // サイズは自由に調整
+                .dimensions(EntityDimensions.fixed(0.8f, 0.8f))
                 .build("nyanko")
     );
 
     public static void register() {
+        // --- Attribute Registry追加 ---
+        FabricDefaultAttributeRegistry.register(SCORCHER, ScorcherEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(OGANESON, OganesonEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(NYANKO, NyankoEntity.createAttributes());
+
         // Scorcher: 深紅の森のみ
         BiomeModifications.addSpawn(
             BiomeSelectors.includeByKey(BiomeKeys.CRIMSON_FOREST),
