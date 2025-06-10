@@ -9,7 +9,7 @@ public class ModItems {
     public static final Item CHOCOLATE_BAR = new Item(new Item.Settings().food(ModFoods.CHOCOLATE_BAR));
 
     public static void register() {
-        Registry.register(Registry.ITEM, new Identifier(SakaPlusMod.MOD_ID, "glow_berry_bread"), GLOW_BERRY_BREAD);
-        Registry.register(Registry.ITEM, new Identifier(SakaPlusMod.MOD_ID, "chocolate_bar"), CHOCOLATE_BAR);
+        Registry.register(Registry.ITEM, new Identifier("sakaplus", "glow_berry_bread"), GLOW_BERRY_BREAD);
+        Registry.register(Registry.ITEM, new Identifier("sakaplus", "chocolate_bar"), CHOCOLATE_BAR);
     }
 }
