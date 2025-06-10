@@ -29,5 +29,24 @@ public class ModEntities {
     );
 
     public static void register() {
+        // Scorcher: 深紅の森のみ
+        BiomeModifications.addSpawn(
+            BiomeSelectors.includeByKey(BiomeKeys.CRIMSON_FOREST),
+            SpawnGroup.MONSTER,
+            SCORCHER,
+            20, // ウェイト
+            1,  // 最小スポーン数
+            5   // 最大スポーン数
+        );
+
+        // Oganeson: 歪んだ森または深紅の森
+        BiomeModifications.addSpawn(
+            BiomeSelectors.includeByKey(BiomeKeys.WARPED_FOREST, BiomeKeys.CRIMSON_FOREST),
+            SpawnGroup.MONSTER,
+            OGANESON,
+            20, // ウェイト
+            1,  // 最小スポーン数
+            6   // 最大スポーン数
+        );
     }
 }
