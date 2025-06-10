@@ -36,7 +36,7 @@ public class NyankoEntity extends HostileEntity {
     }
 
     @Override
-    public boolean tryAttack(Entity target) {
+    protected boolean tryAttack(Entity target) {
         return super.tryAttack(target);
     }
 }
