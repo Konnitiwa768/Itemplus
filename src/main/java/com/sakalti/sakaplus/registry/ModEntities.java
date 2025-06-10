@@ -34,7 +34,7 @@ public class ModEntities {
             new Identifier("sakaplus", "nyanko"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, NyankoEntity::new)
                 .dimensions(EntityDimensions.fixed(0.8f, 0.8f))
-                .build("nyanko")
+                .build()
     );
 
     public static void register() {
