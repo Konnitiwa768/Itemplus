@@ -27,7 +27,7 @@ public class NyankoEntity extends HostileEntity {
         this.targetSelector.add(1, new ActiveTargetGoal<>(this, LivingEntity.class, true));
     }
 
-    public static DefaultAttributeContainer.Builder createNyankoAttributes() {
+    public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 17.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
