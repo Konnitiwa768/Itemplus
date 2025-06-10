@@ -14,7 +14,7 @@ public class OganesonRenderer extends MobEntityRenderer<OganesonEntity, Oganeson
     public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(
         new Identifier("sakaplus", "oganeson"), "main");
 
-    public ScorcherRenderer(EntityRendererFactory.Context context) {
+    public OganesonRenderer(EntityRendererFactory.Context context) {
         super(context, new ScorcherModel(context.getPart(MODEL_LAYER)), 0.5f);
     }
 
