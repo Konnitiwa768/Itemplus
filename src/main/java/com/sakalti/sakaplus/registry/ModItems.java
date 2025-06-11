@@ -9,6 +9,7 @@ public class ModItems {
     public static final Item CHOCOLATE_BAR = new Item(new Item.Settings().food(ModFoods.CHOCOLATE_BAR));
     // ここから追加
     public static final Item SWEET_BERRY_PIE = new Item(new Item.Settings().food(ModFoods.SWEET_BERRY_PIE));
+    public static final Item GLOW_BERRY_DONUT = new Item(new Item.Settings().food(ModFoods.GLOW_BERRY_DONUT));
 
     public static void register() {
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "glow_berry_bread"), GLOW_BERRY_BREAD);
