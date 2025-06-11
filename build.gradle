@@ -7,8 +7,8 @@ group = 'com.sakalti.sakaplus'
 version = '1.0.0'
 
 repositories {
-    maven { url = 'https://maven.fabricmc.net' }
     mavenCentral()
+    maven { url = 'https://maven.fabricmc.net' }
 }
 
 dependencies {
@@ -35,7 +35,6 @@ jar {
     manifest {
         attributes(
             'Fabric-Loom-Version': '1.5.8',
-            'Main-Class': 'com.sakalti.sakaplus.SakaplusMod2'
         )
     }
 }
