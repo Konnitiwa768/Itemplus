@@ -1,6 +1,7 @@
 package com.sakalti.sakaplus.registry;
 
 import com.sakalti.sakaplus.entity.ScorcherEntity;
+import com.sakalti.sakaplus.entity.WarperdunEntity;
 import com.sakalti.sakaplus.entity.OganesonEntity;
 import com.sakalti.sakaplus.entity.NyankoEntity;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -20,6 +21,13 @@ public class ModEntities {
             new Identifier("sakaplus", "scorcher"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ScorcherEntity::new)
                     .dimensions(EntityDimensions.fixed(0.6F, 1.8F))
+                    .build()
+    );
+    public static final EntityType<WarperdunEntity> WARPERDUN = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("sakaplus", "warperdun")
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, WarperdunEntity::new)
+                    .dimensions(EntityDimensions.fixed(3.0F, 3.0F))
                     .build()
     );
     public static final EntityType<OganesonEntity> OGANESON = Registry.register(
