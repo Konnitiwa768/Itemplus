@@ -15,7 +15,7 @@ dependencies {
     minecraft "com.mojang:minecraft:1.20.1"
     // Fabric Loaderを追加
     modImplementation "net.fabricmc:fabric-loader:0.14.19" // 例：適切なバージョンに置き換えてください
-
+    mappings "net.fabricmc:yarn:1.20.1+build.5:v2"
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.91.2+1.20.1"
 }
 
