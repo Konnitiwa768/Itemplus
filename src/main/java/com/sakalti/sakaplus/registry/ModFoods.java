@@ -13,4 +13,9 @@ public class ModFoods {
         .saturationModifier(0.8f)
         .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 60, 1), 1.0f) // 3秒=60tick, 再生II
         .build();
+    public static final FoodComponent GLOW_BERRY_DONUT = new FoodComponent.Builder()
+        .hunger(5) // コスパ良く
+        .saturationModifier(1.0f)
+        .statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 110, 1), 1.0f) // 5.5秒=110tick, 耐性II
+        .build();
 }
