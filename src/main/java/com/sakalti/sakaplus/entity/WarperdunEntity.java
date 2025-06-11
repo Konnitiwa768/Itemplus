@@ -39,7 +39,7 @@ public class WarperdunEntity extends BlazeEntity {
         this.goalSelector.add(1, new FlyGoal(this, 1.0));
         this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0));
         this.goalSelector.add(3, new LookAtEntityGoal(this, LivingEntity.class, 8.0F));
-        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, LivingEntity.class, true));
         this.goalSelector.add(4, new MeleeAttackGoal(this, 1.0, false));
     }
 
