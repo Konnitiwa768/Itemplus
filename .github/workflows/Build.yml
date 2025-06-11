@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main3
+      - main4
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -50,7 +50,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: Release ${{ github.ref_name }}
-          tag_name: vkatapen-1.0.0
+          tag_name: vkatapen-1.0.1
           files: build/libs/*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
