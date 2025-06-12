@@ -5,6 +5,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModItems {
+    public static final Item HP_PLUS = new HPPlusItem(new FabricItemSettings().maxCount(6));
+
+    public static void register() {
+        Registry.register(Registries.ITEM, new Identifier("sakaplus", "hp_plus"), HP_PLUS);
+    }
     public static final Item GLOW_BERRY_BREAD = new Item(new Item.Settings().food(ModFoods.GLOW_BERRY_BREAD));
     public static final Item CHOCOLATE_BAR = new Item(new Item.Settings().food(ModFoods.CHOCOLATE_BAR));
     // ここから追加
