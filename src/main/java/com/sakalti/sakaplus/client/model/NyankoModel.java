@@ -35,12 +35,12 @@ public class NyankoModel extends SinglePartEntityModel<NyankoEntity> {
         // 足（小さい四隅 3x3x3）
         root.addChild("leg_fl", ModelPartBuilder.create().uv(0, 26).cuboid(-1.5F, 0F, -1.5F, 3, 3, 3), ModelTransform.pivot(-5F, 13F, -5F));
         root.addChild("leg_fr", ModelPartBuilder.create().uv(12, 26).cuboid(-1.5F, 0F, -1.5F, 3, 3, 3), ModelTransform.pivot(5F, 13F, -5F));
-        root.addChild("leg_bl", ModelPartBuilder.create().uv(0, 32).cuboid(-1.5F, 0F, -1.5F, 3, 3, 3), ModelTransform.pivot(-5F, 13F, 5F));
-        root.addChild("leg_br", ModelPartBuilder.create().uv(12, 32).cuboid(-1.5F, 0F, -1.5F, 3, 3, 3), ModelTransform.pivot(5F, 13F, 5F));
+        root.addChild("leg_bl", ModelPartBuilder.create().uv(24, 26).cuboid(-1.5F, 0F, -1.5F, 3, 3, 3), ModelTransform.pivot(-5F, 13F, 5F));
+        root.addChild("leg_br", ModelPartBuilder.create().uv(36, 26).cuboid(-1.5F, 0F, -1.5F, 3, 3, 3), ModelTransform.pivot(5F, 13F, 5F));
 
         // 耳（小さい三角柱 2x3x2）
-        root.addChild("ear_l", ModelPartBuilder.create().uv(24, 26).cuboid(-1F, -3F, -1F, 2, 3, 2), ModelTransform.pivot(-3F, 0F, -5F));
-        root.addChild("ear_r", ModelPartBuilder.create().uv(32, 26).cuboid(-1F, -3F, -1F, 2, 3, 2), ModelTransform.pivot(3F, 0F, -5F));
+        root.addChild("ear_l", ModelPartBuilder.create().uv(0, 32).cuboid(-1F, -3F, -1F, 2, 3, 2), ModelTransform.pivot(-3F, 0F, -5F));
+        root.addChild("ear_r", ModelPartBuilder.create().uv(8, 32).cuboid(-1F, -3F, -1F, 2, 3, 2), ModelTransform.pivot(3F, 0F, -5F));
 
         return TexturedModelData.of(modelData, 64, 64);
     }
