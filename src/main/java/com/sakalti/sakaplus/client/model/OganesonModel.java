@@ -26,20 +26,20 @@ public class OganesonModel extends SinglePartEntityModel<OganesonEntity> {
         // Body: 8x8x8, centered at origin
         root.addChild("body",
             ModelPartBuilder.create().uv(0, 0)
-                .cuboid(-4.0F, -4.0F, -4.0F, 8, 8, 8),
+                .cuboid(-4.0F, -4.0F, -4.400F, 8, 8, 8),
             ModelTransform.pivot(0.0F, 12.0F, 0.0F)
         );
 
         // Left Leg: 8x8x8, rotated +45° Y, positioned below body
         root.addChild("left_leg",
-            ModelPartBuilder.create().uv(0, 16)
+            ModelPartBuilder.create().uv(32, 0)
                 .cuboid(-4.0F, 0.0F, -4.0F, 2, 8, 2),
             ModelTransform.of(0.0F, 20.0F, 0.0F, 0.0F, MathHelper.PI / 4, 0.0F)
         );
 
         // Right Leg: 8x8x8, rotated -45° Y, positioned below body
         root.addChild("right_leg",
-            ModelPartBuilder.create().uv(32, 16)
+            ModelPartBuilder.create().uv(40, 0)
                 .cuboid(-4.0F, 0.0F, -4.0F, 2, 8, 2),
             ModelTransform.of(0.0F, 20.0F, 0.0F, 0.0F, -MathHelper.PI / 4, 0.0F)
         );
