@@ -4,10 +4,8 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.boss.BossBar;
-import net.minecraft.entity.boss.BossBarColor;
-import net.minecraft.entity.boss.BossBarStyle;
 import net.minecraft.entity.boss.ServerBossBar;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,10 +16,13 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.Difficulty;
+
+import java.util.Random;
 
 public class WarperdunEntity extends FlyingEntity implements Monster {
 
@@ -31,7 +32,7 @@ public class WarperdunEntity extends FlyingEntity implements Monster {
     public WarperdunEntity(EntityType<? extends FlyingEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 1150;
-        this.bossBar = new ServerBossBar(Text.literal("Warperdun"), BossBarColor.PURPLE, BossBarStyle.PROGRESS);
+        this.bossBar = new ServerBossBar(Text.literal("Warperdun"));
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
@@ -72,27 +73,18 @@ public class WarperdunEntity extends FlyingEntity implements Monster {
         double arrowSpeed = 2.0;
         for (int i = 0; i < count; i++) {
             double angle = 2 * Math.PI * i / count;
-            double dx = Math.cos(angle);
-            double dz = Math.sin(angle);
+            double dx = MathHelper.cos((float) angle);
+            double dz = MathHelper.sin((float) angle);
             double dy = 0.15;
 
-            ArrowEntity arrow = new ArrowEntity(this.world, this.getX(), this.getY() + 1, this.getZ()) {
-                @Override
-                protected void onEntityHit(EntityHitResult entityHitResult) {
-                    super.onEntityHit(entityHitResult);
-                    if (entityHitResult.getEntity() instanceof LivingEntity target) {
-                        target.hurtTime = 0;
-                    }
-                }
-            };
-
+            ArrowEntity arrow = new ArrowEntity(this.world, this.getX(), this.getY() + 1, this.getZ());
             arrow.setVelocity(dx, dy, dz, (float) arrowSpeed, 0.0F);
             arrow.setOwner(this);
             arrow.setInvisible(true);
             arrow.setDamage(3.0D);
 
-            if (arrow instanceof PersistentProjectileEntity) {
-                ((PersistentProjectileEntity) arrow).pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
+            if (arrow instanceof PersistentProjectileEntity projectile) {
+                projectile.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
             }
 
             this.world.spawnEntity(arrow);
@@ -124,8 +116,8 @@ public class WarperdunEntity extends FlyingEntity implements Monster {
         }
     }
 
-    // スポーン条件（自然スポーン可能にする場合に使用）
     //public static boolean canSpawn(EntityType<WarperdunEntity> type, WorldAccess world, SpawnReason reason, BlockPos pos, Random random) {
-    //    return world.getDifficulty() != Difficulty.PEACEFUL && world.getBlockState(pos.down()).isSolidBlock(world, pos.down());
+    //    return world.getDifficulty() != Difficulty.PEACEFUL
+    //       && world.getBlockState(pos.down()).isSolidBlock(world, pos.down());
     //}
 }
