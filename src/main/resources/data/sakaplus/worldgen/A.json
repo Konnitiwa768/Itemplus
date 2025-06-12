@@ -1,0 +1,22 @@
+{
+  "precipitation": "none",
+  "temperature": 2.0,
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 10040115,
+    "water_color": 15597568,
+    "water_fog_color": 13355968,
+    "sky_color": 7962607,
+    "ambient_sound": "minecraft:ambient.nether_wastes.loop"
+  },
+  "carvers": {},
+  "features": {
+    "vegetation": [
+      "minecraft:kelp"
+    ]
+  },
+  "spawn_costs": {},
+  "spawners": {},
+  "surface_builder": "minecraft:nether",
+  "category": "nether"
+}
