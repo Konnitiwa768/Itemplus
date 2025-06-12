@@ -48,39 +48,56 @@ public class ModEntities {
                     .build()
     );
 
+    // Spawn Egg Items（ModItemsを使わずにここで直接登録）
+    public static final Item SCORCHER_SPAWN_EGG = Registry.register(
+            Registry.ITEM,
+            new Identifier("sakaplus", "scorcher_spawn_egg"),
+            new SpawnEggItem(SCORCHER, 0xAA0000, 0xFF5500, new Item.Settings())
+    );
+
+    public static final Item WARPERDUN_SPAWN_EGG = Registry.register(
+            Registry.ITEM,
+            new Identifier("sakaplus", "warperdun_spawn_egg"),
+            new SpawnEggItem(WARPERDUN, 0x003366, 0x660099, new Item.Settings())
+    );
+
+    public static final Item OGANESON_SPAWN_EGG = Registry.register(
+            Registry.ITEM,
+            new Identifier("sakaplus", "oganeson_spawn_egg"),
+            new SpawnEggItem(OGANESON, 0x336699, 0x00FFFF, new Item.Settings())
+    );
+
+    public static final Item NYANKO_SPAWN_EGG = Registry.register(
+            Registry.ITEM,
+            new Identifier("sakaplus", "nyanko_spawn_egg"),
+            new SpawnEggItem(NYANKO, 0xFFFFCC, 0xFF66CC, new Item.Settings())
+    );
+
     public static void register() {
-        // Attribute Registry
+        // 属性登録
         FabricDefaultAttributeRegistry.register(SCORCHER, ScorcherEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(WARPERDUN, WarperdunEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(OGANESON, OganesonEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(NYANKO, NyankoEntity.createAttributes());
 
-        // Spawns
+        // 自然スポーン設定（Warperdunは除外）
+
+        // Scorcher: 深紅の森
         BiomeModifications.addSpawn(
                 BiomeSelectors.includeByKey(BiomeKeys.CRIMSON_FOREST),
                 SpawnGroup.MONSTER, SCORCHER, 20, 1, 5
         );
 
+        // Nyanko: 平原
         BiomeModifications.addSpawn(
                 BiomeSelectors.includeByKey(BiomeKeys.PLAINS),
                 SpawnGroup.MONSTER, NYANKO, 11, 1, 5
         );
 
+        // Oganeson: 歪んだ森・深紅の森
         BiomeModifications.addSpawn(
                 BiomeSelectors.includeByKey(BiomeKeys.WARPED_FOREST, BiomeKeys.CRIMSON_FOREST),
                 SpawnGroup.MONSTER, OGANESON, 20, 1, 6
         );
-
-        // 例：WARPERDUNはネザーのソウルサンドの谷にスポーン
-        //BiomeModifications.addSpawn(
-        //        BiomeSelectors.includeByKey(BiomeKeys.SOUL_SAND_VALLEY),
-        //        SpawnGroup.MONSTER, WARPERDUN, 5, 1, 1
-        //);
-
-        // Spawn Eggs 登録（ModItems にまとめる）
-        ModItems.registerSpawnEgg("scorcher_spawn_egg", SCORCHER, 0xAA0000, 0xFF5500);
-        ModItems.registerSpawnEgg("warperdun_spawn_egg", WARPERDUN, 0x003366, 0x660099);
-        ModItems.registerSpawnEgg("oganeson_spawn_egg", OGANESON, 0x336699, 0x00FFFF);
-        ModItems.registerSpawnEgg("nyanko_spawn_egg", NYANKO, 0xFFFFCC, 0xFF66CC);
     }
 }
