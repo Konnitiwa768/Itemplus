@@ -3,9 +3,12 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import com.sakalti.sakaplus.client.model.ScorcherModel;
 import com.sakalti.sakaplus.client.model.OganesonModel;
 import com.sakalti.sakaplus.client.model.NyankoModel;
+import com.sakalti.sakaplus.client.model.WarperdunModel;
 import com.sakalti.sakaplus.registry.ModEntities;
 import com.sakalti.sakaplus.entity.ScorcherEntity;
 import com.sakalti.sakaplus.client.renderer.ScorcherRenderer;
+import com.sakalti.sakaplus.entity.WarperdunEntity;
+import com.sakalti.sakaplus.client.renderer.WarperdunRenderer;
 import com.sakalti.sakaplus.entity.NyankoEntity;
 import com.sakalti.sakaplus.client.renderer.NyankoRenderer;
 import com.sakalti.sakaplus.entity.OganesonEntity;
@@ -16,9 +19,11 @@ public class SakaplusClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         EntityRendererRegistry.register(ModEntities.SCORCHER, ScorcherRenderer::new);
+        EntityRendererRegistry.register(ModEntities.WARPERDUN, WarperdunRenderer::new);
         EntityRendererRegistry.register(ModEntities.NYANKO, NyankoRenderer::new);
         EntityRendererRegistry.register(ModEntities.OGANESON, OganesonRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ScorcherRenderer.MODEL_LAYER, ScorcherModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(WarperdunRenderer.MODEL_LAYER, WarperdunModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(NyankoRenderer.MODEL_LAYER, NyankoModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(OganesonRenderer.MODEL_LAYER, OganesonModel::getTexturedModelData);
     }
