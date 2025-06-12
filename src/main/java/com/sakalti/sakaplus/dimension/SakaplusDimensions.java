@@ -27,8 +27,6 @@ import net.minecraft.world.level.biome.BiomeManager;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 
-import com.sakalti.sakaplus.Sakaplus;
-
 public class SakaplusDimensions {
     public static final ResourceKey<Level> KRUZIVILIM_DIMENSION_KEY =
         ResourceKey.create(Registries.DIMENSION, new ResourceLocation(Sakaplus.MOD_ID, "kruzivilim"));
