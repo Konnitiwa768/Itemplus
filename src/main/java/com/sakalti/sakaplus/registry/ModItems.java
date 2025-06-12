@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModItems {
-    public static final Item HP_PLUS = new HPPlusItem(new FabricItemSettings().maxCount(6));
+    public static final Item HP_PLUS = new HPPlusItem(new Item.Settings().maxCount(6));
 
     public static final Item GLOW_BERRY_BREAD = new Item(new Item.Settings().food(ModFoods.GLOW_BERRY_BREAD));
     public static final Item CHOCOLATE_BAR = new Item(new Item.Settings().food(ModFoods.CHOCOLATE_BAR));
@@ -20,6 +20,6 @@ public class ModItems {
         // ここから追加
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "sweet_berry_pie"), SWEET_BERRY_PIE);
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "glow_berry_donut"), GLOW_BERRY_DONUT);
-        Registry.register(Registries.ITEM, new Identifier("sakaplus", "hp_plus"), HP_PLUS);
+        Registry.register(Registry.ITEM, new Identifier("sakaplus", "hp_plus"), HP_PLUS);
     }
 }
