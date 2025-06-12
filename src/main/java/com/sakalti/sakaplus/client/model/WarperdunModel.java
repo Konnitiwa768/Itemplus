@@ -7,8 +7,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 
 public class WarperdunModel extends SinglePartEntityModel<WarperdunEntity> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-        new net.minecraft.util.Identifier("sakaplus", "warperdun"), "main");
 
     private final ModelPart root;
     private final ModelPart body;
