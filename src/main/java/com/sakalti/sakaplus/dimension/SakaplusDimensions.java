@@ -1,67 +1,37 @@
-package com.sakalti.sakaplus.world.dimension;
+package com.sakalti.sakaplus.dimension;
 
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.dimension.DimensionType;
-import net.minecraft.world.level.dimension.LevelStem;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
-import net.minecraft.world.level.levelgen.WorldGenSettings;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerLevelData;
-import net.minecraft.world.level.storage.LevelStorageSource;
-import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
-import net.minecraft.world.level.levelgen.presets.WorldPreset;
-
-import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
-import net.minecraft.world.level.levelgen.RandomState;
-import net.minecraft.core.Registry;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterList;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
-import net.minecraft.world.level.biome.BiomeManager;
-
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 
 public class SakaplusDimensions {
-    public static final ResourceKey<Level> KRUZIVILIM_DIMENSION_KEY =
-        ResourceKey.create(Registries.DIMENSION, new ResourceLocation(Sakaplus.MOD_ID, "kruzivilim"));
-    
-    public static final ResourceKey<DimensionType> KRUZIVILIM_TYPE =
-        ResourceKey.create(Registries.DIMENSION_TYPE, new ResourceLocation(Sakaplus.MOD_ID, "kruzivilim"));
-    
-    public static final ResourceKey<Biome> KRUZIVILIM_BIOME =
-        ResourceKey.create(Registries.BIOME, new ResourceLocation(Sakaplus.MOD_ID, "kruzivilim_biome"));
-    
-    public static final ResourceKey<NoiseGeneratorSettings> KRUZIVILIM_NOISE_SETTINGS =
-        ResourceKey.create(Registries.NOISE_SETTINGS, new ResourceLocation(Sakaplus.MOD_ID, "kruzivilim_generator"));
 
-    public static void init() {
-        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-            Registry<LevelStem> dimensionRegistry = server.registryAccess().registryOrThrow(Registries.LEVEL_STEM);
+    // ディメンションキー
+    public static final RegistryKey<World> KRUZIVILIM_DIMENSION_KEY = RegistryKey.of(
+            Registry.WORLD_KEY,
+            new Identifier("sakaplus", "kruzivilim")
+    );
 
-            if (!dimensionRegistry.containsKey(KRUZIVILIM_DIMENSION_KEY)) {
-                Holder<DimensionType> dimensionType = server.registryAccess().registryOrThrow(Registries.DIMENSION_TYPE)
-                    .getHolderOrThrow(KRUZIVILIM_TYPE);
-                Holder<NoiseGeneratorSettings> generatorSettings = server.registryAccess().registryOrThrow(Registries.NOISE_SETTINGS)
-                    .getHolderOrThrow(KRUZIVILIM_NOISE_SETTINGS);
-                Holder<Biome> biome = server.registryAccess().registryOrThrow(Registries.BIOME)
-                    .getHolderOrThrow(KRUZIVILIM_BIOME);
+    // ディメンションタイプキー
+    public static final RegistryKey<DimensionType> KRUZIVILIM_DIMENSION_TYPE_KEY = RegistryKey.of(
+            Registry.DIMENSION_TYPE_KEY,
+            new Identifier("sakaplus", "kruzivilim")
+    );
 
-                NoiseBasedChunkGenerator chunkGenerator = new NoiseBasedChunkGenerator(
-                    MultiNoiseBiomeSource.create(biome),
-                    generatorSettings
-                );
+    // バイオームキー（例：黄土色の昆布バイオーム）
+    public static final RegistryKey<Biome> KRUZIVILIM_BIOME_KEY = RegistryKey.of(
+            Registry.BIOME_KEY,
+            new Identifier("sakaplus", "kruzivilim_biome")
+    );
 
-                LevelStem stem = new LevelStem(dimensionType, chunkGenerator);
+    // ノイズ設定キー（チャンク生成用）
+    public static final RegistryKey<ChunkGeneratorSettings> KRUZIVILIM_NOISE_SETTINGS_KEY = RegistryKey.of(
+            Registry.CHUNK_GENERATOR_SETTINGS_KEY,
+            new Identifier("sakaplus", "kruzivilim_noise")
+    );
 
-                ((net.minecraft.core.WritableRegistry<LevelStem>) dimensionRegistry)
-                    .register(KRUZIVILIM_DIMENSION_KEY, stem, null);
-            }
-        });
-    }
 }
