@@ -14,8 +14,6 @@ public class SakaplusMod2 implements ModInitializer {
         ModEntities.register();
         ModItems.register();
         SakaplusDimensions.register();
-        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             KruzivilimCommand.register(dispatcher);
-        });
     }
 }
