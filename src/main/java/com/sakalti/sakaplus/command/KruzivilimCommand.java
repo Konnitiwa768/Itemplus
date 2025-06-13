@@ -7,17 +7,11 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
 public class KruzivilimCommand {
-
-    // Fabric 0.77.0 互換のディメンションキー定義
-    // public static final RegistryKey<World> KRUZIVILIM_DIM = RegistryKey.of(Registry.DIMENSION, new Identifier("sakaplus", "kruzivilim"));
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager.literal("kruzivilim")
@@ -31,29 +25,31 @@ public class KruzivilimCommand {
     private static int teleport(ServerCommandSource source, boolean toKruzivilim) {
         ServerPlayerEntity player = source.getPlayer();
         if (player == null) {
-            source.sendError(Text.of("プレイヤーしか使えません。"));
+            source.sendError(Text.of("§cこのコマンドはプレイヤー専用です。"));
             return 0;
         }
 
-        // 金インゴット28個が必要
+        // 必要な金インゴットの数
+        int required = 28;
         int goldCount = countItems(player, Items.GOLD_INGOT);
-        if (goldCount < 28) {
-            player.sendMessage(Text.of("§c金インゴットが28個必要です。"), false);
+        if (goldCount < required) {
+            player.sendMessage(Text.of("§c金インゴットが28個必要です。現在: " + goldCount + "個"), false);
             return 0;
         }
 
-        // 消費
-        removeItems(player, Items.GOLD_INGOT, 28);
+        // 消費処理
+        removeItems(player, Items.GOLD_INGOT, required);
 
-        ServerWorld targetWorld = player.getServer().getWorld(toKruzivilim ? KRUZIVILIM_DIM : World.OVERWORLD);
+        ServerWorld targetWorld = player.getServer().getWorld(
+            toKruzivilim ? SakaplusDimensions.KRUZIVILIM_DIMENSION_KEY : World.OVERWORLD
+        );
         if (targetWorld == null) {
-            player.sendMessage(Text.of("§cテレポート先が存在しません。"), false);
+            player.sendMessage(Text.of("§cテレポート先ワールドが見つかりません。"), false);
             return 0;
         }
 
         BlockPos pos = player.getBlockPos();
         player.teleport(targetWorld, pos.getX(), pos.getY(), pos.getZ(), player.getYaw(), player.getPitch());
-
         player.sendMessage(Text.of(toKruzivilim ? "§6クルジヴィリムへ移動しました。" : "§6元の世界に戻りました。"), false);
         return 1;
     }
