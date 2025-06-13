@@ -12,6 +12,6 @@ public class SakaplusMod2 implements ModInitializer {
         ModBlocks2.registerBlocks();
         ModEntities.register();
         ModItems.register();
-        SakaplusDimensions.register();
+        SakaplusDimensions();
     }
 }
