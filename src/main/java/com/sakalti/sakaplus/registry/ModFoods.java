@@ -1,6 +1,7 @@
 package com.sakalti.sakaplus.registry;
 
 import net.minecraft.item.FoodComponent;
+import com.sakalti.sakaplus.effect.ModEffects;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 
@@ -12,6 +13,11 @@ public class ModFoods {
         .hunger(7) // コスパ良く
         .saturationModifier(4.5f)
         .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 60, 1), 1.0f) // 3秒=60tick, 再生II
+        .build();
+    public static final FoodComponent KUR_BRUTE_MEAT = new FoodComponent.Builder()
+        .hunger(13) // コスパ良く
+        .saturationModifier(15.5f)
+        .statusEffect(new StatusEffectInstance(ModEffects.LIGHT_BLOCK, 40, 3), 1.0f) // 3秒=60tick, 再生II
         .build();
     public static final FoodComponent GLOW_BERRY_DONUT = new FoodComponent.Builder()
         .hunger(5) // コスパ良く
