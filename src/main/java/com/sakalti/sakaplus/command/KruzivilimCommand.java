@@ -6,16 +6,17 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
 public class KruzivilimCommand {
 
-    // クルジヴィリムのディメンションキー
-    public static final RegistryKey<World> KRUZIVILIM_DIM = RegistryKey.of(RegistryKey.WORLD, new Identifier("sakaplus", "kruzivilim"));
+    // Fabric 0.77.0 互換のディメンションキー定義
+    public static final RegistryKey<World> KRUZIVILIM_DIM = RegistryKey.of(Registry.DIMENSION, new Identifier("sakaplus", "kruzivilim"));
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager.literal("kruzivilim")
@@ -28,13 +29,12 @@ public class KruzivilimCommand {
 
     private static int teleport(ServerCommandSource source, boolean toKruzivilim) {
         ServerPlayerEntity player = source.getPlayer();
-
         if (player == null) {
             source.sendError(Text.of("プレイヤーしか使えません。"));
             return 0;
         }
 
-        // 金インゴット28個を所持しているかチェック
+        // 金インゴット28個が必要
         int goldCount = countItems(player, Items.GOLD_INGOT);
         if (goldCount < 28) {
             player.sendMessage(Text.of("§c金インゴットが28個必要です。"), false);
@@ -44,21 +44,19 @@ public class KruzivilimCommand {
         // 消費
         removeItems(player, Items.GOLD_INGOT, 28);
 
-        // テレポート先のディメンションを取得
         ServerWorld targetWorld = player.getServer().getWorld(toKruzivilim ? KRUZIVILIM_DIM : World.OVERWORLD);
         if (targetWorld == null) {
-            player.sendMessage(Text.of("§cテレポート先の世界が見つかりません。"), false);
+            player.sendMessage(Text.of("§cテレポート先が存在しません。"), false);
             return 0;
         }
 
         BlockPos pos = player.getBlockPos();
         player.teleport(targetWorld, pos.getX(), pos.getY(), pos.getZ(), player.getYaw(), player.getPitch());
-        player.sendMessage(Text.of("§6" + (toKruzivilim ? "クルジヴィリムへ移動しました。" : "元の世界に戻りました。")), false);
 
+        player.sendMessage(Text.of(toKruzivilim ? "§6クルジヴィリムへ移動しました。" : "§6元の世界に戻りました。"), false);
         return 1;
     }
 
-    // 所持しているアイテムをカウント
     private static int countItems(ServerPlayerEntity player, net.minecraft.item.Item item) {
         return player.getInventory().main.stream()
             .filter(stack -> stack != null && stack.getItem() == item)
@@ -66,7 +64,6 @@ public class KruzivilimCommand {
             .sum();
     }
 
-    // 指定数のアイテムを削除
     private static void removeItems(ServerPlayerEntity player, net.minecraft.item.Item item, int amount) {
         int remaining = amount;
         for (int i = 0; i < player.getInventory().main.size(); i++) {
