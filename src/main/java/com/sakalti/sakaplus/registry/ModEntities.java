@@ -48,6 +48,14 @@ public class ModEntities {
                     .build()
     );
 
+    public static final EntityType<BattleNyankoEntity> BATTLE_NYANKO = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("sakaplus", "battle_nyanko"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, BattleNyankoEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.8F, 0.8F))
+                    .build()
+    );
+
     // Spawn Egg Items（ModItemsを使わずにここで直接登録）
     public static final Item SCORCHER_SPAWN_EGG = Registry.register(
             Registry.ITEM,
@@ -71,6 +79,12 @@ public class ModEntities {
             Registry.ITEM,
             new Identifier("sakaplus", "nyanko_spawn_egg"),
             new SpawnEggItem(NYANKO, 0xFFFFCC, 0xFF66CC, new Item.Settings())
+    );
+
+    public static final Item BATTLE_NYANKO_SPAWN_EGG = Registry.register(
+            Registry.ITEM,
+            new Identifier("sakaplus", "battle_nyanko_spawn_egg"),
+            new SpawnEggItem(BATTLE_NYANKO, 0xFFFFCC, 0x999999, new Item.Settings())
     );
 
     public static void register() {
