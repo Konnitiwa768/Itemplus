@@ -23,7 +23,13 @@ public class ModEntities {
                     .dimensions(EntityDimensions.fixed(0.6F, 1.8F))
                     .build()
     );
-
+　　 public static final EntityType<KurBruteEntity> KUR_BRUTE = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("sakaplus", "kur_brute"),
+            FabricEntityTypeBuilder.create(SpawnGroup.PASSIVE, KurBruteEntity::new)
+                    .dimensions(EntityDimensions.fixed(2.0F, 2.0F))
+                    .build()
+    );
     public static final EntityType<WarperdunEntity> WARPERDUN = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier("sakaplus", "warperdun"),
@@ -85,6 +91,12 @@ public class ModEntities {
             Registry.ITEM,
             new Identifier("sakaplus", "battle_nyanko_spawn_egg"),
             new SpawnEggItem(BATTLE_NYANKO, 0xFFFFCC, 0x999999, new Item.Settings())
+    );
+
+    public static final Item KUR_BRUTE_SPAWN_EGG = Registry.register(
+            Registry.ITEM,
+            new Identifier("sakaplus", "battle_nyanko_spawn_egg"),
+            new SpawnEggItem(KUR_BRUTE, 0x999900, 0x999999, new Item.Settings())
     );
 
     public static void register() {
