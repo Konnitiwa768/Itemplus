@@ -1,6 +1,7 @@
 package com.sakalti.sakaplus.command;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.sakalti.sakaplus.dimension.SakaplusDimensions;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -16,7 +17,7 @@ import net.minecraft.world.World;
 public class KruzivilimCommand {
 
     // Fabric 0.77.0 互換のディメンションキー定義
-    public static final RegistryKey<World> KRUZIVILIM_DIM = RegistryKey.of(Registry.DIMENSION, new Identifier("sakaplus", "kruzivilim"));
+    // public static final RegistryKey<World> KRUZIVILIM_DIM = RegistryKey.of(Registry.DIMENSION, new Identifier("sakaplus", "kruzivilim"));
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager.literal("kruzivilim")
