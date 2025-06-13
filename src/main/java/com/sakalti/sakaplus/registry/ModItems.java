@@ -13,9 +13,11 @@ public class ModItems {
     // ここから追加
     public static final Item SWEET_BERRY_PIE = new Item(new Item.Settings().food(ModFoods.SWEET_BERRY_PIE));
     public static final Item GLOW_BERRY_DONUT = new Item(new Item.Settings().food(ModFoods.GLOW_BERRY_DONUT));
+    public static final Item KUR_BRUTE_MEAT = new Item(new Item.Settings().food(ModFoods.KUR_BRUTE_MEAT));
 
     public static void register() {
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "glow_berry_bread"), GLOW_BERRY_BREAD);
+        Registry.register(Registry.ITEM, new Identifier("sakaplus", "kur_brute_meat"), KUR_BRUTE_MEAT);
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "chocolate_bar"), CHOCOLATE_BAR);
         // ここから追加
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "sweet_berry_pie"), SWEET_BERRY_PIE);
