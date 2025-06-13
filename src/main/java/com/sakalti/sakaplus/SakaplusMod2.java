@@ -1,6 +1,8 @@
 package com.sakalti.sakaplus;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+
 import com.sakalti.sakaplus.command.KruzivilimCommand;
 import com.sakalti.sakaplus.registry.ModEntities;
 import com.sakalti.sakaplus.dimension.SakaplusDimensions;
@@ -14,6 +16,10 @@ public class SakaplusMod2 implements ModInitializer {
         ModEntities.register();
         ModItems.register();
         SakaplusDimensions.register();
-        KruzivilimCommand.register();
+
+        // コマンドの登録（Fabric API v2）
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            KruzivilimCommand.register(dispatcher);
+        });
     }
 }
