@@ -8,12 +8,10 @@ import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.Identifier;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
 public class KruzivilimCommand {
-
-    public static final RegistryKey<World> KRUZIVILIM_DIM = RegistryKey.of(RegistryKey.ofRegistry(new Identifier("minecraft:dimension")), new Identifier("sakaplus:kruzivilim"));
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager.literal("kruzivilim")
