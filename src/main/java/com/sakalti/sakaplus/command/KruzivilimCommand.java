@@ -9,9 +9,14 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.util.registry.RegistryKeys;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
 public class KruzivilimCommand {
+
+    // クルジヴィリムのディメンションキー
+    public static final RegistryKey<World> KRUZIVILIM_DIM = RegistryKey.of(RegistryKeys.WORLD, new Identifier("sakaplus", "kruzivilim"));
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager.literal("kruzivilim")
@@ -40,8 +45,8 @@ public class KruzivilimCommand {
         // 消費
         removeItems(player, Items.GOLD_INGOT, 28);
 
-        // テレポート
-        World targetWorld = player.getServer().getWorld(toKruzivilim ? KRUZIVILIM_DIM : World.OVERWORLD);
+        // テレポート先のディメンションを取得
+        ServerWorld targetWorld = player.getServer().getWorld(toKruzivilim ? KRUZIVILIM_DIM : World.OVERWORLD);
         if (targetWorld == null) {
             player.sendMessage(Text.of("§cテレポート先の世界が見つかりません。"), false);
             return 0;
@@ -54,7 +59,7 @@ public class KruzivilimCommand {
         return 1;
     }
 
-    // インベントリから金インゴットをカウント
+    // 所持しているアイテムをカウント
     private static int countItems(ServerPlayerEntity player, net.minecraft.item.Item item) {
         return player.getInventory().main.stream()
             .filter(stack -> stack != null && stack.getItem() == item)
@@ -62,7 +67,7 @@ public class KruzivilimCommand {
             .sum();
     }
 
-    // 指定数だけ削除
+    // 指定数のアイテムを削除
     private static void removeItems(ServerPlayerEntity player, net.minecraft.item.Item item, int amount) {
         int remaining = amount;
         for (int i = 0; i < player.getInventory().main.size(); i++) {
