@@ -11,7 +11,7 @@ public class BattleNyankoModel extends SinglePartEntityModel<BattleNyankoEntity>
     private final ModelPart[] legs = new ModelPart[4];
     private final ModelPart[] ears = new ModelPart[2];
 
-    public NyankoModel(ModelPart root) {
+    public BattleNyankoModel(ModelPart root) {
         this.root = root;
         this.body = root.getChild("body");
         this.legs[0] = root.getChild("leg_fl");
