@@ -34,7 +34,7 @@ public class KruzivilimBiome {
 
         return new Biome.Builder()
                 .precipitation(Biome.Precipitation.NONE)
-                .temperature(2.0F)  // ネザーっぽい高温
+                .temperature(0.3F)  // ネザーっぽい高温
                 .downfall(0.0F)
                 .effects(effects)
                 .spawnSettings(spawnBuilder.build())
