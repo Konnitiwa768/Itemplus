@@ -15,8 +15,6 @@ import java.util.UUID;
 
 public class HPPlusItem extends Item {
 
-    public static final UUID HP_BONUS_UUID = UUID.fromString("9f1f8711-a839-4dc0-943e-c731b2ea92a6");
-
     public HPPlusItem(Settings settings) {
         super(settings);
     }
@@ -24,24 +22,23 @@ public class HPPlusItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (!world.isClient && user instanceof ServerPlayerEntity serverPlayer) {
-            boolean alreadyHasModifier = serverPlayer.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)
-                    .getModifiers()
-                    .stream()
-                    .anyMatch(mod -> mod.getId().equals(HP_BONUS_UUID));
+            var attrInstance = serverPlayer.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
 
-            if (!alreadyHasModifier) {
+            if (attrInstance != null) {
+                // UUIDをランダムに生成して重複適用可能に
+                UUID uniqueId = UUID.randomUUID();
                 EntityAttributeModifier modifier = new EntityAttributeModifier(
-                        HP_BONUS_UUID,
+                        uniqueId,
                         "hp_plus_bonus",
                         2.0,
                         EntityAttributeModifier.Operation.ADDITION
                 );
-                serverPlayer.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(modifier);
+
+                attrInstance.addPersistentModifier(modifier);
                 serverPlayer.sendMessage(Text.literal("最大HPが恒久的に +2 されました。"), true);
 
+                // アイテムを1つ消費
                 user.getStackInHand(hand).decrement(1);
-            } else {
-                serverPlayer.sendMessage(Text.literal("このアイテムの効果はすでに適用されています。"), true);
             }
         }
 
