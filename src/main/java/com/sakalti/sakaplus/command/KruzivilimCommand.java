@@ -9,14 +9,13 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.util.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
 public class KruzivilimCommand {
 
     // クルジヴィリムのディメンションキー
-    public static final RegistryKey<World> KRUZIVILIM_DIM = RegistryKey.of(RegistryKeys.WORLD, new Identifier("sakaplus", "kruzivilim"));
+    public static final RegistryKey<World> KRUZIVILIM_DIM = RegistryKey.of(RegistryKey.WORLD, new Identifier("sakaplus", "kruzivilim"));
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager.literal("kruzivilim")
