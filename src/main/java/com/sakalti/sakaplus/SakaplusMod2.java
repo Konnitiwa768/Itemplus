@@ -1,6 +1,7 @@
 package com.sakalti.sakaplus;
 
 import net.fabricmc.api.ModInitializer;
+import com.sakalti.sakaplus.command.KruzivilimCommand;
 import com.sakalti.sakaplus.registry.ModEntities;
 import com.sakalti.sakaplus.dimension.SakaplusDimensions;
 import com.sakalti.sakaplus.block.ModBlocks2;
