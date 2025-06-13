@@ -1,14 +1,18 @@
 package com.sakalti.sakaplus.dimension;
 
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SakaplusDimensions {
+
+    public static final Logger LOGGER = LoggerFactory.getLogger("Sakaplus");
 
     // ディメンションキー
     public static final RegistryKey<World> KRUZIVILIM_DIMENSION_KEY = RegistryKey.of(
@@ -22,7 +26,7 @@ public class SakaplusDimensions {
             new Identifier("sakaplus", "kruzivilim")
     );
 
-    // バイオームキー（例：黄土色の昆布バイオーム）
+    // バイオームキー
     public static final RegistryKey<Biome> KRUZIVILIM_BIOME_KEY = RegistryKey.of(
             Registry.BIOME_KEY,
             new Identifier("sakaplus", "kruzivilim_biome")
@@ -34,4 +38,15 @@ public class SakaplusDimensions {
             new Identifier("sakaplus", "kruzivilim_noise")
     );
 
+    // 初期化処理
+    public static void register() {
+        LOGGER.info("Registering Sakaplus Dimension Keys...");
+
+        // 通常ここで `Registry.register()` などを行うが、
+        // ディメンション定義は Datapack で行うため、キーの初期化のみ。
+        
+        // 将来的にバイオームなどをプログラム的に追加したい場合はここに処理を書く。
+
+        LOGGER.info("Sakaplus Dimensions registered: " + KRUZIVILIM_DIMENSION_KEY.getValue());
+    }
 }
