@@ -27,7 +27,7 @@ public class ModEntities {
     public static final EntityType<KurBruteEntity> KUR_BRUTE = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier("sakaplus", "kur_brute"),
-            FabricEntityTypeBuilder.create(SpawnGroup.PASSIVE, KurBruteEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, KurBruteEntity::new)
                     .dimensions(EntityDimensions.fixed(2.0F, 2.0F))
                     .build()
     );
