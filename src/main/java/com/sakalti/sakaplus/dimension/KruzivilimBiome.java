@@ -22,6 +22,7 @@ public class KruzivilimBiome {
 
         // パッシブモブだけスポーン（例：牛・羊）
         spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.COW, 10, 2, 4));
+        spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(ModEntities.KUR_BRUTE, 25, 2, 6));
         spawnBuilder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(ModEntities.BATTLE_NYANKO, 3, 2, 5));
         spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.SHEEP, 10, 2, 4));
 
