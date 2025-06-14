@@ -44,5 +44,5 @@ jobs:
           git add src/main/resources/assets/sakaplus/textures/models/armor/pyronium_layer_1.png \
                   src/main/resources/assets/sakaplus/textures/models/armor/pyronium_layer_2.png
           git commit -m "Generate Leafeau textures from crystal base" || echo "No changes to commit"
-          git pull --rebase origin main || echo "Pull failed (likely due to conflicts or clean state)"
-          git push origin HEAD:main
+          git pull --rebase origin main3 || echo "Pull failed (likely due to conflicts or clean state)"
+          git push origin HEAD:main3
