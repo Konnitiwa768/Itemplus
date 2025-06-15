@@ -23,6 +23,13 @@ public class ModEntities {
                     .dimensions(EntityDimensions.fixed(0.6F, 1.8F))
                     .build()
     );
+    public static final EntityType<KuloogieEntity> KULOOGIE = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("sakaplus", "kuloogie"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, KuloogieEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.2F, 1.2F))
+                    .build()
+    );
     
     public static final EntityType<KurBruteEntity> KUR_BRUTE = Registry.register(
             Registry.ENTITY_TYPE,
@@ -98,6 +105,11 @@ public class ModEntities {
             Registry.ITEM,
             new Identifier("sakaplus", "battle_nyanko_spawn_egg"),
             new SpawnEggItem(KUR_BRUTE, 0x999900, 0x999999, new Item.Settings())
+    );
+    public static final Item KULOOGIE_SPAWN_EGG = Registry.register(
+            Registry.ITEM,
+            new Identifier("sakaplus", "kuloogie_spawn_egg"),
+            new SpawnEggItem(kuloogie, 0x009900, 0x333333, new Item.Settings())
     );
 
     public static void register() {
