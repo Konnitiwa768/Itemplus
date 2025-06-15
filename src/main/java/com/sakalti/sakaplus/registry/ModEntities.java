@@ -109,7 +109,7 @@ public class ModEntities {
     public static final Item KULOOGIE_SPAWN_EGG = Registry.register(
             Registry.ITEM,
             new Identifier("sakaplus", "kuloogie_spawn_egg"),
-            new SpawnEggItem(kuloogie, 0x009900, 0x333333, new Item.Settings())
+            new SpawnEggItem(KULOOGIE, 0x009900, 0x333333, new Item.Settings())
     );
 
     public static void register() {
