@@ -15,9 +15,9 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-public class KuloogieEntity extends PathAwareEntity {
+public class KuloogieEntity extends HostileEntity {
 
-    public KuloogieEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
+    public KuloogieEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 15;
     }
