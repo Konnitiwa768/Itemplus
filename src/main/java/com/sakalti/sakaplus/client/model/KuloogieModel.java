@@ -51,7 +51,7 @@ public class KuloogieModel extends SinglePartEntityModel<KuloogieEntity> {
     }
 
     @Override
-    public void setAngles(BattleNyankoEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setAngles(Kuloogientity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         // 足のパタパタ
         float speed = 1.0F;
         float degree = 1.0F;
