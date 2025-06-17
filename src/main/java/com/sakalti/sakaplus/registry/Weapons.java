@@ -1,4 +1,4 @@
-package com.sakalti.sakaplus;
+package com.sakalti.sakaplus.registry;
 
 import com.sakalti.sakaplus.item.LightningStinger;
 import net.minecraft.item.Item;
