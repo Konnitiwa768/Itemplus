@@ -25,7 +25,8 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git add .
             git commit -m "Replace ModEntities with ModEntities3 via GitHub Actions"
-            git push
+            git pull --rebase origin main3 || echo "Pull failed (likely due to conflicts or clean state)"
+            git push origin HEAD:main3
           else
             echo "No changes to commit."
           fi
