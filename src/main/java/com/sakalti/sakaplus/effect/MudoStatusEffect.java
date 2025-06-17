@@ -9,7 +9,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import java.util.UUID;
 
 public class MudoStatusEffect extends StatusEffect {
-    public static final UUID MUDO_UUID = UUID.Random();
+    public static final UUID MUDO_UUID = UUID.RandomUUID();
 
     public MudoStatusEffect() {
         super(StatusEffectCategory.HARMFUL, 0x551A8B); // 紫色系のデバフ色
