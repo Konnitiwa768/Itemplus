@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.BiomeKeys;
 
-public class ModEntities {
+public class ModEntities3 {
 
     public static final EntityType<ScorcherEntity> SCORCHER = Registry.register(
             Registry.ENTITY_TYPE,
