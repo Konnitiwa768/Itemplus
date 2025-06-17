@@ -1,0 +1,31 @@
+name: Replace ModEntities with ModEntities3
+
+on:
+  workflow_dispatch:   # 手動トリガー可能
+  push:
+    branches:
+      - main3
+
+jobs:
+  replace-and-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Replace ModEntities with ModEntities3
+        run: |
+          find . -type f -exec sed -i 's/ModEntities/ModEntities3/g' {} +
+
+      - name: Commit changes if any
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "Replace ModEntities with ModEntities3 via GitHub Actions"
+            git push
+          else
+            echo "No changes to commit."
+          fi
