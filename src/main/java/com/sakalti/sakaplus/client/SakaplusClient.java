@@ -1,7 +1,7 @@
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import com.sakalti.sakaplus.client.model.*;
-import com.sakalti.sakaplus.registry.ModEntities3;
+import com.sakalti.sakaplus.registry.ModEntities33;
 import com.sakalti.sakaplus.client.renderer.*;
 import com.sakalti.sakaplus.entity.*;
 import net.fabricmc.api.ClientModInitializer;
@@ -9,13 +9,13 @@ import net.fabricmc.api.ClientModInitializer;
 public class SakaplusClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        EntityRendererRegistry.register(ModEntities3.SCORCHER, ScorcherRenderer::new);
-        EntityRendererRegistry.register(ModEntities3.KULOOGIE, KuloogieRenderer::new);
-        EntityRendererRegistry.register(ModEntities3.KUR_BRUTE, KurBruteRenderer::new);
-        EntityRendererRegistry.register(ModEntities3.WARPERDUN, WarperdunRenderer::new);
-        EntityRendererRegistry.register(ModEntities3.NYANKO, NyankoRenderer::new);
-        EntityRendererRegistry.register(ModEntities3.BATTLE_NYANKO, BattleNyankoRenderer::new);
-        EntityRendererRegistry.register(ModEntities3.OGANESON, OganesonRenderer::new);
+        EntityRendererRegistry.register(ModEntities33.SCORCHER, ScorcherRenderer::new);
+        EntityRendererRegistry.register(ModEntities33.KULOOGIE, KuloogieRenderer::new);
+        EntityRendererRegistry.register(ModEntities33.KUR_BRUTE, KurBruteRenderer::new);
+        EntityRendererRegistry.register(ModEntities33.WARPERDUN, WarperdunRenderer::new);
+        EntityRendererRegistry.register(ModEntities33.NYANKO, NyankoRenderer::new);
+        EntityRendererRegistry.register(ModEntities33.BATTLE_NYANKO, BattleNyankoRenderer::new);
+        EntityRendererRegistry.register(ModEntities33.OGANESON, OganesonRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ScorcherRenderer.MODEL_LAYER, ScorcherModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(KuloogieRenderer.MODEL_LAYER, KuloogieModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(KurBruteRenderer.MODEL_LAYER, KurBruteModel::getTexturedModelData);

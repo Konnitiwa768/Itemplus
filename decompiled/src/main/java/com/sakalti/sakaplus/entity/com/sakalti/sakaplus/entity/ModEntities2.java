@@ -17,14 +17,14 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.class_1299;
 
-public class ModEntities32
+public class ModEntities332
 {
     public static final class_1299<NucreeperEntity> NUCREEPER;
     
     public static void register() {
-        FabricDefaultAttributeRegistry.register((class_1299)ModEntities32.NUCREEPER, NucreeperEntity.createNucreeperAttributes());
-        BiomeModifications.addSpawn(BiomeSelectors.foundInOverworld(), class_1311.field_6302, (class_1299)ModEntities32.NUCREEPER, 20, 1, 2);
-        class_1317.method_20637((class_1299)ModEntities32.NUCREEPER, class_1317.class_1319.field_6317, class_2902.class_2903.field_13203, class_1308::method_20636);
+        FabricDefaultAttributeRegistry.register((class_1299)ModEntities332.NUCREEPER, NucreeperEntity.createNucreeperAttributes());
+        BiomeModifications.addSpawn(BiomeSelectors.foundInOverworld(), class_1311.field_6302, (class_1299)ModEntities332.NUCREEPER, 20, 1, 2);
+        class_1317.method_20637((class_1299)ModEntities332.NUCREEPER, class_1317.class_1319.field_6317, class_2902.class_2903.field_13203, class_1308::method_20636);
     }
     
     static {
