@@ -1,7 +1,7 @@
 name: Replace ModEntities with ModEntities3
 
 on:
-  workflow_dispatch:   # 手動トリガー可能
+  workflow_dispatch:
   push:
     branches:
       - main3
@@ -14,9 +14,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Replace ModEntities with ModEntities3
+      - name: Replace ModEntities with ModEntities3 in .java files
         run: |
-          find . -type f -exec sed -i 's/ModEntities/ModEntities3/g' {} +
+          find . -type f -name '*.java' -exec sed -i 's/ModEntities/ModEntities3/g' {} +
 
       - name: Commit changes if any
         run: |
@@ -24,7 +24,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           if [ -n "$(git status --porcelain)" ]; then
             git add .
-            git commit -m "Replace ModEntities with ModEntities3 via GitHub Actions"
+            git commit -m "Replace ModEntities with ModEntities3 in .java files via GitHub Actions"
             git pull --rebase origin main3 || echo "Pull failed (likely due to conflicts or clean state)"
             git push origin HEAD:main3
           else
