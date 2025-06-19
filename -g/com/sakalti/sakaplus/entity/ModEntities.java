@@ -16,24 +16,24 @@ import net.minecraft.class_5458;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.class_1299;
 
-public class ModEntities33
+public class ModEntities333
 {
     public static class_1299<TotuTakumiEntity> TOTU_TAKUMI;
     public static class_1299<KouriTakumiEntity> KOURI_TAKUMI;
     
     public static void registerAll() {
-        FabricDefaultAttributeRegistry.register((class_1299)ModEntities33.TOTU_TAKUMI, TotuTakumiEntity.createTotuTakumiAttributes());
-        FabricDefaultAttributeRegistry.register((class_1299)ModEntities33.KOURI_TAKUMI, KouriTakumiEntity.createKouriTakumiAttributes());
-        ModEntities33.TOTU_TAKUMI = registerCreeper("totu_takumi", (class_1299.class_4049<TotuTakumiEntity>)TotuTakumiEntity::new, 0.6f, 1.7f, 80);
-        ModEntities33.KOURI_TAKUMI = registerCreeper("kouri_takumi", (class_1299.class_4049<KouriTakumiEntity>)KouriTakumiEntity::new, 0.6f, 1.7f, 80);
+        FabricDefaultAttributeRegistry.register((class_1299)ModEntities333.TOTU_TAKUMI, TotuTakumiEntity.createTotuTakumiAttributes());
+        FabricDefaultAttributeRegistry.register((class_1299)ModEntities333.KOURI_TAKUMI, KouriTakumiEntity.createKouriTakumiAttributes());
+        ModEntities333.TOTU_TAKUMI = registerCreeper("totu_takumi", (class_1299.class_4049<TotuTakumiEntity>)TotuTakumiEntity::new, 0.6f, 1.7f, 80);
+        ModEntities333.KOURI_TAKUMI = registerCreeper("kouri_takumi", (class_1299.class_4049<KouriTakumiEntity>)KouriTakumiEntity::new, 0.6f, 1.7f, 80);
         BiomeModifications.addSpawn(context -> {
             final class_2960 biomeId = class_5458.field_25933.method_10221((Object)context.getBiome());
             return biomeId != null && biomeId.method_12832().contains("nether");
-        }, class_1311.field_6302, (class_1299)ModEntities33.TOTU_TAKUMI, 40, 1, 3);
+        }, class_1311.field_6302, (class_1299)ModEntities333.TOTU_TAKUMI, 40, 1, 3);
         BiomeModifications.addSpawn(context -> {
             final class_2960 biomeId2 = class_5458.field_25933.method_10221((Object)context.getBiome());
             return biomeId2 != null && (biomeId2.method_12832().contains("snow") || biomeId2.method_12832().contains("ice") || biomeId2.method_12832().contains("frozen"));
-        }, class_1311.field_6302, (class_1299)ModEntities33.KOURI_TAKUMI, 35, 1, 2);
+        }, class_1311.field_6302, (class_1299)ModEntities333.KOURI_TAKUMI, 35, 1, 2);
     }
     
     private static <T extends class_1308> class_1299<T> registerCreeper(final String name, final class_1299.class_4049<T> factory, final float width, final float height, final int trackRange) {
