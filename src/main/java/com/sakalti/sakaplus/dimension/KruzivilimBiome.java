@@ -2,7 +2,7 @@ package com.sakalti.sakaplus.dimension;
 
 import net.minecraft.world.biome.*;
 import com.sakalti.sakaplus.entity.BattleNyankoEntity;
-import com.sakalti.sakaplus.registry.ModEntities333;
+import com.sakalti.sakaplus.registry.ModEntities3333;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.EntityType;
@@ -22,9 +22,9 @@ public class KruzivilimBiome {
 
         // パッシブモブだけスポーン（例：牛・羊）
         spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.COW, 10, 2, 4));
-        spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(ModEntities333.KULOOGIE, 1, 1, 3));
-        spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(ModEntities333.KUR_BRUTE, 25, 2, 6));
-        spawnBuilder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(ModEntities333.BATTLE_NYANKO, 3, 1, 3));
+        spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(ModEntities3333.KULOOGIE, 1, 1, 3));
+        spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(ModEntities3333.KUR_BRUTE, 25, 2, 6));
+        spawnBuilder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(ModEntities3333.BATTLE_NYANKO, 3, 1, 3));
         spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.SHEEP, 10, 2, 4));
 
         // 敵モブなどはスポーンさせない
