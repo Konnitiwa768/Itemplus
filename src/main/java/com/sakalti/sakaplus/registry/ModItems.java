@@ -9,6 +9,7 @@ public class ModItems {
     public static final Item HP_PLUS = new HPPlusItem(new Item.Settings().maxCount(6));
 
     public static final Item GLOW_BERRY_BREAD = new Item(new Item.Settings().food(ModFoods.GLOW_BERRY_BREAD));
+    public static final Item LIGHT_BERRY = new Item(new Item.Settings().food(ModFoods.LIGHT_BERRY));
     public static final Item CHOCOLATE_BAR = new Item(new Item.Settings().food(ModFoods.CHOCOLATE_BAR));
     public static final Item SWEET_BERRY_PIE = new Item(new Item.Settings().food(ModFoods.SWEET_BERRY_PIE));
     public static final Item GLOW_BERRY_DONUT = new Item(new Item.Settings().food(ModFoods.GLOW_BERRY_DONUT));
@@ -19,6 +20,7 @@ public class ModItems {
 
     public static void register() {
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "glow_berry_bread"), GLOW_BERRY_BREAD);
+        Registry.register(Registry.ITEM, new Identifier("sakaplus", "light_berry"), LIGHT_BERRY);
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "kur_brute_meat"), KUR_BRUTE_MEAT);
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "chocolate_bar"), CHOCOLATE_BAR);
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "sweet_berry_pie"), SWEET_BERRY_PIE);
