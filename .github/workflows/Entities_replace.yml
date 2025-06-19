@@ -16,7 +16,7 @@ jobs:
 
       - name: Replace ModEntities with ModEntities3 in .java files
         run: |
-          find . -type f -name '*.java' -exec sed -i 's/ModEntities/ModEntities3/g' {} +
+          find . -type f -name '*.java' -exec sed -i 's/ModEntities33/ModEntities3/g' {} +
 
       - name: Commit changes if any
         run: |
