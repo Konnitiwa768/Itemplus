@@ -4,7 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
 import com.sakalti.sakaplus.command.KruzivilimCommand;
-import com.sakalti.sakaplus.registry.ModEntities3333;
+import com.sakalti.sakaplus.registry.ModEntities333;
 import com.sakalti.sakaplus.registry.Weapons;
 import com.sakalti.sakaplus.dimension.SakaplusDimensions;
 import com.sakalti.sakaplus.block.ModBlocks2;
@@ -15,7 +15,7 @@ public class SakaplusMod2 implements ModInitializer {
     public void onInitialize() {
         ModBlocks2.registerBlocks();
         Weapons.registerItems();
-        ModEntities3333.register();
+        ModEntities333.register();
         ModItems.register();
         SakaplusDimensions.register();
 
