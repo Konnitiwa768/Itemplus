@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:block_cluster",
+  "config": {
+    "state": {
+      "Name": "sakaplus:bloomsquer"
+    },
+    "radius": 2,
+    "tries": 64,
+    "project": false,
+    "whitelist": [],
+    "blacklist": [],
+    "can_replace": true,
+    "need_water": false,
+    "cannot_replace": []
+  }
+}
