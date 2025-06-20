@@ -6,6 +6,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModItems {
+    public static final Item BLOOMSQUER_ITEM = Registry.register(
+        Registry.ITEM,
+        new Identifier("sakaplus", "bloomsquer"),
+        new BlockItem(ModBlocks.BLOOMSQUER, new FabricItemSettings()
+            .group(ItemGroup.FOOD)
+            .food(ModFoods.BLOOMSQUER)
+            .maxCount(16))
+    );
     public static final Item HP_PLUS = new HPPlusItem(new Item.Settings().maxCount(6));
 
     public static final Item GLOW_BERRY_BREAD = new Item(new Item.Settings().food(ModFoods.GLOW_BERRY_BREAD));
