@@ -1,30 +1,28 @@
 package com.sakalti.sakaplus.registry;
 
 import net.minecraft.item.Item;
+import com.sakalti.sakaplus.block.ModBlocks2;
 import com.sakalti.sakaplus.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.item.BlockItem;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.item.FoodComponent;
 import com.sakalti.sakaplus.effect.ModEffects;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 
 public class ModItems {
-    public static final Item BLOOMSQUER_ITEM = Registry.register(
-        Registry.ITEM,
-        new Identifier("sakaplus", "bloomsquer"),
-        new BlockItem(ModBlocks.BLOOMSQUER, new FabricItemSettings()
-            .group(ItemGroup.FOOD)
-            .food(ModFoods.BLOOMSQUER)
-            .maxCount(16))
+    // 🟣 ブロックアイテム（食べられるbloomsquer）
+    public static final Item BLOOMSQUER_ITEM = new BlockItem(ModBlocks2.BLOOMSQUER, new Item.Settings()
+        .group(ItemGroup.FOOD)
+        .food(ModFoods.BLOOMSQUER)
+        .maxCount(16)
     );
+
     public static final Item HP_PLUS = new HPPlusItem(new Item.Settings().maxCount(6));
 
     public static final Item GLOW_BERRY_BREAD = new Item(new Item.Settings().food(ModFoods.GLOW_BERRY_BREAD));
@@ -38,6 +36,7 @@ public class ModItems {
     public static final Item LIGHT_STONE = new Item(new Item.Settings());
 
     public static void register() {
+        Registry.register(Registry.ITEM, new Identifier("sakaplus", "bloomsquer"), BLOOMSQUER_ITEM);
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "glow_berry_bread"), GLOW_BERRY_BREAD);
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "light_berry"), LIGHT_BERRY);
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "kur_brute_meat"), KUR_BRUTE_MEAT);
@@ -45,8 +44,6 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "sweet_berry_pie"), SWEET_BERRY_PIE);
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "glow_berry_donut"), GLOW_BERRY_DONUT);
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "hp_plus"), HP_PLUS);
-
-        // 🆕 ライトストーンの登録
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "light_stone"), LIGHT_STONE);
     }
 }
