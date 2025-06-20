@@ -10,7 +10,15 @@ import net.minecraft.util.registry.Registry;
 
 public class ModBlocks2 {
     public static final Block IRON_SCAFFOLD = new IronScaffoldBlock();
-
+    public static final Block BLOOMSQUER = Registry.register(
+        Registry.BLOCK,
+        new Identifier("sakaplus", "bloomsquer"),
+        new Block(FabricBlockSettings.of(Material.GOURD)
+            .strength(1.8f)
+            .sounds(BlockSoundGroup.WOOD)
+            .nonOpaque()
+        )
+    );
     // kruzi_stone ブロックを追加
     public static final Block KRUZI_STONE = new Block(AbstractBlock.Settings
         .of(Material.STONE)
