@@ -13,10 +13,9 @@ public class ModBlocks2 {
     public static final Block BLOOMSQUER = Registry.register(
         Registry.BLOCK,
         new Identifier("sakaplus", "bloomsquer"),
-        new Block(FabricBlockSettings.of(Material.GOURD)
+        new Block(AbstractBlock.Settings
+            .of(Material.WOOD)
             .strength(1.8f)
-            .sounds(BlockSoundGroup.WOOD)
-            .nonOpaque()
         )
     );
     // kruzi_stone ブロックを追加
