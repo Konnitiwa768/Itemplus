@@ -10,6 +10,12 @@ public class ModFoods {
         .hunger(13)
         .saturationModifier(3.9f)
         .build();
+    
+    public static final FoodComponent TOUFU_A = new FoodComponent.Builder()
+        .hunger(4)
+        .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 140, 1), 1.0f)
+        .saturationModifier(5.0f)
+        .build();
 
     public static final FoodComponent CHOCOLATE_BAR = new FoodComponent.Builder()
         .hunger(8)
