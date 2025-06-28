@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.sakalti.sakaplus.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AdaptationMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
