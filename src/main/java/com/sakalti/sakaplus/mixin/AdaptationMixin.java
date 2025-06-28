@@ -5,28 +5,28 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArgument;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class AdaptationMixin {
 
-    /**
-     * damageメソッドの第2引数（ダメージ量）を改変する
-     */
-    @ModifyArgument(
-            method = "damage",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"),
-            index = 1
-    )
-    private float modifyDamage(float amount, DamageSource source) {
+    @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
+    private void applyAdaptation(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if ((Object)this instanceof LivingEntity living) {
             double adaptation = living.getAttributeValue(ModAttributes.ADAPTATION);
-            double reduced = amount - adaptation;
+            float reduced = (float)(amount - adaptation);
             if (reduced < 0) {
                 reduced = 0;
             }
-            return (float) reduced;
+            // ダメージ0なら即false（無効）
+            if (reduced <= 0) {
+                cir.setReturnValue(false);
+                return;
+            }
+            // 改めてdamage呼び出し
+            living.damage(source, reduced);
+            cir.setReturnValue(true);
         }
-        return amount;
     }
 }
