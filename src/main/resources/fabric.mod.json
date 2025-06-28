@@ -16,6 +16,9 @@
   "entrypoints": {
     "main": [
       "com.sakalti.sakaplus.SakaplusMod2"
+    ],
+    "mixins": [
+      "sakaplus.mixins.json"
     ]
   },
   "depends": {
