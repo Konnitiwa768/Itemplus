@@ -49,7 +49,7 @@ public class ModFoods {
     public static final FoodComponent HACHIWARI_MANJU = new FoodComponent.Builder()
         .hunger(12)
         .saturationModifier(8.4f)
-        .statusEffect(new StatusEffectInstance(ModEffects.CRYSTAL, 200, 1), 1.0f)
+        .statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 1), 1.0f)
         .build();
 
     public static final FoodComponent BLOOMSQUER = new FoodComponent.Builder()
