@@ -52,6 +52,12 @@ public class ModFoods {
         .statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 1), 1.0f)
         .build();
 
+    public static final FoodComponent HACHIWARI_MANJU_CHOCO = new FoodComponent.Builder()
+        .hunger(15)
+        .saturationModifier(9.4f)
+        .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 200, 1), 1.0f)
+        .build();
+
     public static final FoodComponent BLOOMSQUER = new FoodComponent.Builder()
         .hunger(6)
         .saturationModifier(10.0f)
