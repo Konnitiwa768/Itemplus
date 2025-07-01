@@ -33,6 +33,7 @@ public class ModItems {
     public static final Item GLOW_BERRY_DONUT = new Item(new Item.Settings().food(ModFoods.GLOW_BERRY_DONUT));
     public static final Item KUR_BRUTE_MEAT = new Item(new Item.Settings().food(ModFoods.KUR_BRUTE_MEAT));
     public static final Item TOUFU_A = new Item(new Item.Settings().food(ModFoods.TOUFU_A));
+    public static final Item HACHIWARI_MANJU_CHOCO = new Item(new Item.Settings().food(ModFoods.HACHIWARI_MANJU_CHOCO));
 
     // 🆕 ライトストーンの追加
     public static final Item LIGHT_STONE = new Item(new Item.Settings());
@@ -48,5 +49,6 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "hp_plus"), HP_PLUS);
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "light_stone"), LIGHT_STONE);
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "toufu_a"), TOUFU_A);
+        Registry.register(Registry.ITEM, new Identifier("sakaplus", "hachiwari_manju_choco"), HACHIWARI_MANJU_CHOCO);
     }
 }
