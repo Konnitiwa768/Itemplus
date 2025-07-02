@@ -15,6 +15,12 @@ public class SakaplusMod2 implements ModInitializer {
     @Override
     public void onInitialize() {
         ModBlocks2.registerBlocks();
+        ModelLoadingRegistry.INSTANCE.registerResourceProvider(manager -> (resourceId, context) -> {
+            if (resourceId.getNamespace().equals("tinco") && resourceId.getPath().equals("assembled_tool")) {
+            return new AssembledToolBakedModel();
+            }
+          return null;
+        });
         Weapons.registerItems();
         ModEntities333.register();
         ModItems.register();
