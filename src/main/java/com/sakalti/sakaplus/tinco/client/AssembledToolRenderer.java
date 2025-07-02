@@ -1,6 +1,6 @@
 package com.sakalti.sakaplus.tinco.client;
 
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.ItemStack;
 
 public class AssembledToolRenderer {
 
