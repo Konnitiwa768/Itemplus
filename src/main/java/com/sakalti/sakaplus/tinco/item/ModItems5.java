@@ -5,6 +5,8 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -28,21 +30,29 @@ public class ModItems5 {
 
     public static void register() {
 
-        // 素材定義
+        // 素材定義 - Head
         HEADS.put("iron", new MaterialData(250, 5.5f, 6.0f, 2, List.of("reinforced")));
         HEADS.put("diamond", new MaterialData(1561, 6.6f, 8.0f, 3, List.of("sharp")));
         HEADS.put("netherite", new MaterialData(2031, 7.25f, 9.0f, 4, List.of("reinforced", "sharp")));
         HEADS.put("hachilite", new MaterialData(800, 6.0f, 7.5f, 3, List.of("lightweight")));
+        HEADS.put("kanilite", new MaterialData(2200, 7.0f, 9.0f, 4, List.of("health_boost"))); // 高耐久、攻撃少し低め
+        HEADS.put("momolite", new MaterialData(1900, 8.0f, 9.5f, 4, List.of("resistance")));   // 高攻撃、耐久やや低め
 
+        // Handle
         HANDLES.put("iron", new MaterialData(1.0f, 0.0f, 0.0f, 0, List.of()));
         HANDLES.put("diamond", new MaterialData(1.1f, 0.5f, 0.0f, 0, List.of("sharp")));
         HANDLES.put("netherite", new MaterialData(1.2f, 1.0f, 0.0f, 0, List.of("reinforced")));
         HANDLES.put("hachilite", new MaterialData(1.15f, 0.3f, 0.0f, 0, List.of("lightweight")));
+        HANDLES.put("kanilite", new MaterialData(1.25f, 0.6f, 0.0f, 0, List.of("health_boost")));
+        HANDLES.put("momolite", new MaterialData(1.1f, 1.2f, 0.0f, 0, List.of("resistance")));
 
+        // Extra
         EXTRAS.put("iron", new MaterialData(50, 0.05f, 0.3f, 0, List.of()));
         EXTRAS.put("diamond", new MaterialData(100, 0.07f, 0.5f, 0, List.of("sharp")));
         EXTRAS.put("netherite", new MaterialData(150, 0.2f, 1.0f, 0, List.of("reinforced")));
         EXTRAS.put("hachilite", new MaterialData(75, 0.015f, 0.4f, 0, List.of("lightweight")));
+        EXTRAS.put("kanilite", new MaterialData(120, 0.1f, 0.5f, 0, List.of("health_boost")));
+        EXTRAS.put("momolite", new MaterialData(110, 0.15f, 0.6f, 0, List.of("resistance")));
 
         // 登録
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "assembled_tool"), ASSEMBLED_TOOL);
@@ -65,6 +75,31 @@ public class ModItems5 {
                 }
             }
             return ActionResult.PASS;
+        });
+
+        // health_boost 攻撃時に体力増加付与
+        AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+            ItemStack stack = player.getMainHandStack();
+            if (stack.getItem() instanceof AssembledToolItem tool && tool.hasTrait(stack, "health_boost")) {
+                if (!world.isClient()) {
+                    player.addStatusEffect(new StatusEffectInstance(
+                        StatusEffects.HEALTH_BOOST, 200, 0, false, false, true
+                    ));
+                }
+            }
+            return ActionResult.PASS;
+        });
+
+        // resistance ブロック破壊後に耐性付与
+        PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {
+            ItemStack stack = player.getMainHandStack();
+            if (stack.getItem() instanceof AssembledToolItem tool && tool.hasTrait(stack, "resistance")) {
+                if (!world.isClient()) {
+                    player.addStatusEffect(new StatusEffectInstance(
+                        StatusEffects.RESISTANCE, 100, 0, false, false, true
+                    ));
+                }
+            }
         });
     }
 
