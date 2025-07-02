@@ -1,0 +1,4 @@
+{
+  "parent": "builtin/generated",
+  "loader": "tinco:assembled_tool_loader"
+}
