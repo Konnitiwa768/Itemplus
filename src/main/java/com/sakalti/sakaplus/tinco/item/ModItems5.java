@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 import java.util.*;
 
-public class ModItems {
+public class ModItems5 {
 
     public static final Item ASSEMBLED_TOOL = new AssembledToolItem();
 
