@@ -1,41 +1,68 @@
 package com.sakalti.sakaplus.tinco.client;
 
-import com.sakalti.sakaplus.tinco.item.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.json.ModelTransformation;
-import net.minecraft.client.texture.Sprite;
-import net.minecraft.client.texture.SpriteAtlasTexture;
-import net.minecraft.client.util.ModelIdentifier;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.block.model.ItemOverride;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 @Environment(EnvType.CLIENT)
 public class AssembledToolBakedModel implements BakedModel {
 
-    private final SpriteAtlasTexture atlas;
-    private final Sprite defaultSprite;
+    private final TextureAtlasSprite defaultSprite;
 
     public AssembledToolBakedModel() {
-        this.atlas = MinecraftClient.getInstance().getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
-        this.defaultSprite = atlas.getSprite(new Identifier("tinco", "item/assembled_tool_default"));
+        this.defaultSprite = Minecraft.getInstance().getTextureAtlas(TextureMap.LOCATION_BLOCKS).apply(
+                new ResourceLocation("tinco:item/assembled_tool_default"));
     }
 
     @Override
-    public List<BakedQuad> getQuads(...) {
-        return List.of(); // 実際の描画はOverrideで処理
+    public List<BakedQuad> getQuads(net.minecraft.world.level.block.state.BlockState state, Direction side, Random rand) {
+        return Collections.emptyList();
     }
 
     @Override
-    public Sprite getParticleSprite() {
+    public boolean useAmbientOcclusion() {
+        return true;
+    }
+
+    @Override
+    public boolean isGui3d() {
+        return true;
+    }
+
+    @Override
+    public boolean usesBlockLight() {
+        return false;
+    }
+
+    @Override
+    public boolean isCustomRenderer() {
+        return true;
+    }
+
+    @Override
+    public TextureAtlasSprite getParticleIcon() {
         return defaultSprite;
     }
 
     @Override
-    public boolean isBuiltin() {
-        return true;
+    public ItemTransforms getTransforms() {
+        return ItemTransforms.NO_TRANSFORMS;
+    }
+
+    @Override
+    public List<ItemOverride> getOverrides() {
+        return Collections.emptyList();
     }
 }
