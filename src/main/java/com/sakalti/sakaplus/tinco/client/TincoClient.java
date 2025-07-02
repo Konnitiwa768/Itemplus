@@ -9,6 +9,6 @@ public class TincoClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.ASSEMBLED_TOOL, new AssembledToolRenderer());
+        BuiltinItemRendererRegistry.INSTANCE.register(ModItems5.ASSEMBLED_TOOL, new AssembledToolRenderer());
     }
 }
