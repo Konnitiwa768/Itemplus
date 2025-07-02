@@ -18,51 +18,22 @@ import java.util.Random;
 
 @Environment(EnvType.CLIENT)
 public class AssembledToolBakedModel implements BakedModel {
-
     private final TextureAtlasSprite defaultSprite;
 
     public AssembledToolBakedModel() {
-        this.defaultSprite = Minecraft.getInstance().getTextureAtlas(TextureMap.LOCATION_BLOCKS).apply(
-                new ResourceLocation("tinco:item/assembled_tool_default"));
+        defaultSprite = Minecraft.getInstance()
+            .getTextureAtlas(TextureMap.LOCATION_BLOCKS)
+            .apply(new ResourceLocation("tinco:item/assembled_tool_default"));
     }
 
-    @Override
-    public List<BakedQuad> getQuads(net.minecraft.world.level.block.state.BlockState state, Direction side, Random rand) {
+    @Override public List<BakedQuad> getQuads(null, Direction side, Random rand) { // stateを使用しないためnull可
         return Collections.emptyList();
     }
-
-    @Override
-    public boolean useAmbientOcclusion() {
-        return true;
-    }
-
-    @Override
-    public boolean isGui3d() {
-        return true;
-    }
-
-    @Override
-    public boolean usesBlockLight() {
-        return false;
-    }
-
-    @Override
-    public boolean isCustomRenderer() {
-        return true;
-    }
-
-    @Override
-    public TextureAtlasSprite getParticleIcon() {
-        return defaultSprite;
-    }
-
-    @Override
-    public ItemTransforms getTransforms() {
-        return ItemTransforms.NO_TRANSFORMS;
-    }
-
-    @Override
-    public List<ItemOverride> getOverrides() {
-        return Collections.emptyList();
-    }
+    @Override public boolean useAmbientOcclusion() { return true; }
+    @Override public boolean isGui3d() { return true; }
+    @Override public boolean usesBlockLight() { return false; }
+    @Override public boolean isCustomRenderer() { return true; }
+    @Override public TextureAtlasSprite getParticleIcon() { return defaultSprite; }
+    @Override public ItemTransforms getTransforms() { return ItemTransforms.NO_TRANSFORMS; }
+    @Override public List<ItemOverride> getOverrides() { return Collections.emptyList(); }
 }
