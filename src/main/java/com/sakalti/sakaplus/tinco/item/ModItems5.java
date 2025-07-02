@@ -29,20 +29,20 @@ public class ModItems5 {
     public static void register() {
 
         // 素材定義
-        HEADS.put("iron", new MaterialData(250, 2.0f, 6.0f, 2, List.of("reinforced")));
-        HEADS.put("diamond", new MaterialData(1561, 3.0f, 8.0f, 3, List.of("sharp")));
-        HEADS.put("netherite", new MaterialData(2031, 4.0f, 9.0f, 4, List.of("reinforced", "sharp")));
-        HEADS.put("hachilite", new MaterialData(800, 2.5f, 7.5f, 3, List.of("lightweight")));
+        HEADS.put("iron", new MaterialData(250, 5.5f, 6.0f, 2, List.of("reinforced")));
+        HEADS.put("diamond", new MaterialData(1561, 6.6f, 8.0f, 3, List.of("sharp")));
+        HEADS.put("netherite", new MaterialData(2031, 7.25f, 9.0f, 4, List.of("reinforced", "sharp")));
+        HEADS.put("hachilite", new MaterialData(800, 6.0f, 7.5f, 3, List.of("lightweight")));
 
         HANDLES.put("iron", new MaterialData(1.0f, 0.0f, 0.0f, 0, List.of()));
         HANDLES.put("diamond", new MaterialData(1.1f, 0.5f, 0.0f, 0, List.of("sharp")));
         HANDLES.put("netherite", new MaterialData(1.2f, 1.0f, 0.0f, 0, List.of("reinforced")));
         HANDLES.put("hachilite", new MaterialData(1.15f, 0.3f, 0.0f, 0, List.of("lightweight")));
 
-        EXTRAS.put("iron", new MaterialData(50, 0.0f, 0.0f, 0, List.of()));
-        EXTRAS.put("diamond", new MaterialData(100, 0.0f, 0.0f, 0, List.of("sharp")));
-        EXTRAS.put("netherite", new MaterialData(150, 0.0f, 0.0f, 0, List.of("reinforced")));
-        EXTRAS.put("hachilite", new MaterialData(75, 0.0f, 0.0f, 0, List.of("lightweight")));
+        EXTRAS.put("iron", new MaterialData(50, 0.05f, 0.3f, 0, List.of()));
+        EXTRAS.put("diamond", new MaterialData(100, 0.07f, 0.5f, 0, List.of("sharp")));
+        EXTRAS.put("netherite", new MaterialData(150, 0.2f, 1.0f, 0, List.of("reinforced")));
+        EXTRAS.put("hachilite", new MaterialData(75, 0.015f, 0.4f, 0, List.of("lightweight")));
 
         // 登録
         Registry.register(Registry.ITEM, new Identifier("sakaplus", "assembled_tool"), ASSEMBLED_TOOL);
