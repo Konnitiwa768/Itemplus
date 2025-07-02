@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.resources.ResourceLocation;
 
 import java.io.IOException;
-import java.util.Optional;
 
 public class ToolTextureGenerator {
 
@@ -28,11 +27,9 @@ public class ToolTextureGenerator {
 
     private static NativeImage load(String path) throws IOException {
         ResourceLocation res = new ResourceLocation("tinco", "textures/" + path + ".png");
-        Optional<NativeImage> image = NativeImage.readToOptional(Minecraft.getInstance().getResourceManager().open(res));
-        if (image.isPresent()) {
-            return image.get();
-        } else {
-            throw new IOException("Texture not found: " + res);
+        try (var stream = Minecraft.getInstance().getResourceManager().open(res)) {
+            if (stream == null) throw new IOException("Texture not found: " + res);
+            return NativeImage.read(stream);
         }
     }
 
@@ -40,7 +37,7 @@ public class ToolTextureGenerator {
         for (int y = 0; y < base.getHeight(); y++) {
             for (int x = 0; x < base.getWidth(); x++) {
                 int color = overlay.getPixelRGBA(x, y);
-                if ((color >> 24 & 0xFF) > 0) {
+                if (((color >> 24) & 0xFF) > 0) {
                     base.setPixelRGBA(x, y, color);
                 }
             }
