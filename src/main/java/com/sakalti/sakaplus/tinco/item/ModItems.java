@@ -1,6 +1,5 @@
 package com.sakalti.sakaplus.tinco.item;
 
-import com.sakalti.sakaplus.tinco.TincoMod;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.client.item.TooltipContext;
