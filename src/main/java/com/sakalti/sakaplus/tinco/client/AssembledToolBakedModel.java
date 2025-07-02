@@ -26,7 +26,7 @@ public class AssembledToolBakedModel implements BakedModel {
             .apply(new ResourceLocation("tinco:item/assembled_tool_default"));
     }
 
-    @Override public List<BakedQuad> getQuads(null, Direction side, Random rand) { // stateを使用しないためnull可
+    @Override public List<BakedQuad> getQuads(net.minecraft.world.level.block.state.BlockState state, Direction side, Random rand) {
         return Collections.emptyList();
     }
     @Override public boolean useAmbientOcclusion() { return true; }
