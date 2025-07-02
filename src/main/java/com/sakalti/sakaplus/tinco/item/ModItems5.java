@@ -45,7 +45,7 @@ public class ModItems5 {
         EXTRAS.put("hachilite", new MaterialData(75, 0.0f, 0.0f, 0, List.of("lightweight")));
 
         // 登録
-        Registry.register(Registry.ITEM, new Identifier(TincoMod.MOD_ID, "assembled_tool"), ASSEMBLED_TOOL);
+        Registry.register(Registry.ITEM, new Identifier("sakaplus", "assembled_tool"), ASSEMBLED_TOOL);
 
         // reinforced 耐久軽減
         PlayerBlockBreakEvents.BEFORE.register((world, player, pos, state, blockEntity) -> {
