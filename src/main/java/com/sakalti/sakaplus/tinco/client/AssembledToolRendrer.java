@@ -1,14 +1,14 @@
 package com.sakalti.sakaplus.tinco.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityWithoutLevelRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -36,13 +36,15 @@ public class AssembledToolRenderer extends BlockEntityWithoutLevelRenderer {
         if (!currentKey.equals(cachedKey)) {
             var texture = ToolTextureGenerator.generate(head, handle, extra);
             if (texture != null) {
-                dynamicTextureId = Minecraft.getInstance().getTextureManager().register("tinco/generated/" + currentKey, texture);
+                ResourceLocation key = new ResourceLocation("tinco", "generated/" + currentKey);
+                dynamicTextureId = Minecraft.getInstance().getTextureManager().register(key, texture);
                 cachedKey = currentKey;
             }
         }
 
         if (dynamicTextureId != null) {
-            var buffer = vertexConsumers.getBuffer(RenderType.entityCutout(dynamicTextureId));
+            VertexConsumer buffer = vertexConsumers.getBuffer(RenderType.entityCutoutNoCull(dynamicTextureId));
+            // ※独自描画はここに実装が必要です。ここでは単にMinecraftの標準レンダラー呼び出しだけ。
             Minecraft.getInstance().getItemRenderer().renderStatic(stack, transformType, light, overlay, matrices, vertexConsumers, 0);
         }
     }
