@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
 import com.sakalti.sakaplus.tinco.item.ModItems5;
+import com.sakalti.sakaplus.tinco.client.AssembledToolBakedModel;
 import com.sakalti.sakaplus.command.KruzivilimCommand;
 import com.sakalti.sakaplus.registry.ModEntities333;
 import com.sakalti.sakaplus.registry.Weapons;
