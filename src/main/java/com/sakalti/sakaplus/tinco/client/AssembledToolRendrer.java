@@ -8,37 +8,37 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
 public class AssembledToolRenderer extends BlockEntityWithoutLevelRenderer {
-
-    private ResourceLocation dynamicLocation = null;
+    private ResourceLocation textureRL = null;
+    private String lastKey = "";
 
     public AssembledToolRenderer() {
         super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
     }
 
     @Override
-    public void renderByItem(ItemStack stack, ItemTransforms.TransformType transformType, PoseStack matrices,
-                             MultiBufferSource vertexConsumers, int light, int overlay) {
+    public void renderByItem(ItemStack stack, ItemTransforms.TransformType type, PoseStack ms,
+                             MultiBufferSource buffers, int light, int overlay) {
+        var tag = stack.getOrCreateTag();
+        String head = tag.getString("head"), handle = tag.getString("handle"), extra = tag.getString("extra");
+        String key = head + "_" + handle + "_" + extra;
 
-        String head = stack.getOrCreateTag().getString("head");
-        String handle = stack.getOrCreateTag().getString("handle");
-        String extra = stack.getOrCreateTag().getString("extra");
-
-        if (dynamicLocation == null) {
-            var texture = ToolTextureGenerator.generateToolTexture(head, handle, extra);
-            if (texture != null) {
-                dynamicLocation = Minecraft.getInstance().getTextureManager().register("tinco:assembled_tool_" + head + handle + extra, texture);
+        if (!key.equals(lastKey)) {
+            var tex = ToolTextureGenerator.generate(head, handle, extra);
+            if (tex != null) {
+                textureRL = Minecraft.getInstance().getTextureManager().register("tinco/generated/" + key, tex);
+                lastKey = key;
             }
         }
 
-        if (dynamicLocation != null) {
-            var buffer = vertexConsumers.getBuffer(RenderType.entityCutout(dynamicLocation));
-            Minecraft.getInstance().getItemRenderer().renderModel(matrices, buffer, null, stack, light, OverlayTexture.NO_OVERLAY);
+        if (textureRL != null) {
+            var buf = buffers.getBuffer(RenderType.entityCutout(textureRL));
+            Minecraft.getInstance().getItemRenderer().renderModel(ms, buf, null, stack, light, OverlayTexture.NO_OVERLAY);
         }
     }
 }
