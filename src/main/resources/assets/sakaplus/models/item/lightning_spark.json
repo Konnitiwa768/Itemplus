@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "sakaplus:item/lightning_spark_1"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 1
+      },
+      "model": "sakaplus:item/lightning_spark_anim"
+    }
+  ]
+}
