@@ -1,0 +1,18 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "sakaplus:item/lightning_spark_1"
+  },
+  "gui_light": "front",
+  "display": {},
+  "animations": {
+    "layer0": {
+      "interpolate": true,
+      "frames": [
+        { "time": 7, "texture": "sakaplus:item/lightning_spark_1" },
+        { "time": 7, "texture": "sakaplus:item/lightning_spark_2" },
+        { "time": 7, "texture": "sakaplus:item/lightning_spark_3" }
+      ]
+    }
+  }
+}
