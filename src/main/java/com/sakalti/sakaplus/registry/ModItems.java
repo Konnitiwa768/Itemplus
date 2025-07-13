@@ -24,7 +24,7 @@ public class ModItems {
     );
 
     public static final Item HP_PLUS = new HPPlusItem(new Item.Settings().maxCount(6));
-
+    public static final Item LIGHT_BERRY_CHEESE = new Item(new Item.Settings().food(ModFoods.LIGHT_BERRY_CHEESE));
     public static final Item GLOW_BERRY_BREAD = new Item(new Item.Settings().food(ModFoods.GLOW_BERRY_BREAD));
     public static final Item HACHIWARI_MANJU = new Item(new Item.Settings().food(ModFoods.HACHIWARI_MANJU));
     public static final Item LIGHT_BERRY = new Item(new Item.Settings().food(ModFoods.LIGHT_BERRY));
