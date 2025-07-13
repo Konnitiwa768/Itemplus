@@ -43,7 +43,7 @@ public class ModFoods {
     public static final FoodComponent LIGHT_BERRY_CHEESE = new FoodComponent.Builder()
         .hunger(3)
         .saturationModifier(2.5f)
-        .statusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATH, 1800, 1), 1.0f)
+        .statusEffect(new StatusEffectInstance(ModEffects.ADAPT, 1800, 1), 1.0f)
         .build();
 
     public static final FoodComponent GLOW_BERRY_DONUT = new FoodComponent.Builder()
