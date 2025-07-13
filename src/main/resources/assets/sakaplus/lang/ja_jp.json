@@ -22,6 +22,7 @@
   "block.sakaplus.iron_scaffold": "鉄の足場",
   "effect.sakaplus.light_block": "光遮",
   "effect.sakaplus.paralyze": "麻痺",
+  "effect.sakaplus.mudo": "生命力削",
   "advancement.sakaplus.get_iron_scaffold.title": "工事現場",
   "advancement.sakaplus.get_iron_scaffold.desc": "iron_scaffold を手に入れる"
 }
