@@ -10,7 +10,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 
 import java.util.UUID;
 
-public class MudoStatusEffect extends StatusEffects {
+public class MudoStatusEffect extends StatusEffect {
     public static final UUID MUDO_UUID = UUID.fromString("b8db37c0-6722-4f92-98f5-c0a4c6c9ae32");
 
     public MudoStatusEffect() {
