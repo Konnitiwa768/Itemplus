@@ -5,15 +5,15 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
 import com.sakalti.sakaplus.tinco.item.ModItems5;
 import com.sakalti.sakaplus.command.KruzivilimCommand;
-import com.sakalti.sakaplus.registry.ModEntities333;
-import com.sakalti.sakaplus.registry.Weapons;
+import com.sakalti.sakaplus.registry.*;
 import com.sakalti.sakaplus.dimension.SakaplusDimensions;
 import com.sakalti.sakaplus.block.ModBlocks2;
-import com.sakalti.sakaplus.registry.ModItems;
 
 public class SakaplusMod2 implements ModInitializer {
     @Override
     public void onInitialize() {
+        // 例: Mod initializerやonInitialize()で
+        LongtimePotionRegistry.registerAll();
         ModBlocks2.registerBlocks();
         Weapons.registerItems();
         ModEntities333.register();
