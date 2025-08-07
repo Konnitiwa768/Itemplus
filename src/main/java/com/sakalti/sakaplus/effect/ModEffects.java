@@ -1,6 +1,6 @@
 package com.sakalti.sakaplus.effect;
 
-import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
