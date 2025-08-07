@@ -1,17 +1,16 @@
-package com.sakalti.sakaplus.effect;
-
+import net.minecraft.entity.effect.StatusEffect; // 追加
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModEffects {
-    public static final StatusEffects LIGHT_BLOCK = new LightBlockEffect();
-    public static final StatusEffects PARALYZE = new ParalyzeEffect();
-    public static final StatusEffects MUDO = new MudoStatusEffect();
-    public static final StatusEffects ADAPT = new AdaptEffect();
+    public static final StatusEffect LIGHT_BLOCK = new LightBlockEffect();
+    public static final StatusEffect PARALYZE = new ParalyzeEffect();
+    public static final StatusEffect MUDO = new MudoStatusEffect();
+    public static final StatusEffect ADAPT = new AdaptEffect();
 
     // バニラのエフェクト
-    public static final StatusEffects[] VANILLA = {
+    public static final StatusEffect[] VANILLA = {
         StatusEffects.SPEED,
         StatusEffects.SLOWNESS,
         StatusEffects.HASTE,
@@ -47,7 +46,7 @@ public class ModEffects {
         StatusEffects.DARKNESS
     };
 
-    public static final StatusEffects[] ALL = {
+    public static final StatusEffect[] ALL = {
         MUDO, LIGHT_BLOCK, ADAPT, PARALYZE,
         StatusEffects.SPEED,
         StatusEffects.SLOWNESS,
