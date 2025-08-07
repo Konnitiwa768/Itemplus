@@ -9,7 +9,8 @@ public class ModEffects {
     public static final StatusEffect PARALYZE = new ParalyzeEffect();
     public static final StatusEffect MUDO = new MudoStatusEffect();
     public static final StatusEffect ADAPT = new AdaptEffect();
-
+    
+    public static final StatusEffect[] ALL = { MUDO, LIGHT_BLOCK, ADAPT, PARALYZE };
     public static void registerEffects() {
         Registry.register(Registry.STATUS_EFFECT, new Identifier("sakaplus", "light_block"), LIGHT_BLOCK);
         Registry.register(Registry.STATUS_EFFECT, new Identifier("sakaplus", "paralyze"), PARALYZE);
