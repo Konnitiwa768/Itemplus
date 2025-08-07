@@ -11,7 +11,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 
 import java.util.UUID;
 
-public class AdaptEffect extends StatusEffects {
+public class AdaptEffect extends StatusEffect {
     public static final UUID MUDO_UUID = UUID.fromString("b8db37c0-6722-4f92-98f5-c0a434c9ae32");
 
     public AdaptEffect() {
