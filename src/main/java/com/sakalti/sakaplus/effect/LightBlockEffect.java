@@ -4,7 +4,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.LivingEntity;
 
-public class LightBlockEffect extends StatusEffect {
+public class LightBlockEffect extends StatusEffects {
     public LightBlockEffect() {
         super(StatusEffectCategory.HARMFUL, 0xFFFFFF); // 白色
     }
