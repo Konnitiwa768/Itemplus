@@ -1,7 +1,7 @@
 package com.sakalti.sakaplus.entity;
 
 import net.minecraft.entity.*;
-import com.sakalti.sakaplus.effect.ModEffects;
+import com.sakalti.sakaplus.effect.ModEffect;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
