@@ -20,9 +20,9 @@ public class LongtimePotionRegistry {
             String name = effect.getTranslationKey().replace("effect.", "") + "_longtime";
             Identifier id = new Identifier("sakaplus", name);
 
-            Registry.register(Registries.POTION, id, potion);
-            Registry.register(Registries.ITEM, id,
-                new LongtimePotionItem(new Item.Settings().maxCount(1).group(ItemGroup.BREWING))
+            Registry.register(Registry.POTION, id, potion);
+            Registry.register(Registry.ITEM, id,
+                new LongtimePotionItem(new Item.Settings().maxCount(7).group(ItemGroup.BREWING))
             );
         }
     }
