@@ -3,7 +3,7 @@ package com.sakalti.sakaplus.effect;
 import net.minecraft.entity.effect.StatusEffects; // 追加
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import com.sakalti.sakaplus.effects.*;
+import com.sakalti.sakaplus.effect.*;
 
 public class ModEffects {
     public static final StatusEffect LIGHT_BLOCK = new LightBlockEffect();
