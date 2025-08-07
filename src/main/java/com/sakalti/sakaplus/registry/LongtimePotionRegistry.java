@@ -14,7 +14,7 @@ import net.minecraft.item.ItemGroup;
 
 public class LongtimePotionRegistry {
     public static void registerAll() {
-        for (StatusEffect effect : ModEffects.ALL) {
+        for (StatusEffect: ModEffects.ALL) {
             int duration = 9999; // 効果時間2倍の例
             Potion potion = new Potion(new StatusEffectInstance(effect, duration));
             String name = effect.getTranslationKey().replace("effect.", "") + "_longtime";
