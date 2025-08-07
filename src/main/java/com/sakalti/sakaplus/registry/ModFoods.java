@@ -3,7 +3,7 @@ package com.sakalti.sakaplus.registry;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import com.sakalti.sakaplus.effect.ModEffect;
+import com.sakalti.sakaplus.effect.ModEffects;
 
 public class ModFoods {
     public static final FoodComponent GLOW_BERRY_BREAD = new FoodComponent.Builder()
