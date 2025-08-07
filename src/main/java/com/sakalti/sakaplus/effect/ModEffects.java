@@ -1,3 +1,5 @@
+package com.sakalti.sakaplus.effect
+   
 import net.minecraft.entity.effect.StatusEffect; // 追加
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.Identifier;
