@@ -5,9 +5,8 @@ import com.sakalti.sakaplus.potion.LongtimePotionItem;
 import com.sakalti.sakaplus.effect.ModEffects;
 
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.StatusEffect;
-import net.minecraft.potion.StatusEffectInstance;
-import net.minecraft.util.registry.Registries;
+import net.minecraft.effect.StatusEffects;
+import net.minecraft.effect.StatusEffectInstance;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.item.Item;
