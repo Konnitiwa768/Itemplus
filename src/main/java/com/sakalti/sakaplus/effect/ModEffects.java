@@ -11,7 +11,7 @@ public class ModEffects {
     public static final StatusEffect PARALYZE = new ParalyzeEffect();
     public static final StatusEffect MUDO = new MudoStatusEffect();
     public static final StatusEffect ADAPT = new AdaptEffect();
-
+    public static final StatusEffect CONFUSION = new ConfusionEffect();
     // バニラのエフェクト
     public static final StatusEffect[] VANILLA = {
         StatusEffects.SPEED,
@@ -50,7 +50,7 @@ public class ModEffects {
     };
 
     public static final StatusEffect[] ALL = {
-        MUDO, LIGHT_BLOCK, ADAPT, PARALYZE,
+        MUDO, LIGHT_BLOCK, ADAPT, PARALYZE, CONFUSION,
         StatusEffects.SPEED,
         StatusEffects.SLOWNESS,
         StatusEffects.HASTE,
@@ -86,6 +86,7 @@ public class ModEffects {
         StatusEffects.DARKNESS
     };
     public static void registerEffects() {
+        Registry.register(Registry.STATUS_EFFECT, new Identifier("sakaplus", "confusion"), CONFUSION);
         Registry.register(Registry.STATUS_EFFECT, new Identifier("sakaplus", "light_block"), LIGHT_BLOCK);
         Registry.register(Registry.STATUS_EFFECT, new Identifier("sakaplus", "paralyze"), PARALYZE);
         Registry.register(Registry.STATUS_EFFECT, new Identifier("sakaplus", "adapt"), ADAPT);
